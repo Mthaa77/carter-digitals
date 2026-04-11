@@ -472,3 +472,47 @@
   pointer-events: none;
   z-index: 0;
 }
+
+/* ============================================
+   Premium Gold Utility Additions
+   ============================================ */
+
+/* Gold themed scrollbar */
+.gold-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gold-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.gold-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(212, 168, 83, 0.2);
+  border-radius: 3px;
+}
+
+.gold-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 168, 83, 0.35);
+}
+
+/* Premium gold line decoration */
+.gold-line-decoration {
+  position: relative;
+}
+
+.gold-line-decoration::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #D4A853, #E8C97A);
+  border-radius: 2px;
+}
+
+/* Gold text selection */
+::selection {
+  background: rgba(212, 168, 83, 0.3);
+  color: #F5F5F5;
+}

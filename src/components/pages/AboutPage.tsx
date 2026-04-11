@@ -240,7 +240,7 @@ export default function AboutPage() {
       </section>
 
       {/* ────────────────── 2. OUR STORY SECTION ───────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -381,7 +381,7 @@ export default function AboutPage() {
             {values.map((value) => (
               <StaggerItem key={value.title}>
                 <TiltCard className="h-full" tiltStrength={4}>
-                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover overflow-hidden">
+                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold overflow-hidden">
                     {/* Gold top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-60" />
 
@@ -406,7 +406,7 @@ export default function AboutPage() {
       </section>
 
       {/* ────────────────── 4. FOUNDER SECTION ──────────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -617,7 +617,7 @@ export default function AboutPage() {
       <AnimatedSection direction="up">
         <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
@@ -707,7 +707,7 @@ export default function AboutPage() {
           <AnimatedSection direction="up" delay={0.15}>
             <div className="relative max-w-3xl mx-auto">
               {/* Credentials card */}
-              <div className="rounded-3xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden">
+              <div className="rounded-3xl bg-[#131316] border border-[rgba(212,168,83,0.12)] overflow-hidden">
                 {/* Glass effect overlay */}
                 <div className="absolute inset-0 rounded-3xl" style={{ background: "rgba(19,19,22,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }} />
                 <div className="absolute inset-0 bg-dots opacity-20 rounded-3xl" />

@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/shared/ScrollProgress";
 import { BackToTop } from "@/components/shared/BackToTop";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import { CustomCursor } from "@/components/shared/CustomCursor";
+import { CookieConsent } from "@/components/shared/CookieConsent";
 import HomePage from "@/components/pages/HomePage";
 import AboutPage from "@/components/pages/AboutPage";
 import ServicesPage from "@/components/pages/ServicesPage";
@@ -125,6 +126,8 @@ export default function Page() {
       <WhatsAppButton />
       {/* Custom cursor effect (desktop only) */}
       <CustomCursor />
+      {/* Cookie consent banner */}
+      <CookieConsent />
     </div>
   );
 }

@@ -208,6 +208,7 @@ export default function ContactPage() {
 
       {/* ────────────────── 2. CONTACT GRID ─────────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
             {/* Left column - Contact Form (3 cols) */}
@@ -420,7 +421,7 @@ export default function ContactPage() {
                             target={method.href.startsWith("http") ? "_blank" : undefined}
                             rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
                           >
-                            <div className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover cursor-pointer">
+                            <div className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover-gold cursor-pointer">
                               <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
                                 <method.icon className="w-5 h-5 text-[#D4A853]" />
                               </div>
@@ -495,7 +496,7 @@ export default function ContactPage() {
       <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
 
       {/* ───────────────── 3. MAP / LOCATION SECTION ─────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Our Location"

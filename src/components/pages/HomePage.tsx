@@ -499,6 +499,50 @@ function TypingText({ words, className = "" }: TypingTextProps) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
+   RESULTS BAR COMPONENT
+   ═══════════════════════════════════════════════════════════════════════ */
+function ResultsBar({ label, percentage }: { label: string; percentage: number }) {
+  const [width, setWidth] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Animate from 0 to percentage
+          setTimeout(() => setWidth(percentage), 100);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [percentage]);
+
+  return (
+    <div ref={barRef} className="space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="text-sm md:text-base font-medium text-[rgba(245,245,245,0.7)]">{label}</span>
+        <span className="text-sm md:text-base font-bold text-gradient-gold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          {width}%
+        </span>
+      </div>
+      <div className="w-full bg-[rgba(255,255,255,0.06)] rounded-full h-2.5 overflow-hidden">
+        <div
+          className="h-2.5 rounded-full bg-gradient-to-r from-[#D4A853] to-[#E8C97A] transition-all duration-1000 ease-out"
+          style={{ width: `${width}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
    HOME PAGE COMPONENT
    ═══════════════════════════════════════════════════════════════════════ */
 export default function HomePage() {
@@ -1182,6 +1226,131 @@ export default function HomePage() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* ──────── NEW: RESULTS DASHBOARD ──────── */}
+      <AnimatedSection direction="up">
+        <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+          {/* Gold glow behind section */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
+          {/* Section divider */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              label="Impact"
+              title="Results That"
+              titleHighlight="Compound"
+              description="Real metrics from real projects. Every number represents a tangible outcome for our clients."
+              align="center"
+            />
+
+            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" staggerDelay={0.12}>
+              {/* Progress Bar 1 */}
+              <StaggerItem>
+                <ResultsBar label="Google Ranking Improvement" percentage={85} />
+              </StaggerItem>
+              {/* Progress Bar 2 */}
+              <StaggerItem>
+                <ResultsBar label="Client Retention Rate" percentage={96} />
+              </StaggerItem>
+              {/* Progress Bar 3 */}
+              <StaggerItem>
+                <ResultsBar label="On-Time Delivery" percentage={100} />
+              </StaggerItem>
+              {/* Progress Bar 4 */}
+              <StaggerItem>
+                <ResultsBar label="Client Satisfaction" percentage={98} />
+              </StaggerItem>
+            </StaggerContainer>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* ──────── NEW: OUR GUARANTEE ──────── */}
+      <AnimatedSection direction="up">
+        <section className="relative py-16 md:py-24 bg-[#0A0A0B]">
+          {/* Section divider */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative rounded-2xl border-gradient-gold overflow-hidden p-8 md:p-12">
+              {/* Card background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.06)] via-[rgba(19,19,22,0.95)] to-[rgba(212,168,83,0.03)]" />
+
+              {/* Decorative gold glow orbs in corners */}
+              <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[80px] pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Shield icon */}
+                <div className="flex justify-center mb-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] flex items-center justify-center">
+                    <Shield className="w-8 h-8 text-[#D4A853]" />
+                  </div>
+                </div>
+
+                {/* Heading */}
+                <h2
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-10"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  Our Iron-Clad <span className="text-gradient-gold">Guarantee</span>
+                </h2>
+
+                {/* Guarantee points */}
+                <div className="space-y-6 md:space-y-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mt-0.5">
+                      <CheckCircle className="w-4 h-4 text-[#D4A853]" />
+                    </div>
+                    <div>
+                      <h3 className="text-base md:text-lg font-semibold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        Delivery in 5-7 Days or It&apos;s Free
+                      </h3>
+                      <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed">
+                        If we miss your deadline, you don&apos;t pay. Simple as that.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mt-0.5">
+                      <CheckCircle className="w-4 h-4 text-[#D4A853]" />
+                    </div>
+                    <div>
+                      <h3 className="text-base md:text-lg font-semibold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        You Own Everything — Always
+                      </h3>
+                      <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed">
+                        Full source code, hosting credentials, domain. Zero lock-in, zero recurring licensing.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mt-0.5">
+                      <CheckCircle className="w-4 h-4 text-[#D4A853]" />
+                    </div>
+                    <div>
+                      <h3 className="text-base md:text-lg font-semibold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        30 Days Free Support
+                      </h3>
+                      <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed">
+                        Post-launch bug fixes, content updates, and technical support — all included at no extra cost.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom text */}
+                <p className="text-center text-xs md:text-sm text-[rgba(212,168,83,0.6)] mt-10 italic">
+                  No fine print. No asterisks. Just our word.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* ──────── NEW: FEATURED PROJECTS SHOWCASE ──────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
