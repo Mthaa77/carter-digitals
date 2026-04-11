@@ -1,6 +1,20 @@
 "use client";
 
-import { ArrowRight, Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Instagram,
+  Twitter,
+  GraduationCap,
+  Scale,
+  HeartPulse,
+  Building2,
+  Landmark,
+  BarChart3,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigation } from "@/lib/navigation";
 import { Separator } from "@/components/ui/separator";
@@ -26,6 +40,15 @@ const footerLinks = {
   ],
 };
 
+const trustedClients = [
+  { name: "Rise & Shine Academy", icon: GraduationCap },
+  { name: "Mogale & Associates", icon: Scale },
+  { name: "Family Clinic", icon: HeartPulse },
+  { name: "Gateway Hospitality", icon: Building2 },
+  { name: "Tshwane Municipality", icon: Landmark },
+  { name: "Nkosi Advisory", icon: BarChart3 },
+];
+
 export function Footer() {
   const { navigate } = useNavigation();
 
@@ -35,44 +58,58 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#060607] border-t border-[rgba(255,255,255,0.05)]">
+    <footer className="relative bg-gradient-to-b from-[#060607] via-[#080809] to-[#060607] border-t border-[rgba(255,255,255,0.05)] section-gold-tint">
       {/* Top gradient line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.3)] to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.4)] to-transparent" />
+
+      {/* Subtle gold radial glow at top-center */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
 
       {/* CTA Band */}
-      <div className="py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] via-[rgba(212,168,83,0.05)] to-transparent border border-[rgba(212,168,83,0.15)] p-8 md:p-12 lg:p-16">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-[rgba(212,168,83,0.05)] rounded-full blur-3xl" />
-            <div className="relative z-10 max-w-2xl">
-              <h3
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                Ready to Build Something{" "}
-                <span className="text-gradient-gold">Extraordinary?</span>
-              </h3>
-              <p className="text-[rgba(245,245,245,0.6)] text-base md:text-lg mb-8 leading-relaxed">
-                No obligation. A 30-minute discovery call. Just clarity on what we can build
-                together — and what it will take to get you there.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  onClick={() => handleNavClick("contact")}
-                  size="lg"
-                  className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-8 py-6 text-base shadow-lg shadow-[rgba(212,168,83,0.2)] hover:shadow-[rgba(212,168,83,0.3)] transition-all duration-300"
+      <div className="py-16 md:py-20 relative">
+        {/* Gold radial glow behind CTA card */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Gold border animated wrapper */}
+          <div className="gold-border-animated">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] via-[rgba(212,168,83,0.05)] to-transparent border border-[rgba(212,168,83,0.2)] p-8 md:p-12 lg:p-16 noise-gold">
+              {/* Floating gold dots */}
+              <span className="animate-gold-float absolute top-8 right-16 w-2 h-2 rounded-full bg-[#D4A853] opacity-40" />
+              <span className="animate-gold-float absolute bottom-12 right-32 w-1.5 h-1.5 rounded-full bg-[#E8C97A] opacity-30" style={{ animationDelay: "1s" }} />
+              <span className="animate-gold-float absolute top-20 right-48 w-2.5 h-2.5 rounded-full bg-[#B8922F] opacity-25" style={{ animationDelay: "2s" }} />
+
+              {/* Existing ambient glow */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[rgba(212,168,83,0.05)] rounded-full blur-3xl" />
+              <div className="relative z-10 max-w-2xl">
+                <h3
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
-                  Start Your Project
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-                <a
-                  href="https://wa.me/27724026893"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-6 text-base font-semibold rounded-lg border border-[rgba(255,255,255,0.15)] text-white hover:bg-white/5 transition-all duration-300"
-                >
-                  WhatsApp Us
-                </a>
+                  Ready to Build Something{" "}
+                  <span className="text-gradient-gold">Extraordinary?</span>
+                </h3>
+                <p className="text-[rgba(245,245,245,0.6)] text-base md:text-lg mb-8 leading-relaxed">
+                  No obligation. A 30-minute discovery call. Just clarity on what we can build
+                  together — and what it will take to get you there.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    onClick={() => handleNavClick("contact")}
+                    size="lg"
+                    className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-8 py-6 text-base shadow-lg shadow-[rgba(212,168,83,0.2)] hover:shadow-[rgba(212,168,83,0.3)] transition-all duration-300"
+                  >
+                    Start Your Project
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                  <a
+                    href="https://wa.me/27724026893"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-6 text-base font-semibold rounded-lg border border-[rgba(212,168,83,0.25)] text-white hover:bg-[rgba(212,168,83,0.1)] hover:border-[rgba(212,168,83,0.4)] transition-all duration-300"
+                  >
+                    WhatsApp Us
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -87,8 +124,10 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
             {/* Brand Column */}
             <div className="lg:col-span-2">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4A853] to-[#B8922F] flex items-center justify-center">
+              {/* Logo with gold gradient glow behind */}
+              <div className="flex items-center gap-3 mb-5 relative">
+                <div className="absolute -inset-3 bg-[rgba(212,168,83,0.08)] rounded-2xl blur-xl pointer-events-none" />
+                <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4A853] to-[#B8922F] flex items-center justify-center shadow-lg shadow-[rgba(212,168,83,0.2)]">
                   <span
                     className="text-[#0A0A0B] font-bold text-lg tracking-tight"
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -108,21 +147,42 @@ export function Footer() {
                   </span>
                 </div>
               </div>
-              <p className="text-[rgba(245,245,245,0.5)] text-sm leading-relaxed max-w-sm mb-6">
-                High-agility digital infrastructure & AI-enabled solutions for South Africa&apos;s
-                forward-thinking institutions. Built Different. Built African. Built to Win.
-              </p>
+
+              {/* Brand description in glass-gold card */}
+              <div className="glass-gold rounded-xl p-4 mb-6 max-w-sm">
+                <p className="text-[rgba(245,245,245,0.5)] text-sm leading-relaxed">
+                  High-agility digital infrastructure &amp; AI-enabled solutions for South Africa&apos;s
+                  forward-thinking institutions.
+                </p>
+                <p className="text-[#D4A853] text-sm italic mt-2 font-medium">
+                  Built Different. Built African. Built to Win.
+                </p>
+              </div>
+
+              {/* Contact info with gold icon hover glow */}
               <div className="space-y-3 text-sm text-[rgba(245,245,245,0.5)]">
-                <a href="mailto:kabelokadiaka4@gmail.com" className="flex items-center gap-2 hover:text-[#D4A853] transition-colors">
-                  <Mail className="w-4 h-4" />
+                <a
+                  href="mailto:kabelokadiaka4@gmail.com"
+                  className="flex items-center gap-2 hover:text-[#D4A853] transition-all duration-300 group"
+                >
+                  <span className="p-1 rounded-md group-hover:bg-[rgba(212,168,83,0.1)] group-hover:shadow-[0_0_8px_rgba(212,168,83,0.3)] transition-all duration-300">
+                    <Mail className="w-4 h-4" />
+                  </span>
                   kabelokadiaka4@gmail.com
                 </a>
-                <a href="tel:0724026893" className="flex items-center gap-2 hover:text-[#D4A853] transition-colors">
-                  <Phone className="w-4 h-4" />
+                <a
+                  href="tel:0724026893"
+                  className="flex items-center gap-2 hover:text-[#D4A853] transition-all duration-300 group"
+                >
+                  <span className="p-1 rounded-md group-hover:bg-[rgba(212,168,83,0.1)] group-hover:shadow-[0_0_8px_rgba(212,168,83,0.3)] transition-all duration-300">
+                    <Phone className="w-4 h-4" />
+                  </span>
                   072 402 6893
                 </a>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 shrink-0" />
+                <div className="flex items-center gap-2 group">
+                  <span className="p-1 rounded-md group-hover:bg-[rgba(212,168,83,0.1)] group-hover:shadow-[0_0_8px_rgba(212,168,83,0.3)] transition-all duration-300">
+                    <MapPin className="w-4 h-4 shrink-0" />
+                  </span>
                   1457 Block L, Soshanguve, Pretoria, Gauteng
                 </div>
               </div>
@@ -130,15 +190,18 @@ export function Footer() {
 
             {/* Company Links */}
             <div>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-5">
-                Company
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-5 flex items-center gap-2">
+                <span className="w-3 h-px bg-gradient-to-r from-[#D4A853] to-transparent" />
+                <span className="text-gradient-gold">Company</span>
               </h4>
+              <span className="block w-4 h-0.5 bg-[rgba(212,168,83,0.2)] rounded-full mb-4" />
               <ul className="space-y-3">
-                {footerLinks.company.map((link) => (
+                {footerLinks.company.map((link, i) => (
                   <li key={link.label}>
                     <button
                       onClick={() => handleNavClick(link.page)}
-                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-colors"
+                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ transitionDelay: `${i * 50}ms` }}
                     >
                       {link.label}
                     </button>
@@ -149,15 +212,18 @@ export function Footer() {
 
             {/* Services Links */}
             <div>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-5">
-                Services
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-5 flex items-center gap-2">
+                <span className="w-3 h-px bg-gradient-to-r from-[#D4A853] to-transparent" />
+                <span className="text-gradient-gold">Services</span>
               </h4>
+              <span className="block w-4 h-0.5 bg-[rgba(212,168,83,0.2)] rounded-full mb-4" />
               <ul className="space-y-3">
-                {footerLinks.services.map((link) => (
+                {footerLinks.services.map((link, i) => (
                   <li key={link.label}>
                     <button
                       onClick={() => handleNavClick(link.page)}
-                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-colors"
+                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ transitionDelay: `${i * 50}ms` }}
                     >
                       {link.label}
                     </button>
@@ -168,15 +234,18 @@ export function Footer() {
 
             {/* Resources Links */}
             <div>
-              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-5">
-                Get Started
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-5 flex items-center gap-2">
+                <span className="w-3 h-px bg-gradient-to-r from-[#D4A853] to-transparent" />
+                <span className="text-gradient-gold">Get Started</span>
               </h4>
+              <span className="block w-4 h-0.5 bg-[rgba(212,168,83,0.2)] rounded-full mb-4" />
               <ul className="space-y-3">
-                {footerLinks.resources.map((link) => (
+                {footerLinks.resources.map((link, i) => (
                   <li key={link.label}>
                     <button
                       onClick={() => handleNavClick(link.page)}
-                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-colors"
+                      className="text-sm text-[rgba(245,245,245,0.5)] hover:text-[#D4A853] transition-all duration-300 hover:translate-x-1 inline-block"
+                      style={{ transitionDelay: `${i * 50}ms` }}
                     >
                       {link.label}
                     </button>
@@ -190,38 +259,76 @@ export function Footer() {
 
       <Separator className="bg-[rgba(255,255,255,0.05)]" />
 
+      {/* Social Proof Strip — Trusted By */}
+      <div className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-[rgba(212,168,83,0.5)] mb-6">
+            Trusted By
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            {trustedClients.map((client, i) => (
+              <div key={client.name} className="flex items-center gap-3">
+                <div className="glass-gold rounded-lg px-4 py-2.5 flex items-center gap-2.5 transition-all duration-300 hover:bg-[rgba(212,168,83,0.1)] hover:border-[rgba(212,168,83,0.3)] group cursor-default">
+                  <client.icon className="w-4 h-4 text-[rgba(212,168,83,0.4)] group-hover:text-[#D4A853] transition-colors duration-300" />
+                  <span className="text-xs font-medium text-[rgba(245,245,245,0.5)] group-hover:text-[rgba(245,245,245,0.8)] transition-colors duration-300 whitespace-nowrap">
+                    {client.name}
+                  </span>
+                </div>
+                {i < trustedClients.length - 1 && (
+                  <span className="hidden md:block w-1 h-1 rounded-full bg-[rgba(212,168,83,0.3)]" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Bar */}
-      <div className="py-6">
+      <div className="section-divider-gold py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-[rgba(245,245,245,0.35)]">
+            <p className="text-xs text-[rgba(212,168,83,0.35)]">
               &copy; {new Date().getFullYear()} Carter Digitals (Pty) Ltd. All rights reserved. | CIPC:
               2025/907839/07
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[rgba(245,245,245,0.35)] hover:text-[#D4A853] transition-colors"
+                className="card-hover-gold text-[rgba(245,245,245,0.35)] hover:text-[#D4A853] transition-all duration-300 p-2 rounded-lg"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
+              {/* Instagram */}
               <a
                 href="https://www.instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[rgba(245,245,245,0.35)] hover:text-[#D4A853] transition-colors"
+                className="card-hover-gold text-[rgba(245,245,255,0.35)] hover:text-[#D4A853] transition-all duration-300 p-2 rounded-lg"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
               </a>
+              {/* X / Twitter */}
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-hover-gold text-[rgba(245,245,255,0.35)] hover:text-[#D4A853] transition-all duration-300 p-2 rounded-lg"
+                aria-label="X / Twitter"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+
+              {/* Compliance badges with gold gradient backgrounds */}
               <div className="flex items-center gap-2 ml-2">
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[rgba(212,168,83,0.15)] text-[#D4A853] border border-[rgba(212,168,83,0.2)]">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.1)] text-[#D4A853] border border-[rgba(212,168,83,0.3)]">
                   B-BBEE L1
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[rgba(212,168,83,0.15)] text-[#D4A853] border border-[rgba(212,168,83,0.2)]">
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.1)] text-[#D4A853] border border-[rgba(212,168,83,0.3)]">
                   100% BLACK-OWNED
                 </span>
               </div>
