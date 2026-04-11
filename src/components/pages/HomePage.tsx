@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -20,11 +21,23 @@ import {
   CheckCircle,
   ChevronRight,
   Sparkles,
+  Cloud,
+  Database,
+  Terminal,
+  FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import {
   AnimatedSection,
   StaggerContainer,
@@ -207,6 +220,20 @@ const packages = [
   },
 ];
 
+/* ──────────────────────── tech stack data ────────────────────────── */
+const techStack = [
+  { name: "Next.js", icon: Globe },
+  { name: "React", icon: Code },
+  { name: "TypeScript", icon: Code },
+  { name: "Vercel", icon: Cloud },
+  { name: "PostgreSQL", icon: Database },
+  { name: "Python / FastAPI", icon: Terminal },
+  { name: "Google Cloud", icon: Cloud },
+  { name: "Tailwind CSS", icon: Palette },
+  { name: "Framer Motion", icon: Sparkles },
+  { name: "Sanity CMS", icon: FileText },
+];
+
 /* ──────────────────────── trust badges ──────────────────────────────── */
 const trustBadges = [
   "B-BBEE Level 1",
@@ -221,6 +248,48 @@ const trustBadges = [
    ═══════════════════════════════════════════════════════════════════════ */
 export default function HomePage() {
   const { navigate } = useNavigation();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isHoveringCarousel, setIsHoveringCarousel] = useState(false);
+
+  const onSelect = useCallback(() => {
+    if (!carouselApi) return;
+    setCurrentSlide(carouselApi.selectedScrollSnap());
+  }, [carouselApi]);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+    const handler = () => {
+      setCurrentSlide(carouselApi.selectedScrollSnap());
+    };
+    // Defer initial sync to avoid synchronous setState in effect
+    const raf = requestAnimationFrame(handler);
+    carouselApi.on("select", handler);
+    carouselApi.on("reInit", handler);
+    return () => {
+      cancelAnimationFrame(raf);
+      carouselApi.off("select", handler);
+      carouselApi.off("reInit", handler);
+    };
+  }, [carouselApi]);
+
+  // Auto-play carousel every 5 seconds
+  useEffect(() => {
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+    if (!isHoveringCarousel) {
+      autoplayRef.current = setInterval(() => {
+        if (carouselApi && carouselApi.canScrollNext()) {
+          carouselApi.scrollNext();
+        } else {
+          carouselApi?.scrollTo(0);
+        }
+      }, 5000);
+    }
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+  }, [carouselApi, isHoveringCarousel]);
 
   const handleNavClick = (page: "contact" | "services" | "packages") => {
     navigate(page);
@@ -448,6 +517,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ───────────────────── TECH MARQUEE SECTION ─────────────── */}
+      <section className="relative py-12 md:py-16 bg-[#0A0A0B] overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+
+        <p className="text-center text-xs font-medium tracking-widest uppercase text-[rgba(245,245,245,0.3)] mb-8">
+          Technologies We Work With
+        </p>
+
+        {/* Marquee - infinite scroll */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10" />
+
+          <div className="flex animate-marquee">
+            {/* Duplicate items for seamless loop */}
+            {[...techStack, ...techStack].map((tech, i) => (
+              <div key={i} className="flex items-center gap-3 px-8 shrink-0">
+                <tech.icon className="w-5 h-5 text-[rgba(212,168,83,0.4)]" />
+                <span className="text-sm font-medium text-[rgba(245,245,245,0.35)] whitespace-nowrap">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ────────────────── 4. SERVICES OVERVIEW SECTION ───────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -601,58 +698,101 @@ export default function HomePage() {
             align="center"
           />
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6" staggerDelay={0.12}>
-            {testimonials.map((testimonial, idx) => (
-              <StaggerItem key={idx}>
-                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover flex flex-col">
-                  {/* Quote icon */}
-                  <Quote className="w-10 h-10 text-[rgba(212,168,83,0.2)] mb-5 shrink-0" />
+          {/* Testimonial Carousel */}
+          <AnimatedSection delay={0.1} direction="up">
+            <div
+              className="relative mx-auto max-w-5xl"
+              onMouseEnter={() => setIsHoveringCarousel(true)}
+              onMouseLeave={() => setIsHoveringCarousel(false)}
+            >
+              <Carousel
+                setApi={setCarouselApi}
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-4">
+                  {testimonials.map((testimonial, idx) => (
+                    <CarouselItem
+                      key={idx}
+                      className="pl-4 md:basis-1/2 lg:basis-1/3"
+                    >
+                      <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover flex flex-col">
+                        {/* Quote icon */}
+                        <Quote className="w-10 h-10 text-[rgba(212,168,83,0.2)] mb-5 shrink-0" />
 
-                  {/* Quote text */}
-                  <p className="text-sm md:text-base text-[rgba(245,245,245,0.6)] leading-relaxed mb-6 flex-1">
-                    &ldquo;{testimonial.quote}&rdquo;
-                  </p>
+                        {/* Quote text */}
+                        <p className="text-sm md:text-base text-[rgba(245,245,245,0.6)] leading-relaxed mb-6 flex-1">
+                          &ldquo;{testimonial.quote}&rdquo;
+                        </p>
 
-                  {/* Star rating */}
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 text-[#D4A853] fill-[#D4A853]"
-                      />
-                    ))}
-                  </div>
+                        {/* Star rating */}
+                        <div className="flex gap-1 mb-5">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star
+                              key={i}
+                              className="w-4 h-4 text-[#D4A853] fill-[#D4A853]"
+                            />
+                          ))}
+                        </div>
 
-                  <Separator className="bg-[rgba(255,255,255,0.06)] mb-5" />
+                        <Separator className="bg-[rgba(255,255,255,0.06)] mb-5" />
 
-                  {/* Author info */}
-                  <div className="flex items-start gap-4">
-                    {/* Avatar placeholder */}
-                    <div className="w-11 h-11 shrink-0 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
-                      <span className="text-sm font-bold text-[#D4A853]">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </span>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-white">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-xs text-[rgba(245,245,245,0.4)]">
-                        {testimonial.role}
-                      </p>
-                      <p className="text-xs text-[#D4A853] mt-0.5">
-                        {testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                        {/* Author info */}
+                        <div className="flex items-start gap-4">
+                          {/* Avatar placeholder */}
+                          <div className="w-11 h-11 shrink-0 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
+                            <span className="text-sm font-bold text-[#D4A853]">
+                              {testimonial.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")
+                                .slice(0, 2)}
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-white">
+                              {testimonial.name}
+                            </h4>
+                            <p className="text-xs text-[rgba(245,245,245,0.4)]">
+                              {testimonial.role}
+                            </p>
+                            <p className="text-xs text-[#D4A853] mt-0.5">
+                              {testimonial.company}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious
+                  className="hidden md:flex -left-6 lg:-left-14 border-[rgba(212,168,83,0.3)] bg-[#131316]/90 hover:bg-[#1A1A1F] text-[#D4A853] hover:text-[#E8C97A] hover:border-[#D4A853] transition-all duration-300"
+                />
+                <CarouselNext
+                  className="hidden md:flex -right-6 lg:-right-14 border-[rgba(212,168,83,0.3)] bg-[#131316]/90 hover:bg-[#1A1A1F] text-[#D4A853] hover:text-[#E8C97A] hover:border-[#D4A853] transition-all duration-300"
+                />
+              </Carousel>
+
+              {/* Dot indicators */}
+              <div className="flex items-center justify-center gap-2 mt-8">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => carouselApi?.scrollTo(idx)}
+                    className={`transition-all duration-300 rounded-full ${
+                      currentSlide === idx
+                        ? "w-8 h-2 bg-[#D4A853]"
+                        : "w-2 h-2 bg-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.35)]"
+                    }`}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

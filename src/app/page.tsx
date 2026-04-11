@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigation } from "@/lib/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { LoadingScreen } from "@/components/shared/LoadingScreen";
+import { ScrollProgress } from "@/components/shared/ScrollProgress";
+import { BackToTop } from "@/components/shared/BackToTop";
+import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 import HomePage from "@/components/pages/HomePage";
 import AboutPage from "@/components/pages/AboutPage";
 import ServicesPage from "@/components/pages/ServicesPage";
@@ -29,6 +33,19 @@ const pageVariants = {
 
 export default function Page() {
   const { currentPage, navigate } = useNavigation();
+  const [hasLoaded, setHasLoaded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('carter-loaded') === 'true';
+    }
+    return false;
+  });
+
+  const handleLoadingComplete = useCallback(() => {
+    setHasLoaded(true);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('carter-loaded', 'true');
+    }
+  }, []);
 
   // Listen for hash changes to support direct navigation
   useEffect(() => {
@@ -81,6 +98,10 @@ export default function Page() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0A0A0B]">
+      {/* Loading screen - shows only on first visit per session */}
+      {!hasLoaded && <LoadingScreen onComplete={handleLoadingComplete} />}
+      {/* Scroll progress bar */}
+      <ScrollProgress />
       <Navbar />
       <main className="flex-1">
         <AnimatePresence mode="wait">
@@ -97,6 +118,10 @@ export default function Page() {
         </AnimatePresence>
       </main>
       <Footer />
+      {/* Back to top button */}
+      <BackToTop />
+      {/* WhatsApp floating button */}
+      <WhatsAppButton />
     </div>
   );
 }
