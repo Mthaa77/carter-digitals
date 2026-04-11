@@ -445,3 +445,134 @@ The Carter Digitals premium website is fully functional with all 6 pages, animat
 4. Add portfolio image gallery with lightbox
 5. Implement SEO (sitemap.xml, robots.txt, structured data)
 6. Add more interactive elements: drag-to-reorder packages, interactive pricing slider
+
+---
+Task ID: 3
+Agent: full-stack-developer
+Task: Upgrade homepage with 4 new sections and premium gold enhancements
+
+Work Log:
+- Added Industry Sectors Grid section with 6 interactive sector cards (Education, Legal, Healthcare, Government, Hospitality, Finance)
+- Added Featured Projects Showcase section with 3 project cards and result stats (Soshanguve School, Mogale Law, Gateway Hospitality)
+- Added FAQ section with 6 accordion items and gold accent styling using shadcn/ui Accordion
+- Added Newsletter/Stay Connected section with email subscription and toast notification via sonner
+- Added "Why Choose Us?" mini-section with 3 USP cards (Speed, Ownership, Results) and gold number badges
+- Enhanced all existing sections with gold gradient overlays on alternating sections (sections 2, 4, 6, 8)
+- Added gold glow orbs behind key sections for ambient gold lighting
+- Added gold left border accents to About Preview feature cards (in addition to top accent)
+- Upgraded gold separator dividers from 0.15 to 0.2 opacity across all sections
+- Added new imports: GraduationCap, Scale, HeartPulse, Landmark, Building2, BarChart3, ChevronDown from lucide-react
+- Added Accordion, AccordionContent, AccordionItem, AccordionTrigger from shadcn/ui
+- Added Input from shadcn/ui and toast from sonner for newsletter functionality
+
+Stage Summary:
+- HomePage now has 13 sections (was 9) with premium interactive components
+- Section order: Hero → About Preview → Stats → Tech Marquee → Services Overview → Industry Sectors → Why Choose Us → Process → Testimonials → Featured Projects → Packages Preview → FAQ → Newsletter → Final CTA
+- All existing functionality preserved (typing effect, carousel, parallax, magnetic buttons, counters)
+- New sections use StaggerContainer/StaggerItem and AnimatedSection for consistent scroll animations
+- Premium gold colouring integrated throughout with subtle gradients, glows, and border accents
+- ✅ ESLint: Zero errors
+- ✅ Compilation: Clean, HTTP 200 responses confirmed in dev log
+
+---
+Task ID: 5
+Agent: frontend-styling-expert
+Task: Add premium gold-themed CSS utilities and animations
+
+Work Log:
+- Added gold gradient border animation (@keyframes borderRotate + .gold-border-animated with pseudo-elements)
+- Added gold floating particles animation (@keyframes goldFloat + .animate-gold-float)
+- Added text-glow-gold utility for gold text shadow
+- Added section-gold-tint for premium gold-tinted section background
+- Added section-divider-gold for brighter gold separator line
+- Added animate-shimmer-gold for enhanced gold shimmer loading effect
+- Added bg-gold-gradient-subtle and bg-gold-gradient-radial background utilities
+- Added glass-gold for gold-tinted glass morphism effect
+- Added card-hover-gold for enhanced card hover with gold glow
+- Added animate-pulse-ring for pulsing gold ring effect on floating buttons
+- Added input-gold:focus for gold-themed input focus states
+- Added accordion-gold for FAQ gold accordion styling with data-state selectors
+- Added noise-gold for subtle gold noise texture overlay
+
+Stage Summary:
+- 13 new CSS utility classes/animations added to globals.css (file grew from 325 → 474 lines)
+- All styles follow existing gold (#D4A853, #E8C97A, #B8922F) design system palette
+- No existing styles modified or removed — purely additive changes
+- New section clearly delineated with header comment block
+
+---
+## [2025-07-13] Major Homepage Upgrade — 4 New Sections + Premium Gold System + Cron Job Refresh
+
+### Session Overview
+Comprehensive upgrade to the Carter Digitals homepage with 4 new advanced interactive sections, a premium gold colouring system, 13 new CSS utilities, and cron job refresh.
+
+### Files Modified
+- `src/components/pages/HomePage.tsx` — Major rewrite (1082 → ~1700 lines), 4 new sections, gold enhancements
+- `src/app/globals.css` — 13 new CSS utilities (325 → 474 lines)
+
+### Cron Job
+- **Old**: Job ID 81073 (deleted)
+- **New**: Job ID 81187 — runs every 15 minutes (900s fixed_rate), kind: webDevReview
+
+### New Homepage Sections (4 added, total now 13+)
+
+**1. Industry Sectors We Serve** (between Services & Process)
+- 6 interactive sector cards: Education, Legal, Healthcare, Government, Hospitality, Finance
+- Responsive 2×3 grid with gold gradient hover effects
+- Icons transition from dim to bright gold on hover
+
+**2. Why Choose Us?** (between Industry Sectors & Process)
+- 3 USP cards with gold number badges (01, 02, 03)
+- "Speed Meets Quality", "You Own Everything", "Results, Not Promises"
+
+**3. Featured Projects Showcase** (between Testimonials & Packages)
+- 3 project cards with gradient backgrounds and result stats
+- Soshanguve School (340% enrollment), Mogale Law (3x inquiries), Gateway Hospitality (R2.4M revenue)
+
+**4. FAQ Section** (between Packages & Newsletter)
+- 6 accordion items with gold accent styling
+- Covers: timeline, ownership, tech stack, support, integrations, differentiation
+
+**5. Newsletter / Stay Connected** (between FAQ & Final CTA)
+- Email subscription with gold-themed input and toast notification
+
+### Premium Gold Enhancements
+- Gold gradient overlays on alternating sections
+- Gold glow orbs behind key sections
+- Gold left border accents on About feature cards
+- Upgraded gold separator dividers (0.15 → 0.2 opacity)
+
+### New CSS Utilities (13 added)
+| Class | Purpose |
+|---|---|
+| `@keyframes borderRotate` + `.gold-border-animated` | Animated rotating gold gradient border |
+| `@keyframes goldFloat` + `.animate-gold-float` | Floating gold particle dots |
+| `.text-glow-gold` | Gold text shadow glow |
+| `.section-gold-tint` | Gold-tinted section background |
+| `.section-divider-gold` | Brighter gold separator |
+| `@keyframes shimmerGold` + `.animate-shimmer-gold` | Enhanced gold shimmer |
+| `.bg-gold-gradient-subtle` | Subtle gold gradient background |
+| `.bg-gold-gradient-radial` | Radial gold gradient background |
+| `.glass-gold` | Gold-tinted glass morphism |
+| `.card-hover-gold` | Enhanced card hover with gold glow |
+| `@keyframes pulseRing` + `.animate-pulse-ring` | Pulsing gold ring |
+| `.input-gold:focus` | Gold input focus state |
+| `.accordion-gold` | FAQ gold accordion styling |
+| `.noise-gold::after` | Gold noise texture overlay |
+
+### QA Results (agent-browser)
+- ✅ Homepage: All 13+ sections render correctly
+- ✅ All headings present and correctly ordered
+- ✅ New sections: Industry Sectors, Why Choose Us, FAQ, Newsletter all visible
+- ✅ Existing sections: Hero, About, Stats, Marquee, Services, Process, Testimonials, Packages, CTA preserved
+- ✅ ESLint: Zero errors
+- ✅ Dev server: Clean compilation, HTTP 200 responses
+
+### Recommended Next Steps
+1. Apply gold utility classes (glass-gold, card-hover-gold, section-gold-tint) to About, Services, Portfolio, Packages, Contact pages
+2. Add animated gold border (.gold-border-animated) to premium cards
+3. Add gold floating particle effects (.animate-gold-float) to hero or CTA sections
+4. Implement dark/light mode toggle with next-themes
+5. Add blog/news section with CMS
+6. Implement email sending on contact form (Resend API)
+7. Add interactive pricing calculator/slider

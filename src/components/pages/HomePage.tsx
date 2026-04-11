@@ -25,6 +25,13 @@ import {
   Database,
   Terminal,
   FileText,
+  GraduationCap,
+  Scale,
+  HeartPulse,
+  Landmark,
+  Building2,
+  BarChart3,
+  ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,6 +45,14 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import {
   AnimatedSection,
   StaggerContainer,
@@ -123,6 +138,99 @@ const services = [
     title: "Pitch Decks & Profiles",
     description:
       "Investor-ready pitch decks and compelling company profiles that tell your story and win stakeholder buy-in.",
+  },
+];
+
+/* ──────────────────────── sector cards data ─────────────────────────── */
+const sectors = [
+  {
+    icon: GraduationCap,
+    name: "Education",
+    description:
+      "School management systems, enrollment portals, and institutional websites for SA's schools and universities.",
+  },
+  {
+    icon: Scale,
+    name: "Legal",
+    description:
+      "Professional websites for law firms that project authority and drive client inquiries.",
+  },
+  {
+    icon: HeartPulse,
+    name: "Healthcare",
+    description:
+      "Patient portals, clinic management tools, and HIPAA-compliant medical practice websites.",
+  },
+  {
+    icon: Landmark,
+    name: "Government",
+    description:
+      "Municipal websites, public service portals, and government department digital transformation.",
+  },
+  {
+    icon: Building2,
+    name: "Hospitality",
+    description:
+      "Booking platforms, restaurant websites, and guest experience tools for SA's hospitality sector.",
+  },
+  {
+    icon: BarChart3,
+    name: "Finance",
+    description:
+      "Secure financial portals, advisory firm websites, and fintech application interfaces.",
+  },
+];
+
+/* ────────────────── featured projects data ──────────────────────────── */
+const featuredProjects = [
+  {
+    name: "Soshanguve Secondary School",
+    category: "Education",
+    description:
+      "Full school management system with online enrollment, parent portal, and Google Workspace integration. 340% increase in digital enrollment.",
+    stats: ["340% Enrollment Increase", "2 Week Delivery", "99.9% Uptime"],
+    gradient: "from-blue-900/40 via-indigo-900/30 to-slate-900/50",
+    accentColor: "#6366f1",
+  },
+  {
+    name: "Mogale & Associates Law",
+    category: "Legal",
+    description:
+      "Premium law firm website with client intake forms, case tracking dashboard, and appointment scheduling system.",
+    stats: ["3x More Inquiries", "Page 1 Google", "5-Star Reviews"],
+    gradient: "from-amber-900/40 via-yellow-900/30 to-stone-900/50",
+    accentColor: "#D4A853",
+  },
+  {
+    name: "Gateway Hospitality Group",
+    category: "Hospitality",
+    description:
+      "Multi-property booking platform with real-time availability, payment processing, and guest management tools.",
+    stats: ["R2.4M Revenue", "85% Occupancy", "4.8★ Rating"],
+    gradient: "from-emerald-900/40 via-teal-900/30 to-cyan-900/50",
+    accentColor: "#10b981",
+  },
+];
+
+/* ────────────────── why choose us USPs ──────────────────────────────── */
+const whyChooseUs = [
+  {
+    num: "01",
+    title: "Speed Meets Quality",
+    description:
+      "5–7 day delivery without cutting corners. Every line of code is tested, every pixel is intentional.",
+  },
+  {
+    num: "02",
+    title: "You Own Everything",
+    description:
+      "Full source code, hosting credentials, domain — all yours from day one. Zero lock-in.",
+  },
+  {
+    num: "03",
+    title: "Results, Not Promises",
+    description:
+      "Google-ranking websites, 340% enrollment increases, 3x client inquiries. The numbers speak.",
   },
 ];
 
@@ -245,6 +353,40 @@ const trustBadges = [
   "POPIA Compliant",
 ];
 
+/* ──────────────────────── FAQ data ──────────────────────────────── */
+const faqItems = [
+  {
+    question: "How long does it take to build a website?",
+    answer:
+      "Our standard delivery is 5–7 business days from brief to launch. More complex projects like web applications or school management systems may take 10–14 days. We'll provide a clear timeline during our discovery call.",
+  },
+  {
+    question: "Do I own the source code after handover?",
+    answer:
+      "Absolutely. Full source code ownership transfers to you upon final payment. No lock-in contracts, no recurring licensing fees. Your digital asset, your rules.",
+  },
+  {
+    question: "What technology stack do you use?",
+    answer:
+      "We build exclusively on Next.js with TypeScript, deployed on Vercel's edge network for blazing-fast performance. For complex applications, we use PostgreSQL databases and Python/FastAPI backends.",
+  },
+  {
+    question: "Do you offer ongoing maintenance and support?",
+    answer:
+      "Yes. Every package includes 30 days of post-launch support. We also offer ongoing maintenance plans starting from R999/month, which include security updates, performance monitoring, and content updates.",
+  },
+  {
+    question: "Can you integrate with our existing systems?",
+    answer:
+      "Certainly. We regularly integrate with Google Workspace, payment gateways (PayFast, Yoco), CRM systems, accounting software, and custom APIs. Tell us what you need connected.",
+  },
+  {
+    question: "What makes Carter Digitals different from other agencies?",
+    answer:
+      "Three things: speed (5–7 day delivery), ownership (you keep everything), and depth (we're not just designers — we're full-stack engineers). Plus, we're B-BBEE Level 1 with 135% procurement recognition.",
+  },
+];
+
 /* ═══════════════════════════════════════════════════════════════════════
    TYPING TEXT COMPONENT
    ═══════════════════════════════════════════════════════════════════════ */
@@ -365,6 +507,7 @@ export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [isHoveringCarousel, setIsHoveringCarousel] = useState(false);
+  const [email, setEmail] = useState("");
 
   const onSelect = useCallback(() => {
     if (!carouselApi) return;
@@ -407,6 +550,13 @@ export default function HomePage() {
   const handleNavClick = (page: "contact" | "services" | "packages") => {
     navigate(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    toast.success("Subscribed! Check your inbox for a welcome email.");
+    setEmail("");
   };
 
   return (
@@ -548,7 +698,11 @@ export default function HomePage() {
 
       {/* ────────────────── 2. ABOUT PREVIEW SECTION ───────────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Gold glow orb behind section */}
+        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Who We Are"
@@ -564,6 +718,8 @@ export default function HomePage() {
                 <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover overflow-hidden">
                   {/* Gold top accent */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Gold left border accent */}
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="w-12 h-12 rounded-xl bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mb-5 group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
                     <feature.icon className="w-6 h-6 text-[#D4A853]" />
@@ -583,8 +739,8 @@ export default function HomePage() {
 
       {/* ─────────────────────── 3. STATS SECTION ──────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] bg-dots">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
 
         {/* Center glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
@@ -645,8 +801,10 @@ export default function HomePage() {
 
       {/* ───────────────────── TECH MARQUEE SECTION ─────────────── */}
       <section className="relative py-12 md:py-16 bg-[#0A0A0B] overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
 
         <p className="text-center text-xs font-medium tracking-widest uppercase text-[rgba(245,245,245,0.3)] mb-8">
           Technologies We Work With
@@ -721,9 +879,112 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ───────────── NEW: INDUSTRY SECTORS WE SERVE ───────────── */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/4 left-0 w-[350px] h-[350px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-0 w-[300px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="Sectors"
+            title="Built for South Africa's"
+            titleHighlight="Most Demanding Sectors"
+            description="From classrooms to courtrooms, clinics to corporations — we understand the unique demands of every industry we serve."
+            align="center"
+          />
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
+            {sectors.map((sector) => (
+              <StaggerItem key={sector.name}>
+                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover overflow-hidden">
+                  {/* Gold gradient border glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.08)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[rgba(212,168,83,0.25)] transition-colors duration-500" />
+
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.1)] flex items-center justify-center mb-5 group-hover:bg-[rgba(212,168,83,0.15)] group-hover:border-[rgba(212,168,83,0.25)] transition-all duration-300">
+                      <sector.icon className="w-6 h-6 text-[rgba(212,168,83,0.5)] group-hover:text-[#D4A853] transition-colors duration-300" />
+                    </div>
+                    <h3
+                      className="text-lg font-semibold text-white mb-3"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {sector.name}
+                    </h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed group-hover:text-[rgba(245,245,245,0.6)] transition-colors duration-300">
+                      {sector.description}
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ───────────── NEW: WHY CHOOSE US? MINI SECTION ───────────── */}
+      <section className="relative py-20 md:py-24 bg-[#0A0A0B]">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        {/* Gold glow orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection direction="up">
+            <div className="text-center mb-12">
+              <h2
+                className="text-3xl md:text-4xl font-bold text-white mb-3"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                Why <span className="text-gradient-gold">Choose Us?</span>
+              </h2>
+              <p className="text-[rgba(245,245,245,0.5)] max-w-xl mx-auto">
+                Three pillars that set us apart from every other agency in South Africa.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6" staggerDelay={0.12}>
+            {whyChooseUs.map((usp) => (
+              <StaggerItem key={usp.num}>
+                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover overflow-hidden text-center">
+                  {/* Gold top accent */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Gold number badge */}
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] mb-5">
+                    <span
+                      className="text-lg font-bold text-[#D4A853]"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {usp.num}
+                    </span>
+                  </div>
+
+                  <h3
+                    className="text-lg font-semibold text-white mb-3"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
+                    {usp.title}
+                  </h3>
+                  <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed">
+                    {usp.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* ────────────────────── 5. PROCESS SECTION ──────────────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="How We Work"
@@ -811,7 +1072,7 @@ export default function HomePage() {
 
       {/* ──────────────────── 6. TESTIMONIALS SECTION ───────────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
@@ -922,9 +1183,83 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ──────── NEW: FEATURED PROJECTS SHOWCASE ──────── */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="Our Work"
+            title="Projects That"
+            titleHighlight="Speak Volumes"
+            description="Real outcomes from real projects. Every build is a case study in digital transformation."
+            align="center"
+          />
+
+          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.1}>
+            {featuredProjects.map((project) => (
+              <StaggerItem key={project.name}>
+                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden card-hover transition-all duration-300 hover:border-[rgba(212,168,83,0.25)] hover:shadow-lg hover:shadow-[rgba(212,168,83,0.08)]">
+                  {/* Project image area with gradient */}
+                  <div className={`relative h-48 md:h-56 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent" />
+                    {/* Category badge */}
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-[rgba(10,10,11,0.7)] backdrop-blur-sm border border-[rgba(212,168,83,0.2)] text-[#D4A853] text-xs font-medium px-3 py-1">
+                        {project.category}
+                      </Badge>
+                    </div>
+                    {/* Decorative accent */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-1 opacity-60"
+                      style={{ backgroundColor: project.accentColor }}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 md:p-8">
+                    <h3
+                      className="text-xl font-bold text-white mb-3"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      {project.name}
+                    </h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed mb-6">
+                      {project.description}
+                    </p>
+
+                    {/* Result stats */}
+                    <div className="space-y-3">
+                      {project.stats.map((stat) => (
+                        <div key={stat} className="flex items-center gap-2.5">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#D4A853] shrink-0 group-hover:shadow-sm group-hover:shadow-[rgba(212,168,83,0.5)] transition-shadow duration-300" />
+                          <span className="text-xs font-medium text-[rgba(245,245,245,0.55)] group-hover:text-[rgba(245,245,245,0.7)] transition-colors duration-300">
+                            {stat}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* ────────────────── 7. PACKAGES PREVIEW SECTION ────────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Gold glow orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Pricing"
@@ -1014,9 +1349,114 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ──────────── NEW: FAQ SECTION ──────────── */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/4 right-0 w-[350px] h-[350px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/3 left-0 w-[300px] h-[300px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="FAQ"
+            title="Got Questions?"
+            titleHighlight="We've Got Answers"
+            description="Everything you need to know about working with Carter Digitals. Can't find what you're looking for? Reach out directly."
+            align="center"
+          />
+
+          <AnimatedSection delay={0.1} direction="up">
+            <Accordion type="single" collapsible className="space-y-2">
+              {faqItems.map((item, idx) => (
+                <AccordionItem
+                  key={idx}
+                  value={`faq-${idx}`}
+                  className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#131316] px-6 data-[state=open]:border-[rgba(212,168,83,0.2)] data-[state=open]:shadow-sm data-[state=open]:shadow-[rgba(212,168,83,0.05)] transition-all duration-300 overflow-hidden"
+                >
+                  <AccordionTrigger className="text-left text-base font-semibold text-[rgba(245,245,245,0.8)] hover:text-white py-5 data-[state=open]:text-[#D4A853] transition-colors duration-300 no-underline">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed pb-5">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ──────────── NEW: NEWSLETTER / STAY CONNECTED ──────────── */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Gold subtle overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection direction="up">
+            <div className="relative overflow-hidden rounded-3xl border border-[rgba(212,168,83,0.15)] bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[#131316] to-[rgba(212,168,83,0.04)]">
+              {/* Decorative gold glow blurs in corners */}
+              <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.08)] rounded-full blur-[120px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-[250px] h-[250px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[100px] pointer-events-none" />
+
+              <div className="relative z-10 px-6 py-14 md:px-16 md:py-16 lg:px-20 lg:py-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                  {/* Left: Copy */}
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)] mb-6">
+                      <Sparkles className="w-3.5 h-3.5 text-[#D4A853]" />
+                      <span className="text-xs font-medium text-[#D4A853]">
+                        Newsletter
+                      </span>
+                    </div>
+                    <h2
+                      className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    >
+                      Stay Ahead of the <span className="text-gradient-gold">Curve</span>
+                    </h2>
+                    <p className="text-base text-[rgba(245,245,245,0.55)] leading-relaxed mb-2">
+                      Get exclusive insights on digital transformation, web development trends, and special offers. No spam — just value.
+                    </p>
+                    <p className="text-xs text-[rgba(245,245,245,0.3)]">
+                      Join 200+ SA business leaders. Unsubscribe anytime.
+                    </p>
+                  </div>
+
+                  {/* Right: Email form */}
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                    <div className="relative">
+                      <Input
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full h-13 px-5 py-4 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.3)] text-base focus:border-[#D4A853] focus:ring-1 focus:ring-[rgba(212,168,83,0.3)] focus:shadow-lg focus:shadow-[rgba(212,168,83,0.05)] transition-all duration-300 backdrop-blur-sm"
+                      />
+                    </div>
+                    <Button
+                      type="submit"
+                      className="w-full h-13 bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-8 py-4 text-base rounded-xl shadow-lg shadow-[rgba(212,168,83,0.25)] hover:shadow-[rgba(212,168,83,0.35)] transition-all duration-300"
+                    >
+                      Subscribe
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ──────────────────── 8. FINAL CTA SECTION ─────────────────── */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.15)] to-transparent" />
+        {/* Gold subtle overlay on alternating section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Gold glow orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="relative overflow-hidden rounded-3xl border border-gradient-gold">
