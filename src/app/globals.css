@@ -1031,3 +1031,68 @@ a {
   border-color: rgba(184, 146, 47, 0.3);
   box-shadow: 0 0 20px rgba(184, 146, 47, 0.08);
 }
+
+/* ============================================
+   Task 8 — Image Lightbox
+   ============================================ */
+
+/* Full-screen lightbox overlay */
+.lightbox-overlay {
+  z-index: 60;
+}
+
+/* Main image container with gold gradient border */
+.lightbox-image {
+  position: relative;
+}
+
+.lightbox-image::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 168, 83, 0.4) 0%,
+    rgba(232, 201, 122, 0.2) 25%,
+    rgba(184, 146, 47, 0.15) 50%,
+    rgba(232, 201, 122, 0.2) 75%,
+    rgba(212, 168, 83, 0.4) 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Thumbnail styles */
+.lightbox-thumb {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.lightbox-thumb[aria-selected="true"] {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Light mode lightbox overrides */
+.light .lightbox-image::before {
+  background: linear-gradient(
+    135deg,
+    rgba(184, 146, 47, 0.3) 0%,
+    rgba(212, 168, 83, 0.15) 25%,
+    rgba(184, 146, 47, 0.1) 50%,
+    rgba(212, 168, 83, 0.15) 75%,
+    rgba(184, 146, 47, 0.3) 100%
+  );
+}
+
+.light .lightbox-overlay {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.light .lightbox-image {
+  background: #F3F2EF;
+  border-color: rgba(184, 146, 47, 0.2);
+}

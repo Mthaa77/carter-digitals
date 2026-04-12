@@ -237,9 +237,15 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="h-px section-divider-gold" />
+
       {/* ────────────────── 2. OUR STORY SECTION ───────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        {/* Gold radial glow orb behind two-column layout */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[rgba(212,168,83,0.07)] rounded-full blur-[160px] pointer-events-none" />
+        {/* Secondary gold accent glow */}
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Text column */}
@@ -256,7 +262,7 @@ export default function AboutPage() {
               </h2>
 
               <div className="space-y-5 text-[rgba(245,245,245,0.6)] leading-[1.8]">
-                <p>
+                <p className="first-letter:text-[#D4A853] first-letter:text-3xl first-letter:font-bold first-letter:float-left first-letter:mr-2 first-letter:mt-1">
                   Carter Digitals was never meant to be just another digital
                   agency. Founded in 2023, this studio was named in tribute to a
                   close friend who passed away in April 2021. Every project we
@@ -401,18 +407,19 @@ export default function AboutPage() {
       </section>
 
       {/* ────────────────── 4. FOUNDER SECTION ──────────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Gold gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.03)] via-[rgba(212,168,83,0.01)] to-transparent pointer-events-none" />
-        {/* Gold glow orb */}
-        <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-0 w-[300px] h-[250px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Image/visual column */}
             <AnimatedSection direction="right" delay={0.1}>
               <div className="relative">
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#131316] via-[rgba(212,168,83,0.03)] to-[#131316] border border-[rgba(212,168,83,0.12)] overflow-hidden aspect-[4/5] max-w-md mx-auto lg:max-w-none">
+                <div className="relative rounded-3xl bg-gradient-to-br from-[#131316] via-[rgba(212,168,83,0.03)] to-[#131316] border-2 border-[rgba(212,168,83,0.2)] overflow-hidden aspect-[4/5] max-w-md mx-auto lg:max-w-none glass-gold glow-gold">
                   {/* Background pattern */}
                   <div className="absolute inset-0 bg-grid opacity-50" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent" />
@@ -578,7 +585,7 @@ export default function AboutPage() {
       {/* ──────────── 5a. COMPANY STATS BAR ───────────────────── */}
       <AnimatedSection direction="up">
         <section className="relative py-16 md:py-20 bg-[#0A0A0B] section-gold-tint">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
           <div className="absolute inset-0 bg-dots opacity-40" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
 
@@ -610,7 +617,7 @@ export default function AboutPage() {
       {/* ──────────── 5b. COMPANY MILESTONES TIMELINE ─────────────── */}
       <AnimatedSection direction="up">
         <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -685,7 +692,7 @@ export default function AboutPage() {
 
       {/* ────────────────── 5. CREDENTIALS SECTION ──────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -795,9 +802,13 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
+      <div className="h-px section-divider-gold" />
+
       {/* ────────────── 6. ENGAGEMENT MODELS SECTION ────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        {/* Gold glow orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="How We Work Together"
@@ -811,11 +822,16 @@ export default function AboutPage() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
             staggerDelay={0.12}
           >
-            {engagementModels.map((model) => (
+            {engagementModels.map((model, idx) => (
               <StaggerItem key={model.title}>
                 <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover-gold hover-lift overflow-hidden flex flex-col">
                   {/* Gold top accent */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Gold number badge */}
+                  <span className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] flex items-center justify-center text-sm font-bold text-[#D4A853] font-display select-none shadow-sm shadow-[rgba(212,168,83,0.1)]">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
 
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-[rgba(212,168,83,0.1)] transition-shadow duration-300">
                     <model.icon className="w-7 h-7 text-[#D4A853]" />

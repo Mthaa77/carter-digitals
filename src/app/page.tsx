@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { useNavigation } from "@/lib/navigation";
 import { Navbar } from "@/components/layout/Navbar";
@@ -49,12 +49,18 @@ const pageVariants = {
 
 export default function Page() {
   const { currentPage, navigate } = useNavigation();
-  const [hasLoaded, setHasLoaded] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('carter-loaded') === 'true';
-    }
-    return false;
-  });
+  // Track whether loading screen has completed this session
+  const loadingCompleteRef = useState(false);
+  const [loadingComplete, setLoadingComplete] = loadingCompleteRef;
+
+  // Hydration-safe read from sessionStorage via useSyncExternalStore
+  const loadedFromStorage = useSyncExternalStore(
+    () => () => {},
+    () => sessionStorage.getItem('carter-loaded') === 'true',
+    () => false
+  );
+
+  const hasLoaded = loadedFromStorage || loadingComplete;
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // ─── Page transition progress bar ───
@@ -93,10 +99,8 @@ export default function Page() {
   );
 
   const handleLoadingComplete = useCallback(() => {
-    setHasLoaded(true);
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('carter-loaded', 'true');
-    }
+    setLoadingComplete(true);
+    sessionStorage.setItem('carter-loaded', 'true');
   }, []);
 
   // Listen for hash changes to support direct navigation
@@ -151,13 +155,15 @@ export default function Page() {
 
   const PageComponent = pageComponents[currentPage];
 
-  // Update hash on navigation
+  // Update hash on navigation + smooth scroll to top
   useEffect(() => {
     if (currentPage !== "home") {
       window.history.replaceState(null, "", `#${currentPage}`);
     } else {
       window.history.replaceState(null, "", window.location.pathname);
     }
+    // Smooth scroll to top on every page navigation
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
   return (

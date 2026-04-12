@@ -8,7 +8,6 @@ import {
   CheckCircle,
   Sparkles,
   Building2,
-  Briefcase,
   GraduationCap,
   Scale,
   HeartPulse,
@@ -20,6 +19,7 @@ import {
   Clock,
   Calendar,
   User,
+  Camera,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,10 +29,6 @@ import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import {
   AnimatedSection,
@@ -42,6 +38,8 @@ import {
 } from "@/components/shared/AnimatedSection";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { useNavigation } from "@/lib/navigation";
+import ImageLightbox from "@/components/shared/ImageLightbox";
+import type { LightboxImage } from "@/components/shared/ImageLightbox";
 
 /* ──────────────────────── project data types ────────────────────────── */
 interface ProjectData {
@@ -240,6 +238,83 @@ const projectCards: ProjectData[] = [
   },
 ];
 
+/* ──────────────────────── mock project images ────────────────────── */
+function generateProjectImages(projectName: string, categoryKey: string): LightboxImage[] {
+  /* Generate gradient placeholder images based on category */
+  const gradients: Record<string, string[]> = {
+    education: [
+      "linear-gradient(135deg, #1a3a5c 0%, #0d7377 50%, #14a085 100%)",
+      "linear-gradient(160deg, #0c2461 0%, #1e3799 50%, #4a69bd 100%)",
+      "linear-gradient(145deg, #0a3d62 0%, #1289A7 50%, #38ada9 100%)",
+      "linear-gradient(180deg, #2c3e50 0%, #3498db 50%, #1abc9c 100%)",
+    ],
+    business: [
+      "linear-gradient(135deg, #4a1a0a 0%, #b85c1e 50%, #e67e22 100%)",
+      "linear-gradient(160deg, #3d0c02 0%, #c0392b 50%, #e74c3c 100%)",
+      "linear-gradient(145deg, #6b3a0a 0%, #d68910 50%, #f5b041 100%)",
+      "linear-gradient(180deg, #5b2c0e 0%, #ca6f1e 50%, #eb984e 100%)",
+    ],
+    legal: [
+      "linear-gradient(135deg, #2c3e50 0%, #4a5568 50%, #a0aec0 100%)",
+      "linear-gradient(160deg, #1a202c 0%, #2d3748 50%, #718096 100%)",
+      "linear-gradient(145deg, #37474f 0%, #607d8b 50%, #90a4ae 100%)",
+      "linear-gradient(180deg, #263238 0%, #546e7a 50%, #78909c 100%)",
+    ],
+    medical: [
+      "linear-gradient(135deg, #0a3d0c 0%, #1e8449 50%, #27ae60 100%)",
+      "linear-gradient(160deg, #0b5345 0%, #148f77 50%, #1abc9c 100%)",
+      "linear-gradient(145deg, #0e6655 0%, #117a65 50%, #48c9b0 100%)",
+      "linear-gradient(180deg, #1e8449 0%, #28b463 50%, #82e0aa 100%)",
+    ],
+  };
+
+  const categoryGradients = gradients[categoryKey] || gradients.business;
+  const count = 3 + Math.floor(Math.random() * 3); // 3–5 images
+  const captions = [
+    `${projectName} — Homepage Design`,
+    `${projectName} — Dashboard Interface`,
+    `${projectName} — Mobile Responsive View`,
+    `${projectName} — Feature Detail`,
+    `${projectName} — Admin Panel`,
+  ];
+
+  /* We use SVG data URIs as placeholder images with the gradients */
+  return Array.from({ length: count }, (_, i) => {
+    const grad = categoryGradients[i % categoryGradients.length];
+    const svg = encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+        <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:${grad.includes('#') ? grad.match(/#[0-9a-fA-F]{6}/g)?.[0] || '#333' : '#333'};stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:${grad.includes('#') ? (grad.match(/#[0-9a-fA-F]{6}/g)?.[1] || grad.match(/#[0-9a-fA-F]{6}/g)?.[0] || '#666') : '#666'};stop-opacity:1"/>
+        </linearGradient></defs>
+        <rect fill="url(#g)" width="1200" height="800"/>
+        <text x="600" y="380" text-anchor="middle" font-family="sans-serif" font-size="42" fill="rgba(255,255,255,0.15)" font-weight="bold">${projectName}</text>
+        <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-size="20" fill="rgba(255,255,255,0.08)">Design Preview ${i + 1}</text>
+        <rect x="200" y="500" width="800" height="4" rx="2" fill="rgba(255,255,255,0.05)"/>
+        <rect x="200" y="520" width="600" height="4" rx="2" fill="rgba(255,255,255,0.03)"/>
+        <rect x="200" y="540" width="700" height="4" rx="2" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="400" cy="300" r="40" fill="rgba(255,255,255,0.05)"/>
+        <circle cx="600" cy="280" r="60" fill="rgba(255,255,255,0.03)"/>
+        <circle cx="800" cy="310" r="35" fill="rgba(255,255,255,0.04)"/>
+      </svg>`
+    );
+    return {
+      src: `data:image/svg+xml,${svg}`,
+      alt: `${projectName} — ${captions[i] || `Screenshot ${i + 1}`}`,
+      caption: captions[i] || `Screenshot ${i + 1}`,
+    };
+  });
+}
+
+/* Pre-generate images for all projects */
+const projectImageMap: Record<string, LightboxImage[]> = {};
+function getProjectImages(name: string, categoryKey: string): LightboxImage[] {
+  if (!projectImageMap[name]) {
+    projectImageMap[name] = generateProjectImages(name, categoryKey);
+  }
+  return projectImageMap[name];
+}
+
 /* ──────────────────────── stats data ───────────────────────────────── */
 const stats = [
   { target: 50, suffix: "+", label: "Projects Delivered", prefix: "" },
@@ -270,6 +345,8 @@ function ProjectDetailDialog({
   onOpenChange: (open: boolean) => void;
 }) {
   const { navigate } = useNavigation();
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const projectImages = getProjectImages(project.name, project.categoryKey);
 
   const handleStartProject = () => {
     onOpenChange(false);
@@ -277,7 +354,12 @@ function ProjectDetailDialog({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleViewGallery = () => {
+    setGalleryOpen(true);
+  };
+
   return (
+    <>
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className="max-w-2xl bg-[#0F0F12] border-[rgba(212,168,83,0.15)] p-0 overflow-hidden rounded-2xl"
@@ -286,14 +368,6 @@ function ProjectDetailDialog({
         }}
         showCloseButton={false}
       >
-        {/* Override overlay with dark overlay */}
-        <style>{`
-          [data-slot="dialog-overlay"] {
-            background: rgba(0, 0, 0, 0.8) !important;
-            backdrop-filter: blur(4px);
-          }
-        `}</style>
-
         {/* Top section with gradient background */}
         <div className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F12] via-transparent to-transparent" />
@@ -319,7 +393,7 @@ function ProjectDetailDialog({
         <div className="px-6 md:px-8 pb-6 md:pb-8 -mt-4">
           {/* Title */}
           <h2
-            className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight" font-display
+            className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight font-display"
           >
             {project.name}
           </h2>
@@ -422,9 +496,36 @@ function ProjectDetailDialog({
               </Button>
             )}
           </div>
+
+          {/* View Gallery button */}
+          <div className="mt-4">
+            <button
+              onClick={handleViewGallery}
+              className="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-xl
+                         bg-[rgba(212,168,83,0.06)] border border-[rgba(212,168,83,0.12)]
+                         text-[#D4A853] font-medium text-sm
+                         hover:bg-[rgba(212,168,83,0.1)] hover:border-[rgba(212,168,83,0.25)]
+                         hover:shadow-[0_0_20px_rgba(212,168,83,0.08)]
+                         transition-all duration-200 group"
+              aria-label="View project gallery"
+            >
+              <Camera className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>View Gallery</span>
+              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-[rgba(212,168,83,0.12)] text-[#E8C97A]">
+                {projectImages.length}
+              </span>
+            </button>
+          </div>
         </div>
+
       </DialogContent>
     </Dialog>
+    <ImageLightbox
+      images={projectImages}
+      open={galleryOpen}
+      onClose={() => setGalleryOpen(false)}
+    />
+    </>
   );
 }
 
@@ -488,16 +589,23 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ────────────────── 2. FEATURED PROJECT ─────────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        {/* Gold radial glow orb behind featured card */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gold-gradient-radial pointer-events-none z-0" />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[100px] pointer-events-none z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div
-              className="relative overflow-hidden rounded-3xl border-gradient-gold glass-gold cursor-pointer group"
+              className="relative overflow-hidden rounded-3xl border-gradient-gold glass-gold-premium cursor-pointer group"
               onClick={() => setSelectedProject(featuredProject)}
             >
+              {/* Gold gradient accent line at top */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent" />
+
               {/* Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[#131316] to-[rgba(212,168,83,0.04)]" />
               <div className="absolute inset-0 bg-dots opacity-30" />
@@ -505,6 +613,9 @@ export default function PortfolioPage() {
               {/* Decorative glows */}
               <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
+
+              {/* Gold shimmer overlay on hover */}
+              <div className="absolute inset-0 animate-shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-[1]" />
 
               <div className="relative z-10 p-6 md:p-10 lg:p-14">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -614,12 +725,14 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ──────────────────── 3. PROJECT GRID ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+        {/* Background glow orbs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[80px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -666,15 +779,19 @@ export default function PortfolioPage() {
                             className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden card-hover-gold hover-lift cursor-pointer hover:shadow-[0_0_30px_rgba(212,168,83,0.08)] transition-shadow duration-300"
                             onClick={() => setSelectedProject(project)}
                           >
+                            {/* Gold shimmer overlay on hover */}
+                            <div className="absolute inset-0 z-20 animate-shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
                             {/* Gradient placeholder header */}
                             <div
                               className={`relative h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
                             >
                               <project.icon className="w-12 h-12 text-[rgba(212,168,83,0.25)] group-hover:text-[rgba(212,168,83,0.4)] transition-colors duration-300" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-transparent to-transparent" />
-                              {/* Category badge */}
+                              {/* Subtle gradient overlay for depth */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-[rgba(0,0,0,0.1)] to-transparent" />
+                              {/* Category badge with gold-tinted background */}
                               <div className="absolute top-3 right-3">
-                                <Badge className="bg-[rgba(10,10,11,0.7)] backdrop-blur-sm text-[rgba(245,245,245,0.7)] border-[rgba(255,255,255,0.1)] text-[10px] font-medium px-2.5 py-0.5">
+                                <Badge className="bg-[rgba(212,168,83,0.12)] backdrop-blur-sm text-[#E8C97A] border-[rgba(212,168,83,0.2)] text-[10px] font-medium px-2.5 py-0.5">
                                   {project.category}
                                 </Badge>
                               </div>
@@ -716,15 +833,17 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ───────────────────── 4. RESULTS SECTION ───────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] bg-dots section-gold-tint">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
 
-        {/* Center glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.035)] rounded-full blur-[100px] pointer-events-none" />
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/3 left-0 w-[350px] h-[250px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-1/3 right-0 w-[300px] h-[250px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[80px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -740,7 +859,7 @@ export default function PortfolioPage() {
               <StaggerItem key={stat.label}>
                 <div className="text-center p-6 rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover">
                   <div
-                    className="text-4xl md:text-5xl font-bold text-gradient-gold mb-2 font-display"
+                    className="text-4xl md:text-5xl font-bold text-gradient-gold counter-glow mb-2 font-display"
                   >
                     {stat.prefix}
                     <AnimatedCounter
@@ -759,24 +878,34 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ──────────────────── 5. CTA SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative overflow-hidden rounded-3xl border-gradient-gold">
+            <div className="relative overflow-hidden rounded-3xl gold-border-animated">
               {/* Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(19,19,22,0.95)] to-[rgba(212,168,83,0.04)]" />
               <div className="absolute inset-0 bg-dots opacity-40" />
+
+              {/* Noise texture overlay */}
+              <div className="absolute inset-0 noise-gold" />
 
               {/* Decorative glows */}
               <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
 
+              {/* Decorative floating gold dots */}
+              <div className="absolute top-12 left-[15%] w-1.5 h-1.5 rounded-full bg-[#D4A853] animate-gold-float pointer-events-none" style={{ animationDelay: "0s" }} />
+              <div className="absolute top-24 right-[20%] w-1 h-1 rounded-full bg-[#E8C97A] animate-gold-float pointer-events-none" style={{ animationDelay: "1s" }} />
+              <div className="absolute bottom-20 left-[25%] w-2 h-2 rounded-full bg-[#D4A853] animate-gold-float pointer-events-none" style={{ animationDelay: "2s" }} />
+              <div className="absolute bottom-32 right-[30%] w-1 h-1 rounded-full bg-[#B8922F] animate-gold-float pointer-events-none" style={{ animationDelay: "0.5s" }} />
+              <div className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-[#E8C97A] animate-gold-float pointer-events-none" style={{ animationDelay: "1.5s" }} />
+
               <div className="relative z-10 px-6 py-14 md:px-16 md:py-20 lg:px-24 lg:py-24 text-center">
                 <h2
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight font-display"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight font-display text-glow-gold"
                 >
                   Have a Project in Mind?
                 </h2>

@@ -309,15 +309,18 @@ export default function ServicesPage() {
       </section>
 
       {/* ---------- 2. FLAGSHIP SERVICE -- WEBSITE DEV ---------- */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" delay={0.1}>
             <div className="relative rounded-3xl bg-[#131316] border-2 border-[rgba(212,168,83,0.25)] overflow-hidden">
               {/* Gold border glow */}
-              <div className="absolute inset-0 rounded-3xl shadow-[0_0_60px_rgba(212,168,83,0.12)] pointer-events-none" />
+              <div className="absolute inset-0 rounded-3xl shadow-[0_0_60px_rgba(212,168,83,0.15)] pointer-events-none" />
               <div className="absolute inset-0 bg-dots opacity-20" />
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent" />
+              {/* Gold glow orbs */}
+              <div className="absolute -top-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-[250px] h-[250px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 p-8 md:p-12 lg:p-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -395,7 +398,7 @@ export default function ServicesPage() {
 
       {/* ----------------- 3. CORE SERVICES GRID ----------------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
 
@@ -415,9 +418,9 @@ export default function ServicesPage() {
             {coreServices.map((service) => (
               <StaggerItem key={service.title}>
                 <TiltCard className="h-full" tiltStrength={4}>
-                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover overflow-hidden">
-                    {/* Shimmer on hover */}
-                    <div className="absolute inset-0 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold hover:border-[rgba(212,168,83,0.2)] hover-lift overflow-hidden">
+                    {/* Gold shimmer on hover */}
+                    <div className="absolute inset-0 animate-shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
                     <div className="relative z-10">
                       {/* Icon in gold circle */}
@@ -447,7 +450,7 @@ export default function ServicesPage() {
 
       {/* ----------------- 4. PROCESS SECTION ----------------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Gold glow orb */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -509,7 +512,7 @@ export default function ServicesPage() {
 
       {/* ----------------- 5. ADD-ON SERVICES ----------------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
@@ -572,7 +575,7 @@ export default function ServicesPage() {
 
       {/* ---------- 6. SERVICES COMPARISON TABLE ---------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -585,7 +588,7 @@ export default function ServicesPage() {
           />
 
           <AnimatedSection direction="up" delay={0.15}>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto gold-scrollbar">
               <div className="min-w-[640px]">
                 {/* Table */}
                 <div className="rounded-2xl border border-[rgba(255,255,255,0.06)] overflow-hidden">
@@ -793,10 +796,10 @@ export default function ServicesPage() {
 
       {/* ---------- 7. STAY CONNECTED / NEWSLETTER ---------- */}
       <section className="relative py-16 md:py-20 bg-[#0A0A0B] section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[rgba(212,168,83,0.1)] via-[#131316] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] p-8 md:p-10">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[rgba(212,168,83,0.1)] via-[#131316] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] p-8 md:p-10 glow-gold">
               {/* Decorative glows */}
               <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[100px] pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-[200px] h-[200px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[80px] pointer-events-none" />
@@ -826,7 +829,7 @@ export default function ServicesPage() {
                           "Subscribed! Check your inbox for a welcome email."
                         )
                       }
-                      className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-6 rounded-xl shrink-0"
+                      className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-6 rounded-xl shrink-0 shadow-lg shadow-[rgba(212,168,83,0.3)] hover:shadow-[rgba(212,168,83,0.5),0_0_24px_rgba(212,168,83,0.3)] transition-all duration-300 glow-gold"
                     >
                       Subscribe
                     </Button>
@@ -843,7 +846,7 @@ export default function ServicesPage() {
 
       {/* ----------------- 8. CTA SECTION ----------------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="relative overflow-hidden rounded-3xl border border-gradient-gold">

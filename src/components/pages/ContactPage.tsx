@@ -88,10 +88,34 @@ const budgetOptions = [
 
 /* ──────────────────────── trust badges ─────────────────────────── */
 const trustBadges = [
-  "B-BBEE Level 1",
-  "100% Black-Owned",
-  "POPIA Compliant",
-  "CSD Registered",
+  { label: "B-BBEE Level 1", icon: Shield },
+  { label: "100% Black-Owned", icon: CheckCircle },
+  { label: "POPIA Compliant", icon: Shield },
+  { label: "CSD Registered", icon: CheckCircle },
+];
+
+/* ──────────────────────── location info cards ──────────────────── */
+const locationCards = [
+  {
+    icon: MapPin,
+    title: "Physical Address",
+    lines: ["1457 Block L, Soshanguve", "Pretoria, Gauteng, South Africa"],
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    lines: ["kabelokadiaka4@gmail.com", "We reply within 2 hours"],
+  },
+  {
+    icon: Phone,
+    title: "Call Us",
+    lines: ["072 402 6893", "Mon–Fri, 08:00–18:00"],
+  },
+  {
+    icon: Clock,
+    title: "Operating Hours",
+    lines: ["Mon–Fri: 08:00–18:00", "Sat: 09:00–14:00"],
+  },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -168,7 +192,7 @@ export default function ContactPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection delay={0.1} direction="up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)] mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)] mb-8 label-badge">
               <MessageCircle className="w-4 h-4 text-[#D4A853]" />
               <span className="text-sm font-medium text-[#D4A853]">
                 Get in Touch
@@ -178,7 +202,7 @@ export default function ContactPage() {
 
           <AnimatedSection delay={0.2} direction="up">
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight" font-display
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display"
             >
               <span className="text-gradient-gold">Let&apos;s Talk</span>
             </h1>
@@ -202,23 +226,31 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ────────────────── 2. CONTACT GRID ─────────────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B]">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        {/* Gold glow orbs */}
+        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
             {/* Left column - Contact Form (3 cols) */}
             <div className="lg:col-span-3">
               <AnimatedSection delay={0.1} direction="left">
-                <div className="rounded-2xl bg-[#131316] border border-[rgba(212,168,83,0.1)] p-6 md:p-8 shadow-[0_0_40px_rgba(212,168,83,0.05)]">
-                  <h2
-                    className="text-2xl md:text-3xl font-bold text-white mb-2 font-display"
-                  >
-                    Send Us a Message
-                  </h2>
+                {/* Gold radial glow behind form */}
+                <div className="absolute -inset-4 bg-gold-gradient-radial opacity-60 pointer-events-none hidden lg:block" />
+                <div className="relative rounded-2xl glass-gold border-l-[3px] border-l-[#D4A853] p-6 md:p-8 shadow-[0_0_40px_rgba(212,168,83,0.08)]">
+                  {/* Heading */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
+                      <Send className="w-5 h-5 text-[#D4A853]" />
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-white font-display">
+                      Send Us a Message
+                    </h2>
+                  </div>
                   <p className="text-sm text-[rgba(245,245,245,0.5)] mb-8">
                     Fill out the form below and we&apos;ll get back to you within 2 business hours.
                   </p>
@@ -238,7 +270,7 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={(e) => handleChange("name", e.target.value)}
                             placeholder="Your full name"
-                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11"
+                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] rounded-xl h-11 input-gold"
                           />
                         </div>
                       </div>
@@ -255,7 +287,7 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={(e) => handleChange("email", e.target.value)}
                             placeholder="you@company.co.za"
-                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11"
+                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] rounded-xl h-11 input-gold"
                           />
                         </div>
                       </div>
@@ -274,7 +306,7 @@ export default function ContactPage() {
                             value={formData.phone}
                             onChange={(e) => handleChange("phone", e.target.value)}
                             placeholder="072 402 6893"
-                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11"
+                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] rounded-xl h-11 input-gold"
                           />
                         </div>
                       </div>
@@ -289,7 +321,7 @@ export default function ContactPage() {
                             value={formData.company}
                             onChange={(e) => handleChange("company", e.target.value)}
                             placeholder="Your company name"
-                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11"
+                            className="pl-10 bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] rounded-xl h-11 input-gold"
                           />
                         </div>
                       </div>
@@ -305,7 +337,7 @@ export default function ContactPage() {
                           value={formData.service}
                           onValueChange={(value) => handleChange("service", value)}
                         >
-                          <SelectTrigger className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11">
+                          <SelectTrigger className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white rounded-xl h-11 input-gold">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                           <SelectContent className="bg-[#1A1A1F] border-[rgba(255,255,255,0.08)]">
@@ -329,7 +361,7 @@ export default function ContactPage() {
                           value={formData.budget}
                           onValueChange={(value) => handleChange("budget", value)}
                         >
-                          <SelectTrigger className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl h-11">
+                          <SelectTrigger className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white rounded-xl h-11 input-gold">
                             <SelectValue placeholder="Select budget range" />
                           </SelectTrigger>
                           <SelectContent className="bg-[#1A1A1F] border-[rgba(255,255,255,0.08)]">
@@ -359,16 +391,16 @@ export default function ContactPage() {
                         onChange={(e) => handleChange("message", e.target.value)}
                         placeholder="Tell us about your project, goals, and timeline..."
                         rows={5}
-                        className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] focus:border-[rgba(212,168,83,0.5)] focus:ring-1 focus:ring-[rgba(212,168,83,0.2)] focus:shadow-[0_0_20px_rgba(212,168,83,0.05)] rounded-xl resize-none"
+                        className="bg-[rgba(255,255,255,0.03)] border-[rgba(255,255,255,0.08)] text-white placeholder:text-[rgba(245,245,245,0.25)] rounded-xl resize-none input-gold"
                       />
                     </div>
 
-                    {/* Submit button */}
+                    {/* Submit button - enhanced with glow */}
                     <Button
                       type="submit"
                       disabled={isSubmitting}
                       size="lg"
-                      className="w-full bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold py-5 text-base rounded-xl shadow-lg shadow-[rgba(212,168,83,0.25)] hover:shadow-[rgba(212,168,83,0.35)] transition-all duration-300 group disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-[#D4A853] via-[#E8C97A] to-[#D4A853] hover:from-[#E8C97A] hover:via-[#D4A853] hover:to-[#B8922F] text-[#0A0A0B] font-semibold py-5 text-base rounded-xl shadow-[0_0_30px_rgba(212,168,83,0.3),0_0_60px_rgba(212,168,83,0.1)] hover:shadow-[0_0_40px_rgba(212,168,83,0.45),0_0_80px_rgba(212,168,83,0.15)] transition-all duration-300 group disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
@@ -398,9 +430,7 @@ export default function ContactPage() {
                 <div className="space-y-6">
                   {/* Get in Touch heading */}
                   <div>
-                    <h2
-                      className="text-2xl md:text-3xl font-bold text-white mb-2 font-display"
-                    >
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 font-display">
                       Get in Touch
                     </h2>
                     <p className="text-sm text-[rgba(245,245,245,0.5)]">
@@ -410,7 +440,7 @@ export default function ContactPage() {
 
                   {/* Contact method cards */}
                   <StaggerContainer className="space-y-3" staggerDelay={0.08}>
-                    {contactMethods.map((method) => (
+                    {contactMethods.map((method, index) => (
                       <StaggerItem key={method.label}>
                         {method.href ? (
                           <a
@@ -418,9 +448,12 @@ export default function ContactPage() {
                             target={method.href.startsWith("http") ? "_blank" : undefined}
                             rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
                           >
-                            <div className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover-gold cursor-pointer">
-                              <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
-                                <method.icon className="w-5 h-5 text-[#D4A853]" />
+                            <div
+                              className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover-gold cursor-pointer"
+                              style={{ transitionDelay: `${index * 50}ms` }}
+                            >
+                              <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center group-hover:bg-[rgba(212,168,83,0.15)] group-hover:shadow-[0_0_20px_rgba(212,168,83,0.2)] transition-all duration-300">
+                                <method.icon className="w-5 h-5 text-[#D4A853] group-hover:text-[#E8C97A] transition-colors duration-300" />
                               </div>
                               <div className="min-w-0">
                                 <p className="text-xs font-medium text-[rgba(245,245,245,0.4)] mb-0.5">
@@ -430,6 +463,7 @@ export default function ContactPage() {
                                   {method.value}
                                 </p>
                               </div>
+                              <ArrowRight className="w-4 h-4 text-[rgba(245,245,245,0.2)] shrink-0 mt-1 ml-auto group-hover:text-[#D4A853] group-hover:translate-x-1 transition-all duration-300" />
                             </div>
                           </a>
                         ) : (
@@ -453,14 +487,12 @@ export default function ContactPage() {
 
                   {/* Business hours card */}
                   <AnimatedSection delay={0.4} direction="right">
-                    <div className="rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.03)] to-[#131316] border border-[rgba(212,168,83,0.1)] p-5 shadow-[0_0_20px_rgba(212,168,83,0.04)]">
+                    <div className="rounded-xl glass-gold p-5 shadow-[0_0_20px_rgba(212,168,83,0.06)]">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
                           <Clock className="w-5 h-5 text-[#D4A853]" />
                         </div>
-                        <h3
-                          className="text-base font-semibold text-white font-display"
-                        >
+                        <h3 className="text-base font-semibold text-white font-display">
                           Business Hours
                         </h3>
                       </div>
@@ -489,11 +521,15 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ───────────────── 3. MAP / LOCATION SECTION ─────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 md:py-28 bg-[#0F0F12] section-gold-tint grain-texture">
+        {/* Gold glow orbs */}
+        <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Our Location"
             title="Find Us in"
@@ -503,140 +539,188 @@ export default function ContactPage() {
           />
 
           <AnimatedSection delay={0.2} direction="up">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-              {/* Map placeholder */}
-              <div className="relative rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden min-h-[320px]">
-                {/* Gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.06)] via-[#131316] to-[rgba(212,168,83,0.03)]" />
-                <div className="absolute inset-0 bg-dots opacity-40" />
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+              {/* Stylized Map Area - spans 3 cols */}
+              <div className="lg:col-span-3 relative rounded-2xl overflow-hidden min-h-[380px] lg:min-h-[440px] border border-[rgba(212,168,83,0.12)] shadow-[0_0_40px_rgba(212,168,83,0.06)]">
+                {/* Dark base */}
+                <div className="absolute inset-0 bg-[#0A0A0B]" />
+                {/* Grid pattern background */}
+                <div className="absolute inset-0 bg-grid" />
+                {/* Gold gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(10,10,11,0.95)] to-[rgba(184,146,47,0.05)]" />
+                {/* Dot pattern */}
+                <div className="absolute inset-0 bg-dots opacity-30" />
 
-                {/* Grid lines to simulate a map */}
+                {/* Decorative grid lines - roads */}
+                <div className="absolute inset-0 opacity-[0.05]">
+                  {/* Vertical roads */}
+                  <div className="absolute left-[15%] top-0 bottom-0 w-[2px] bg-white" />
+                  <div className="absolute left-[35%] top-0 bottom-0 w-[2px] bg-white" />
+                  <div className="absolute left-[50%] top-0 bottom-0 w-[3px] bg-[#D4A853] opacity-80" />
+                  <div className="absolute left-[65%] top-0 bottom-0 w-[2px] bg-white" />
+                  <div className="absolute left-[85%] top-0 bottom-0 w-[2px] bg-white" />
+                  {/* Horizontal roads */}
+                  <div className="absolute top-[15%] left-0 right-0 h-[2px] bg-white" />
+                  <div className="absolute top-[35%] left-0 right-0 h-[2px] bg-white" />
+                  <div className="absolute top-[55%] left-0 right-0 h-[3px] bg-[#D4A853] opacity-80" />
+                  <div className="absolute top-[75%] left-0 right-0 h-[2px] bg-white" />
+                  <div className="absolute top-[90%] left-0 right-0 h-[2px] bg-white" />
+                  {/* Diagonal road */}
+                  <div className="absolute top-[20%] left-[10%] w-[60%] h-[2px] bg-white rotate-[25deg] origin-left" />
+                  {/* Block shapes */}
+                  <div className="absolute top-[18%] left-[18%] w-[14%] h-[14%] border border-white/40 rounded-sm" />
+                  <div className="absolute top-[40%] left-[55%] w-[8%] h-[12%] border border-white/30 rounded-sm" />
+                  <div className="absolute top-[60%] left-[20%] w-[12%] h-[10%] border border-white/30 rounded-sm" />
+                  <div className="absolute top-[25%] left-[68%] w-[10%] h-[16%] border border-white/25 rounded-sm" />
+                </div>
+
+                {/* Subtle gold road lines */}
                 <div className="absolute inset-0 opacity-[0.06]">
-                  <div className="absolute left-1/4 top-0 bottom-0 w-px bg-white" />
-                  <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white" />
-                  <div className="absolute left-3/4 top-0 bottom-0 w-px bg-white" />
-                  <div className="absolute top-1/4 left-0 right-0 h-px bg-white" />
-                  <div className="absolute top-1/2 left-0 right-0 h-px bg-white" />
-                  <div className="absolute top-3/4 left-0 right-0 h-px bg-white" />
+                  <div className="absolute top-[55%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent" />
+                  <div className="absolute top-0 bottom-0 left-[50%] w-[1px] bg-gradient-to-b from-transparent via-[#D4A853] to-transparent" />
                 </div>
 
-                {/* Road lines */}
-                <div className="absolute inset-0 opacity-[0.04]">
-                  <div className="absolute top-[45%] left-0 right-0 h-[2px] bg-[#D4A853]" />
-                  <div className="absolute top-0 bottom-0 left-[55%] w-[2px] bg-[#D4A853]" />
-                  <div className="absolute top-[30%] left-[20%] right-[30%] h-[1px] bg-white rotate-12 origin-left" />
-                </div>
-
-                {/* Location pin */}
+                {/* SVG Map Pin Marker - centered */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     className="relative"
                   >
-                    <div className="w-16 h-16 rounded-full bg-[rgba(212,168,83,0.15)] flex items-center justify-center">
-                      <div className="w-10 h-10 rounded-full bg-[rgba(212,168,83,0.25)] flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-[#D4A853]" />
-                      </div>
-                    </div>
-                    {/* Pulse ring */}
+                    {/* Outer pulse ring */}
                     <motion.div
-                      animate={{ scale: [1, 1.8], opacity: [0.4, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-                      className="absolute inset-0 w-16 h-16 rounded-full border-2 border-[rgba(212,168,83,0.3)]"
+                      animate={{ scale: [1, 2.2], opacity: [0.35, 0] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                      className="absolute -inset-4 rounded-full border-2 border-[rgba(212,168,83,0.3)]"
                     />
+                    {/* Mid pulse ring */}
+                    <motion.div
+                      animate={{ scale: [1, 1.6], opacity: [0.25, 0] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 0.4 }}
+                      className="absolute -inset-2 rounded-full border border-[rgba(212,168,83,0.2)]"
+                    />
+                    {/* Pin glow background */}
+                    <div className="absolute -inset-6 bg-[rgba(212,168,83,0.08)] rounded-full blur-[20px]" />
+                    {/* SVG Pin Icon */}
+                    <svg
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="relative z-10 drop-shadow-[0_0_12px_rgba(212,168,83,0.5)]"
+                    >
+                      <path
+                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                        fill="rgba(212,168,83,0.2)"
+                        stroke="#D4A853"
+                        strokeWidth="1.5"
+                      />
+                      <circle cx="12" cy="9" r="3" fill="#D4A853" />
+                    </svg>
                   </motion.div>
                 </div>
 
-                {/* Label */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="px-4 py-3 rounded-xl bg-[rgba(10,10,11,0.8)] backdrop-blur-sm border border-[rgba(255,255,255,0.06)]">
-                    <p className="text-sm font-semibold text-white font-display">
-                      Carter Digitals (Pty) Ltd
-                    </p>
-                    <p className="text-xs text-[rgba(245,245,245,0.5)] mt-0.5">
-                      1457 Block L, Soshanguve, Pretoria
-                    </p>
+                {/* Label overlay at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[rgba(10,10,11,0.9)] via-[rgba(10,10,11,0.5)] to-transparent pt-12 pb-5 px-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D4A853] to-[#B8922F] flex items-center justify-center shadow-[0_0_15px_rgba(212,168,83,0.3)]">
+                      <MapPin className="w-4 h-4 text-[#0A0A0B]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white font-display tracking-wide">
+                        Carter Digitals (Pty) Ltd
+                      </p>
+                      <p className="text-xs text-[rgba(245,245,245,0.5)] mt-0.5">
+                        1457 Block L, Soshanguve, Pretoria, Gauteng
+                      </p>
+                    </div>
                   </div>
                 </div>
+
+                {/* Corner gold accents */}
+                <div className="absolute top-3 left-3 w-6 h-6 border-l-2 border-t-2 border-[rgba(212,168,83,0.3)] rounded-tl-sm" />
+                <div className="absolute top-3 right-3 w-6 h-6 border-r-2 border-t-2 border-[rgba(212,168,83,0.3)] rounded-tr-sm" />
+                <div className="absolute bottom-3 left-3 w-6 h-6 border-l-2 border-b-2 border-[rgba(212,168,83,0.3)] rounded-bl-sm" />
+                <div className="absolute bottom-3 right-3 w-6 h-6 border-r-2 border-b-2 border-[rgba(212,168,83,0.3)] rounded-br-sm" />
               </div>
 
-              {/* Address details */}
-              <div className="flex flex-col justify-center gap-6">
-                <div className="rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6">
-                  <h3
-                    className="text-lg font-semibold text-white mb-4 font-display"
-                  >
-                    Address Details
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-white">Physical Address</p>
-                        <p className="text-sm text-[rgba(245,245,245,0.5)]">
-                          1457 Block L, Soshanguve
-                        </p>
-                        <p className="text-sm text-[rgba(245,245,245,0.5)]">
-                          Pretoria, Gauteng, South Africa
-                        </p>
+              {/* Location Info Cards - spans 2 cols */}
+              <div className="lg:col-span-2 flex flex-col gap-4">
+                <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4" staggerDelay={0.1}>
+                  {locationCards.map((card) => (
+                    <StaggerItem key={card.title}>
+                      <div className="glass-gold rounded-xl p-5 hover-lift group cursor-default">
+                        <div className="flex items-start gap-4">
+                          <div className="w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center group-hover:shadow-[0_0_16px_rgba(212,168,83,0.15)] transition-all duration-300">
+                            <card.icon className="w-5 h-5 text-[#D4A853] group-hover:text-[#E8C97A] transition-colors duration-300" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-white mb-1.5 font-display">
+                              {card.title}
+                            </p>
+                            {card.lines.map((line, i) => (
+                              <p
+                                key={i}
+                                className={`text-xs leading-relaxed ${
+                                  i === 0
+                                    ? "text-[rgba(245,245,245,0.6)]"
+                                    : "text-[rgba(245,245,245,0.4)]"
+                                }`}
+                              >
+                                {line}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <Separator className="bg-[rgba(255,255,255,0.06)]" />
-                    <div className="flex items-start gap-3">
-                      <Mail className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-white">Email</p>
-                        <p className="text-sm text-[rgba(245,245,245,0.5)]">
-                          kabelokadiaka4@gmail.com
-                        </p>
-                      </div>
-                    </div>
-                    <Separator className="bg-[rgba(255,255,255,0.06)]" />
-                    <div className="flex items-start gap-3">
-                      <Phone className="w-5 h-5 text-[#D4A853] shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-white">Phone</p>
-                        <p className="text-sm text-[rgba(245,245,245,0.5)]">
-                          072 402 6893
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
 
-                {/* Nationwide note */}
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[rgba(212,168,83,0.06)] border border-[rgba(212,168,83,0.12)]">
-                  <MapPin className="w-5 h-5 text-[#D4A853] shrink-0" />
-                  <p className="text-sm text-[rgba(245,245,245,0.6)]">
-                    <span className="text-white font-medium">Nationwide coverage.</span>{" "}
-                    We serve clients across South Africa — our process is fully remote-friendly.
-                  </p>
-                </div>
+                {/* Nationwide coverage note */}
+                <AnimatedSection delay={0.5} direction="up">
+                  <div className="flex items-center gap-3 px-5 py-4 rounded-xl bg-gradient-to-r from-[rgba(212,168,83,0.08)] to-[rgba(212,168,83,0.03)] border border-[rgba(212,168,83,0.15)] shadow-[0_0_20px_rgba(212,168,83,0.04)]">
+                    <div className="w-9 h-9 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center">
+                      <MapPin className="w-4 h-4 text-[#D4A853]" />
+                    </div>
+                    <p className="text-sm text-[rgba(245,245,245,0.6)]">
+                      <span className="text-white font-medium">Nationwide coverage.</span>{" "}
+                      We serve clients across South Africa — fully remote-friendly.
+                    </p>
+                  </div>
+                </AnimatedSection>
               </div>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ──────────────────── 4. TRUST SECTION ──────────────────── */}
-      <section className="relative py-12 md:py-16 bg-[#0A0A0B] section-gold-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-14 md:py-18 bg-[#0A0A0B] section-gold-tint">
+        {/* Gold glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="flex flex-col items-center text-center">
-              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-4">
-                {trustBadges.map((badge) => (
-                  <div
-                    key={badge}
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,168,83,0.06)] border border-[rgba(212,168,83,0.12)]"
+              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-5">
+                {trustBadges.map((badge, index) => (
+                  <motion.div
+                    key={badge.label}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
                   >
-                    <CheckCircle className="w-4 h-4 text-[#D4A853] shrink-0" />
-                    <span className="text-xs md:text-sm font-medium text-[rgba(245,245,245,0.7)] whitespace-nowrap">
-                      {badge}
-                    </span>
-                  </div>
+                    <div className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-[rgba(212,168,83,0.08)] to-[rgba(212,168,83,0.03)] border border-[rgba(212,168,83,0.18)] shadow-[0_0_20px_rgba(212,168,83,0.04)] hover:border-[rgba(212,168,83,0.3)] hover:shadow-[0_0_25px_rgba(212,168,83,0.08)] transition-all duration-300">
+                      <badge.icon className="w-4 h-4 text-[#D4A853] shrink-0" />
+                      <span className="text-xs md:text-sm font-medium text-[rgba(245,245,245,0.75)] whitespace-nowrap">
+                        {badge.label}
+                      </span>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
               <p className="text-sm text-[rgba(245,245,245,0.4)]">
@@ -647,41 +731,67 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="section-divider-gold" />
 
       {/* ─────────────── 5. RESPONSE PROMISE SECTION ─────────────── */}
-      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        {/* Background glow orbs */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[rgba(184,146,47,0.03)] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.04)] via-[#131316] to-[rgba(212,168,83,0.02)] border border-[rgba(212,168,83,0.12)] p-8 md:p-10 shadow-[0_0_30px_rgba(212,168,83,0.06)]">
+            <div className="relative overflow-hidden rounded-2xl glass-gold-premium border-l-[3px] border-l-[#D4A853] p-8 md:p-10 shadow-[0_0_50px_rgba(212,168,83,0.08)]">
               {/* Background accents */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[rgba(212,168,83,0.04)] rounded-full blur-[60px] pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-[rgba(212,168,83,0.03)] rounded-full blur-[50px] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-48 h-48 bg-[rgba(212,168,83,0.05)] rounded-full blur-[70px] pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-36 h-36 bg-[rgba(212,168,83,0.04)] rounded-full blur-[60px] pointer-events-none" />
+
+              {/* Floating gold decorative dots */}
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-8 right-8 w-2 h-2 rounded-full bg-[#D4A853] opacity-40"
+              />
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-16 right-20 w-1.5 h-1.5 rounded-full bg-[#E8C97A] opacity-30"
+              />
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute bottom-12 left-12 w-2 h-2 rounded-full bg-[#D4A853] opacity-35"
+              />
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute bottom-20 right-16 w-1 h-1 rounded-full bg-[#E8C97A] opacity-25"
+              />
+              <motion.div
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                className="absolute top-1/2 right-6 w-1.5 h-1.5 rounded-full bg-[#D4A853] opacity-20"
+              />
 
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.18)] flex items-center justify-center shadow-[0_0_16px_rgba(212,168,83,0.1)]">
                     <Heart className="w-6 h-6 text-[#D4A853]" />
                   </div>
-                  <h2
-                    className="text-2xl md:text-3xl font-bold text-white font-display"
-                  >
+                  <h2 className="text-2xl md:text-3xl font-bold text-white font-display">
                     Our Response Promise
                   </h2>
                 </div>
 
                 <p className="text-base md:text-lg text-[rgba(245,245,245,0.6)] leading-relaxed mb-4">
-                  We respond to all enquiries within <span className="text-[#D4A853] font-semibold">2 business hours</span> during 
+                  We respond to all enquiries within <span className="text-[#D4A853] font-semibold text-glow-gold">2 business hours</span> during 
                   operating days. For urgent requests, reach us directly on WhatsApp.
                 </p>
 
-                <Separator className="bg-[rgba(255,255,255,0.06)] my-5" />
+                <Separator className="bg-[rgba(212,168,83,0.1)] my-5" />
 
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] flex items-center justify-center mt-0.5">
+                  <div className="w-8 h-8 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center mt-0.5">
                     <Sparkles className="w-4 h-4 text-[#D4A853]" />
                   </div>
                   <p className="text-base text-[rgba(245,245,245,0.55)] leading-relaxed italic">
@@ -694,14 +804,14 @@ export default function ContactPage() {
                     href="https://wa.me/27724026893"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.2)] text-[#25D366] font-medium text-sm hover:bg-[rgba(37,211,102,0.15)] transition-colors duration-200"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[rgba(37,211,102,0.1)] border border-[rgba(37,211,102,0.2)] text-[#25D366] font-medium text-sm hover:bg-[rgba(37,211,102,0.15)] hover:shadow-[0_0_20px_rgba(37,211,102,0.1)] transition-all duration-300"
                   >
                     <MessageCircle className="w-4 h-4" />
                     WhatsApp Us Now
                   </a>
                   <a
                     href="mailto:kabelokadiaka4@gmail.com"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-[rgba(245,245,245,0.7)] font-medium text-sm hover:bg-[rgba(255,255,255,0.06)] transition-colors duration-200"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass-gold text-[rgba(245,245,245,0.7)] font-medium text-sm hover:text-white hover:border-[rgba(212,168,83,0.25)] hover:shadow-[0_0_20px_rgba(212,168,83,0.08)] transition-all duration-300"
                   >
                     <Mail className="w-4 h-4" />
                     Send an Email

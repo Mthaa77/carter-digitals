@@ -62,6 +62,7 @@ import { CircularProgress } from "@/components/shared/CircularProgress";
 import { QuickCalculator } from "@/components/shared/QuickCalculator";
 import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import InteractiveTestimonials from "@/components/shared/InteractiveTestimonials";
+import FaqSearch from "@/components/shared/FaqSearch";
 import { useNavigation } from "@/lib/navigation";
 
 /* ─────────────────────────── DATA ─────────────────────────── */
@@ -239,6 +240,15 @@ const techStack = [
 ];
 
 const trustBadges = ["B-BBEE Level 1", "100% Black-Owned", "CSD Registered", "5-7 Day Delivery", "POPIA Compliant"];
+
+const homeFaqItems = [
+  { id: "home-faq-1", question: "How long does it take to build a website?", answer: "5–7 business days from design approval. We've built battle-tested processes and reusable component libraries that let us ship fast without cutting corners. No bloated timelines — just relentless execution." },
+  { id: "home-faq-2", question: "Do I own my website after it's built?", answer: "Yes, 100%. Full source code, hosting credentials, domain — all yours from day one. No lock-in contracts, no recurring licensing fees. Your digital asset, your rules." },
+  { id: "home-faq-3", question: "What technology do you use?", answer: "We build exclusively on Next.js and deploy on Vercel's edge network — the same infrastructure powering GitHub and Nike. TypeScript throughout for type safety, Tailwind CSS for pixel-perfect styling." },
+  { id: "home-faq-4", question: "What support do I get after launch?", answer: "Every package includes 30 days of free post-launch support — bug fixes, content updates, and priority email access. For ongoing needs, our optional retainers cover unlimited edits and new pages." },
+  { id: "home-faq-5", question: "Can I integrate with third-party tools?", answer: "Absolutely. We integrate with Google Workspace, WhatsApp, CRM platforms, payment gateways, and more. If you have an existing system, we'll connect it seamlessly." },
+  { id: "home-faq-6", question: "What makes Carter Digitals different?", answer: "We're B-BBEE Level 1 certified, 100% Black-Owned, and engineer-grade. We don't design and hope — we architect for results: Google rankings, lead generation, and measurable ROI." },
+];
 
 /* ═══════════════════════════════════════════════════════════════
    TYPING TEXT COMPONENT
@@ -1089,7 +1099,28 @@ export default function HomePage() {
         </section>
       </AnimatedSection>
 
-      {/* ════════════════ 14. START YOUR JOURNEY — PREMIUM CTA ════════════════ */}
+      {/* ════════════════ 14. FAQ — SEARCHABLE ACCORDION ════════════════ */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="FAQ"
+            title="Frequently Asked"
+            titleHighlight="Questions"
+            description="Everything you need to know before getting started. Can't find your answer? Drop us a message."
+            align="center"
+          />
+
+          <AnimatedSection delay={0.15} direction="up">
+            <FaqSearch items={homeFaqItems} />
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ════════════════ 15. START YOUR JOURNEY — PREMIUM CTA ════════════════ */}
       <section className="relative py-32 md:py-44 overflow-hidden">
         {/* Dark gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-[#0D0B08] to-[#0A0A0B]" />

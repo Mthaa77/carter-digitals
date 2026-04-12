@@ -16,12 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import FaqSearch from "@/components/shared/FaqSearch";
 import {
   AnimatedSection,
   StaggerContainer,
@@ -165,37 +160,13 @@ const addons = [
 ];
 
 /* ──────────────────────── FAQ data ─────────────────────────────── */
-const faqs = [
-  {
-    question: "How long does it take to build a website?",
-    answer:
-      "5-7 business days from approval of design. We work fast because we've built battle-tested processes and reusable component libraries. No bloated timelines — just ruthless execution.",
-  },
-  {
-    question: "Do I own my website after it's built?",
-    answer:
-      "Yes, 100%. Full handover of source code, hosting credentials, and domain ownership. No lock-in contracts, no ongoing dependency on us. Your digital asset, your rules.",
-  },
-  {
-    question: "What's included in Year 1 hosting?",
-    answer:
-      "Domain registration, SSL certificate, hosting on Vercel's global CDN (the same infrastructure that powers GitHub and Nike), and priority email support. Everything you need for a fast, secure, reliable website.",
-  },
-  {
-    question: "Can I upgrade my package later?",
-    answer:
-      "Absolutely. You can upgrade at any time and pay only the difference between your current and new package. No penalties, no hassle — just seamless scaling.",
-  },
-  {
-    question: "What if I need changes after launch?",
-    answer:
-      "Minor revisions are included in every package. For ongoing changes and updates, our monthly retainers cover unlimited edits, new page additions, and priority support.",
-  },
-  {
-    question: "Do you work with clients outside Pretoria?",
-    answer:
-      "Yes, we serve clients nationwide across South Africa. Our entire process is remote-friendly — from discovery calls to design approvals to launch. Geography is not a barrier.",
-  },
+const packagesFaqItems = [
+  { id: "pkg-faq-1", question: "How long does it take to build a website?", answer: "5-7 business days from approval of design. We work fast because we've built battle-tested processes and reusable component libraries. No bloated timelines — just ruthless execution." },
+  { id: "pkg-faq-2", question: "Do I own my website after it's built?", answer: "Yes, 100%. Full handover of source code, hosting credentials, and domain ownership. No lock-in contracts, no ongoing dependency on us. Your digital asset, your rules." },
+  { id: "pkg-faq-3", question: "What's included in Year 1 hosting?", answer: "Domain registration, SSL certificate, hosting on Vercel's global CDN (the same infrastructure that powers GitHub and Nike), and priority email support. Everything you need for a fast, secure, reliable website." },
+  { id: "pkg-faq-4", question: "Can I upgrade my package later?", answer: "Absolutely. You can upgrade at any time and pay only the difference between your current and new package. No penalties, no hassle — just seamless scaling." },
+  { id: "pkg-faq-5", question: "What if I need changes after launch?", answer: "Minor revisions are included in every package. For ongoing changes and updates, our monthly retainers cover unlimited edits, new page additions, and priority support." },
+  { id: "pkg-faq-6", question: "Do you work with clients outside Pretoria?", answer: "Yes, we serve clients nationwide across South Africa. Our entire process is remote-friendly — from discovery calls to design approvals to launch. Geography is not a barrier." },
 ];
 
 /* ──────────────────── Pricing card component ───────────────────── */
@@ -217,7 +188,7 @@ function PricingCard({
     <div
       className={`relative h-full rounded-2xl ${
         pkg.popular
-          ? "bg-[#131316] border-2 border-[rgba(212,168,83,0.3)] glow-gold md:-mt-4 md:mb-[-16px] z-10"
+          ? "bg-[#131316] border-2 border-[rgba(212,168,83,0.3)] glow-gold md:-mt-4 md:mb-[-16px] z-10 gold-border-animated"
           : "bg-[#131316] border border-[rgba(255,255,255,0.06)]"
       } p-6 md:p-8 glass-gold card-hover-gold flex flex-col`}
     >
@@ -353,7 +324,7 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="h-px section-divider-gold" />
 
       {/* ────────────────── 2. SME PACKAGES TABS ─────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
@@ -422,7 +393,7 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="h-px section-divider-gold" />
 
       {/* ────────────────── 3. ADD-ON SERVICES ──────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
@@ -477,7 +448,7 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="h-px section-divider-gold" />
 
       {/* ──────────────────── 4. FAQ SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
@@ -492,43 +463,37 @@ export default function PackagesPage() {
             align="center"
           />
 
-          <AnimatedSection delay={0.2} direction="up">
-            <div className="rounded-2xl bg-[#131316] border border-[rgba(212,168,83,0.1)] p-4 md:p-6 shadow-[0_0_40px_rgba(212,168,83,0.05)]">
-              <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, idx) => (
-                  <AccordionItem
-                    key={idx}
-                    value={`faq-${idx}`}
-                    className="border-[rgba(255,255,255,0.06)] accordion-gold data-[state=open]:border-[rgba(212,168,83,0.2)] data-[state=open]:bg-[rgba(212,168,83,0.02)] transition-colors duration-300 hover-lift"
-                  >
-                    <AccordionTrigger className="text-left text-sm md:text-base font-medium text-[rgba(245,245,245,0.8)] hover:text-white hover:no-underline py-4 transition-colors duration-200">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+          <AnimatedSection delay={0.15} direction="up">
+            <div className="gold-border-animated rounded-2xl">
+              <FaqSearch items={packagesFaqItems} />
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+      <div className="h-px section-divider-gold" />
 
       {/* ──────────────────── 5. CTA SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative overflow-hidden rounded-3xl border-gradient-gold">
+            <div className="relative overflow-hidden rounded-3xl gold-border-animated">
               {/* Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(19,19,22,0.95)] to-[rgba(212,168,83,0.04)]" />
               <div className="absolute inset-0 bg-dots opacity-40" />
 
-              {/* Decorative glows */}
-              <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
-              <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
+              {/* Gold glow orbs */}
+              <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-[rgba(212,168,83,0.08)] rounded-full blur-[140px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[80px] pointer-events-none" />
+
+              {/* Floating gold dots */}
+              <div className="absolute top-8 left-8 w-2 h-2 rounded-full bg-[rgba(212,168,83,0.3)] animate-gold-float" />
+              <div className="absolute top-1/2 left-[15%] w-1.5 h-1.5 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "1s" }} />
+              <div className="absolute bottom-12 right-12 w-2 h-2 rounded-full bg-[rgba(212,168,83,0.25)] animate-gold-float" style={{ animationDelay: "0.5s" }} />
+              <div className="absolute top-8 right-[20%] w-1.5 h-1.5 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "1.5s" }} />
+              <div className="absolute bottom-1/4 left-[25%] w-1 h-1 rounded-full bg-[rgba(212,168,83,0.15)] animate-gold-float" style={{ animationDelay: "2s" }} />
+              <div className="absolute top-[30%] right-[10%] w-2 h-2 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "0.8s" }} />
 
               <div className="relative z-10 px-6 py-14 md:px-16 md:py-20 lg:px-24 lg:py-24 text-center">
                 <h2
