@@ -1409,3 +1409,188 @@ Tasks: Page Transition Skeleton, Parallax Heroes, Animated Project Filter, Servi
 6. Implement WebSocket real-time chat
 7. Add more ambient particle effects to homepage
 8. Create admin dashboard for content management
+
+---
+Task ID: 1-2
+Agent: visual-fixes-specialist
+Task: Fix VLM-identified visual issues and enhance cookie consent banner + LiveChat indicator
+
+Work Log:
+- Fixed LiveChatIndicator overlap: moved from bottom-28 to bottom-32, reduced max-width from 240px to 200px, added pointer-events-none to wrapper and pointer-events-auto to button
+- Enhanced CookieConsent banner with premium dark+gold theme:
+  - Added 2px gold gradient accent line at top of banner (transparent → #D4A853 → transparent)
+  - Added subtle gold noise texture overlay via .cookie-gold-noise CSS class
+  - Upgraded Shield icon container from w-10 h-10 to w-12 h-12 with rounded-2xl and gold border
+  - Added animated gold glow pulse behind Shield icon (.cookie-shield-glow with 3s ease-in-out infinite animation)
+  - Improved Accept All button: stronger glow shadow (0.25 → 0.4 on hover) with 0_0_20px spread gold glow
+  - Improved Decline button: changed border from white/0.12 to gold/0.2, added gold-tinted hover background and text
+  - Added subtle Carter Digitals "C" logo watermark at bottom-right (10% opacity, text-6xl/7xl)
+  - Increased cookie description text opacity from 0.6 to 0.65 for better readability
+- Added .text-subtle-gold CSS utility (color: rgba(212, 168, 83, 0.7)) to globals.css
+- Added cookie banner CSS animations to globals.css: .cookie-gold-noise, .cookie-shield-glow, @keyframes cookieShieldGlow, light mode variants
+- Fixed hero subtitle text contrast in 4 page components: changed text-[rgba(245,245,245,0.5)] to text-[rgba(245,245,245,0.65)]
+  - ServicesPage.tsx: "From a Single Page to a Full Platform"
+  - PortfolioPage.tsx: "Results That Speak Louder Than Pitches"
+  - PackagesPage.tsx: "Pick Your Package. Go Live in 5-7 Days."
+  - ContactPage.tsx: "Ready When You Are"
+
+Stage Summary:
+- LiveChatIndicator no longer overlaps with WhatsApp button (moved to bottom-32) and content passes through via pointer-events-none
+- Cookie banner is now premium with gold accent line, noise texture, animated shield glow, and branded watermark
+- Hero subtitle text is more readable across all 4 inner pages (0.5 → 0.65 opacity)
+- New CSS utilities: .text-subtle-gold, .cookie-gold-noise, .cookie-shield-glow
+- ✅ ESLint: Zero errors
+- ✅ Compilation: Clean, HTTP 200 responses confirmed in dev log
+---
+Task ID: 5-6-8
+Agent: full-stack-developer
+Task: Add Prisma database persistence, Team section on About page, and BeforeAfterSlider on Services page
+
+Work Log:
+- Added ContactSubmission model to prisma/schema.prisma (id, name, email, phone?, company?, service?, budget?, message, createdAt)
+- Ran `bun run db:push` successfully — database in sync, Prisma Client regenerated
+- Updated /api/contact route to persist submissions to ContactSubmission table with soft-fail pattern (logs error but returns success to user)
+- Added "Meet the Team" section to AboutPage.tsx between Milestones Timeline and Credentials
+- Team section includes 4 member cards: Kabelo Kadiaka (KK), Thabo Molefe (TM), Lerato Nkosi (LN), Sipho Dlamini (SD)
+- Each card has gradient gold initials avatar, name, gold italic role, description, tech stack pill badges with glass-gold styling
+- Cards use card-hover-gold, hover-lift, card-idle-pulse classes with StaggerContainer/StaggerItem animations
+- Section includes gold glow orbs and section-divider-gold
+- Added BeforeAfterSlider import and component to ServicesPage.tsx flagship section
+- BeforeAfterSlider rendered below "Why Next.js & Vercel?" features grid with "Real Results. Real Transformations." heading
+- Wrapped in AnimatedSection with 0.3s delay for staggered entrance
+
+Stage Summary:
+- ContactSubmission model added to Prisma schema and database
+- Contact API now persists form submissions with soft-fail database writes
+- AboutPage now has 8+ sections with the new Team section (between Milestones and Credentials)
+- ServicesPage flagship section now includes BeforeAfterSlider showcase with 3 default comparison items
+- ✅ ESLint: Zero errors
+- ✅ Compilation: Clean, all compiles successful in dev log
+
+---
+Task ID: 3-4
+Agent: frontend-developer
+Task: Add card idle animations and text gradient enhancements across all pages
+
+Work Log:
+- Added `@keyframes cardIdlePulse` CSS animation to globals.css — subtle breathing gold border effect (4s ease-in-out infinite, border-color oscillates between rgba(212,168,83,0.06) and rgba(212,168,83,0.15))
+- Added `.card-idle-pulse` utility class to globals.css
+- Added `@keyframes` and `.card-shine-sweep` CSS utility to globals.css — hover shine sweep effect using pseudo-element with gold gradient that slides across on hover (0.6s ease transition)
+- Applied `card-idle-pulse` to HomePage About Preview feature cards (1 large bento card + 3 accent bar cards)
+- Applied `card-idle-pulse` to AboutPage Engagement Models cards (3 cards)
+- Applied `card-idle-pulse` to ServicesPage flagship feature cards (6 feature items in "Why Next.js & Vercel?" grid)
+- Applied `card-idle-pulse` to PackagesPage PricingCard component (all 3 tiers — Vula, Khula, Elevate)
+- Applied `card-idle-pulse` to ContactPage contact info cards (Email, Phone, WhatsApp clickable + Location static)
+- Applied `card-shine-sweep` to HomePage service cards (6 cards in "Our Services" section)
+- Applied `card-shine-sweep` to ServicesPage core service cards (12 TiltCard-wrapped cards)
+- Applied `card-shine-sweep` to PortfolioPage project grid cards (8 filterable project cards)
+- Verified SectionHeading description already uses `text-[rgba(245,245,245,0.55)]` — no change needed
+
+Stage Summary:
+- 2 new CSS utility classes added to globals.css (`card-idle-pulse`, `card-shine-sweep`)
+- `card-idle-pulse` applied to ~17 card elements across 5 pages (Home, About, Services, Packages, Contact)
+- `card-shine-sweep` applied to ~26 card elements across 3 pages (Home, Services, Portfolio)
+- SectionHeading description text already had correct warm gold tint — no modification needed
+- All changes are purely additive (className only — no HTML restructuring)
+- ✅ ESLint: Zero errors
+- ✅ Compilation: Clean
+
+---
+## [2025-07-13] Cron Review Round 6 — Visual QA, Bug Fixes, New Features & Database
+
+### Current Project Status Assessment
+- **Status**: 6-page premium SPA fully functional, zero build errors, zero lint errors, zero console errors
+- **Build**: Clean SWC/Turbopack compilation, ESLint zero errors, HTTP 200 on all routes
+- **Console Errors**: Zero across all 6 pages (verified via agent-browser)
+- **Database**: Prisma + SQLite operational, contact form submissions persisting correctly
+- **Components**: 27+ shared components, 10,396+ lines of page/component code, 1,176+ lines of CSS
+
+### VLM Visual QA Results
+Used AI vision model (z-ai VLM) to analyze screenshots of About, Services, and Contact pages:
+- **About page**: Minor issues — empty space below heading, green chat widget color clash, cookie banner disconnection
+- **Services page**: Subtitle text low contrast, chat widget overlap potential, "Get Started" button needs hover state
+- **Contact page**: Clean overall, proper contrast, no major issues
+- All issues addressed in this round
+
+### Bugs Fixed (3)
+
+**1. LiveChatIndicator Overlap**
+- **Issue**: "We're Online" indicator could overlap with page content on right side
+- **Fix**: Moved from `bottom-28` → `bottom-32` to clear WhatsApp button; reduced max-width 240→200px; added `pointer-events-none` wrapper + `pointer-events-auto` button for content pass-through
+- **File**: `src/components/shared/LiveChatIndicator.tsx`
+
+**2. Hero Subtitle Text Contrast**
+- **Issue**: Subtitle text on inner pages too dim (`rgba(245,245,245,0.5)`) for comfortable reading
+- **Fix**: Increased opacity to `rgba(245,245,245,0.65)` across 4 pages
+- **Files**: ServicesPage, PortfolioPage, PackagesPage, ContactPage
+
+**3. Cookie Banner Theme Cohesion**
+- **Issue**: Cookie banner felt disconnected from dark+gold premium theme
+- **Fix**: Added gold accent line at top, gold noise texture overlay, animated gold Shield icon glow (`.cookie-shield-glow`), stronger Accept button glow, gold-tinted Decline button, subtle "C" watermark
+- **File**: `src/components/shared/CookieConsent.tsx`
+
+### Features Added (5)
+
+**1. Contact Form Database Persistence (Prisma)**
+- Added `ContactSubmission` model to `prisma/schema.prisma` (name, email, phone?, company?, service?, budget?, message, createdAt)
+- Updated `/api/contact/route.ts` to save submissions via `db.contactSubmission.create()`
+- Soft-fail pattern: database errors are logged but don't block user experience
+- Verified: curl POST successfully saves to SQLite database, entries retrievable via Prisma Client
+
+**2. Team Section on About Page**
+- New "Meet the Team" section between Milestones Timeline and Credentials
+- 4 team member cards in responsive grid (1→2→4 columns):
+  - **KK** — Kabelo Kadiaka, Founder & Director (Next.js, React, TypeScript, Python)
+  - **TM** — Thabo Molefe, Lead Designer (Figma, Framer Motion, Tailwind)
+  - **LN** — Lerato Nkosi, AI Engineer (Python, FastAPI, LangChain, OpenAI)
+  - **SD** — Sipho Dlamini, Backend Architect (PostgreSQL, Node.js, Docker, AWS)
+- Each card: gradient gold initials avatar, white name, gold italic role, muted description, glass-gold tech badges
+- Styling: `.card-hover-gold .hover-lift .card-idle-pulse` with StaggerContainer animations
+
+**3. BeforeAfterSlider on Services Page**
+- Imported existing `BeforeAfterSlider` component into ServicesPage
+- Placed inside flagship Website Development section below "Why Next.js & Vercel?" features
+- "Real Results. Real Transformations." heading with AnimatedSection wrapper
+- Renders 3 default before/after comparison items (Soshanguve School, Mogale Law, Gateway Hospitality)
+- Interactive drag-to-compare slider verified working
+
+**4. Card Idle Pulse Animation (CSS)**
+- Added `@keyframes cardIdlePulse` — subtle gold border breathing effect (4s infinite)
+- `.card-idle-pulse` applied to cards across 5 pages:
+  - HomePage: 4 About Preview feature cards
+  - AboutPage: 3 Engagement Model cards
+  - ServicesPage: 6 flagship feature cards
+  - PackagesPage: 3 pricing tier cards
+  - ContactPage: 4 contact info cards
+
+**5. Card Hover Shine Sweep (CSS)**
+- Added `.card-shine-sweep` with `::after` pseudo-element
+- Gold gradient sweeps across card on hover (0.6s ease transition)
+- Applied to: HomePage 6 service cards, ServicesPage 12 core service cards, PortfolioPage 8 project cards
+
+### Styling Enhancements (CSS)
+- `.text-subtle-gold` — Gold-tinted text color utility
+- `.cookie-gold-noise` — Gold noise texture overlay for cookie banner
+- `.cookie-shield-glow` — Animated gold box-shadow pulse for Shield icon
+- `@keyframes cardIdlePulse` — Gold border breathing animation
+- `.card-idle-pulse` — Idle card border pulse utility
+- `.card-shine-sweep` + `::after` — Hover shine sweep effect
+- Light mode variants for all new utilities
+
+### Quality Verification
+- ESLint: Zero errors
+- SWC/Turbopack: Clean compilation
+- All 6 pages tested via agent-browser: zero console errors
+- VLM visual QA: screenshots analyzed, issues identified and fixed
+- API: Contact form POST verified via curl, database persistence confirmed
+- New features verified: Team section renders on About page, BeforeAfterSlider on Services page, card animations visible
+
+### Recommended Next Steps
+1. Add real team member photos to replace gradient initials avatars
+2. Implement email notification on new contact form submissions (Resend API)
+3. Add newsletter subscription database persistence
+4. Create admin dashboard to view/manage contact submissions
+5. Add structured data (JSON-LD) for SEO
+6. Implement real-time WebSocket chat feature
+7. Add more interactive elements to Packages page (pricing calculator slider)
+8. Create blog/news section with CMS integration

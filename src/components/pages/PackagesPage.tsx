@@ -191,7 +191,7 @@ function PricingCard({
         pkg.popular
           ? "bg-[#131316] border-2 border-[rgba(212,168,83,0.3)] glow-gold md:-mt-4 md:mb-[-16px] z-10 gold-border-animated"
           : "bg-[#131316] border border-[rgba(255,255,255,0.06)]"
-      } p-6 md:p-8 glass-gold card-hover-gold flex flex-col`}
+      } p-6 md:p-8 glass-gold card-hover-gold flex flex-col card-idle-pulse`}
     >
       {/* Popular badge */}
       {pkg.popular && (
@@ -346,7 +346,7 @@ export default function PackagesPage() {
 
             <AnimatedSection delay={0.35} direction="up">
               <p
-                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.5)] font-medium font-display"
+                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.65)] font-medium font-display"
               >
                 Pick Your Package. Go Live in 5-7 Days.
               </p>

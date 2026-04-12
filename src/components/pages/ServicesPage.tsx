@@ -54,6 +54,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
 import { TiltCard } from "@/components/shared/TiltCard";
 import { CircularProgress } from "@/components/shared/CircularProgress";
+import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import { useNavigation } from "@/lib/navigation";
 import { toast } from "sonner";
 
@@ -308,7 +309,7 @@ export default function ServicesPage() {
 
             <AnimatedSection delay={0.35} direction="up">
               <p
-                className="mt-4 text-xl md:text-2xl font-medium text-[rgba(245,245,245,0.5)] tracking-wide font-display"
+                className="mt-4 text-xl md:text-2xl font-medium text-[rgba(245,245,245,0.65)] tracking-wide font-display"
               >
                 From a Single Page to a Full Platform
               </p>
@@ -420,7 +421,7 @@ export default function ServicesPage() {
                       >
                         {flagshipFeatures.map((feature) => (
                           <StaggerItem key={feature.title}>
-                            <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(10,10,11,0.5)] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.15)] transition-colors duration-300 hover-lift">
+                            <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(10,10,11,0.5)] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.15)] transition-colors duration-300 hover-lift card-idle-pulse">
                               <div className="w-9 h-9 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center">
                                 <feature.icon className="w-4 h-4 text-[#D4A853]" />
                               </div>
@@ -433,6 +434,16 @@ export default function ServicesPage() {
                       </StaggerContainer>
                     </div>
                   </ParallaxSection>
+
+                  {/* Before / After Showcase */}
+                  <AnimatedSection direction="up" delay={0.3}>
+                    <div className="mt-10">
+                      <h3 className="text-xl font-bold text-white mb-6 font-display text-center">
+                        Real Results. <span className="text-gradient-gold">Real Transformations.</span>
+                      </h3>
+                      <BeforeAfterSlider />
+                    </div>
+                  </AnimatedSection>
                 </div>
               </div>
             </div>
@@ -462,7 +473,7 @@ export default function ServicesPage() {
             {coreServices.map((service) => (
               <StaggerItem key={service.title}>
                 <TiltCard className="h-full" tiltStrength={4}>
-                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold hover:border-[rgba(212,168,83,0.2)] hover-lift overflow-hidden">
+                  <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold hover:border-[rgba(212,168,83,0.2)] hover-lift overflow-hidden card-shine-sweep">
                     {/* Gold shimmer on hover */}
                     <div className="absolute inset-0 animate-shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 

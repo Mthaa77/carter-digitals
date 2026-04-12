@@ -24,11 +24,11 @@ export function LiveChatIndicator() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-          className="fixed bottom-28 right-4 md:right-6 z-40 hidden md:block"
+          className="fixed bottom-32 right-4 md:right-6 z-40 hidden md:block pointer-events-none"
         >
           <button
             onClick={handleClick}
-            className="group flex items-center gap-3 px-4 py-3 rounded-2xl glass-gold-premium hover:bg-[rgba(212,168,83,0.08)] transition-all duration-300 max-w-[240px]"
+            className="pointer-events-auto group flex items-center gap-3 px-4 py-3 rounded-2xl glass-gold-premium hover:bg-[rgba(212,168,83,0.08)] transition-all duration-300 max-w-[200px]"
           >
             {/* Pulse dot */}
             <div className="relative shrink-0">

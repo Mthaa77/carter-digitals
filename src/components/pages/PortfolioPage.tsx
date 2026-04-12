@@ -611,7 +611,7 @@ export default function PortfolioPage() {
 
             <AnimatedSection delay={0.35} direction="up">
               <p
-                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.5)] font-medium font-display"
+                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.65)] font-medium font-display"
               >
                 Results That Speak Louder Than Pitches
               </p>
@@ -842,7 +842,7 @@ export default function PortfolioPage() {
                             transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
                           >
                             <div
-                              className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden card-hover-gold hover-lift cursor-pointer hover:shadow-[0_0_30px_rgba(212,168,83,0.08)] transition-shadow duration-300"
+                              className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] overflow-hidden card-hover-gold hover-lift cursor-pointer hover:shadow-[0_0_30px_rgba(212,168,83,0.08)] transition-shadow duration-300 card-shine-sweep"
                               onClick={() => setSelectedProject(project)}
                             >
                               {/* Gold shimmer overlay on hover */}

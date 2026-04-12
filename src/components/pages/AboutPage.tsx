@@ -734,6 +734,104 @@ export default function AboutPage() {
         </section>
       </AnimatedSection>
 
+      {/* ────────────────── 5c. MEET THE TEAM ──────────────────── */}
+      <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        {/* Gold glow orbs behind the section */}
+        <div className="absolute top-1/4 left-[10%] w-[400px] h-[400px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-[10%] w-[350px] h-[350px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="OUR TEAM"
+            title="The People"
+            titleHighlight="Behind"
+            description="A tight-knit crew of specialists — each hand-picked for their craft, their drive, and their commitment to building digital infrastructure that actually matters."
+            align="center"
+          />
+
+          <StaggerContainer
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            staggerDelay={0.1}
+          >
+            {[
+              {
+                name: "Kabelo Kadiaka",
+                initials: "KK",
+                role: "Founder & Director",
+                description: "Full-stack developer and digital strategist with 5+ years of experience building production-grade web applications.",
+                tech: ["Next.js", "React", "TypeScript", "Python"],
+              },
+              {
+                name: "Thabo Molefe",
+                initials: "TM",
+                role: "Lead Designer",
+                description: "UI/UX specialist focused on creating premium, conversion-optimised digital experiences that command trust.",
+                tech: ["Figma", "Framer Motion", "Tailwind"],
+              },
+              {
+                name: "Lerato Nkosi",
+                initials: "LN",
+                role: "AI Engineer",
+                description: "Builds intelligent chatbots and automation systems that give businesses a decisive competitive edge.",
+                tech: ["Python", "FastAPI", "LangChain", "OpenAI"],
+              },
+              {
+                name: "Sipho Dlamini",
+                initials: "SD",
+                role: "Backend Architect",
+                description: "Designs robust, scalable backend systems and API architectures for mission-critical applications.",
+                tech: ["PostgreSQL", "Node.js", "Docker", "AWS"],
+              },
+            ].map((member) => (
+              <StaggerItem key={member.name}>
+                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold hover-lift card-idle-pulse overflow-hidden">
+                  {/* Gold top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-60" />
+
+                  {/* Gradient gold initials avatar */}
+                  <div className="flex justify-center mb-5">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#D4A853] to-[#B8922F] flex items-center justify-center shadow-lg shadow-[rgba(212,168,83,0.25)] group-hover:shadow-[rgba(212,168,83,0.4)] transition-shadow duration-300">
+                      <span className="text-xl font-bold text-[#0A0A0B] font-display">
+                        {member.initials}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Name */}
+                  <h3 className="text-lg font-bold text-white text-center font-display mb-1">
+                    {member.name}
+                  </h3>
+
+                  {/* Role in gold italic */}
+                  <p className="text-sm text-[#D4A853] italic font-medium text-center mb-3">
+                    {member.role}
+                  </p>
+
+                  {/* Description */}
+                  <p className="text-sm text-[rgba(245,245,245,0.5)] leading-relaxed text-center mb-4">
+                    {member.description}
+                  </p>
+
+                  {/* Tech stack pill badges */}
+                  <div className="flex flex-wrap justify-center gap-2 mt-auto">
+                    {member.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium text-[#D4A853] bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)] backdrop-blur-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* ────────────────── 5. CREDENTIALS SECTION ──────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
         <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
@@ -868,7 +966,7 @@ export default function AboutPage() {
           >
             {engagementModels.map((model, idx) => (
               <StaggerItem key={model.title}>
-                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover-gold hover-lift overflow-hidden flex flex-col">
+                <div className="group relative h-full rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover-gold hover-lift overflow-hidden flex flex-col card-idle-pulse">
                   {/* Gold top accent */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

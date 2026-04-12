@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod/v4";
+import { db } from "@/lib/db";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
 
     const data = result.data;
 
-    // Log the submission (no database storage needed for now)
+    // Log the submission
     console.log("📧 New contact form submission:", {
       name: data.name,
       email: data.email,
@@ -36,6 +37,24 @@ export async function POST(request: Request) {
       messageLength: data.message.length,
       timestamp: new Date().toISOString(),
     });
+
+    // Persist to database (soft fail — don't block the user)
+    try {
+      await db.contactSubmission.create({
+        data: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          company: data.company,
+          service: data.service,
+          budget: data.budget,
+          message: data.message,
+        },
+      });
+      console.log("💾 Submission saved to database successfully.");
+    } catch (dbError) {
+      console.error("⚠️ Database save failed (soft fail):", dbError);
+    }
 
     return NextResponse.json({
       success: true,

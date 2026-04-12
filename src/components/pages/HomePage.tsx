@@ -515,7 +515,7 @@ export default function HomePage() {
               <StaggerItem key={feature.title} className={idx === 0 ? "lg:col-span-2 lg:row-span-1" : ""}>
                 {idx === 0 ? (
                   /* Large featured bento card */
-                  <div className="group relative h-full rounded-2xl overflow-hidden p-8 md:p-10 hover:-translate-y-1 transition-transform duration-500 hover-lift"
+                  <div className="group relative h-full rounded-2xl overflow-hidden p-8 md:p-10 hover:-translate-y-1 transition-transform duration-500 hover-lift card-idle-pulse border border-transparent"
                     style={{ background: "linear-gradient(135deg, rgba(212,168,83,0.08) 0%, rgba(19,19,22,0.95) 50%, rgba(212,168,83,0.04) 100%)" }}>
                     <motion.div className="absolute -top-20 -right-20 w-[300px] h-[300px] rounded-full opacity-30"
                       style={{ background: "radial-gradient(circle, rgba(212,168,83,0.15) 0%, transparent 70%)" }}
@@ -533,7 +533,7 @@ export default function HomePage() {
                   </div>
                 ) : (
                   /* Minimal accent bar cards */
-                  <div className="group relative h-full pl-5 py-6 pr-4 hover:-translate-y-1 transition-transform duration-500 border-l-2 border-[rgba(212,168,83,0.2)] hover:border-[#D4A853] bg-transparent hover-lift">
+                  <div className="group relative h-full pl-5 py-6 pr-4 hover:-translate-y-1 transition-transform duration-500 border-l-2 border-[rgba(212,168,83,0.2)] hover:border-[#D4A853] bg-transparent hover-lift card-idle-pulse">
                     <div className="w-10 h-10 rounded-lg bg-[rgba(212,168,83,0.08)] flex items-center justify-center mb-4 group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
                       <feature.icon className="w-5 h-5 text-[#D4A853]" />
                     </div>
@@ -604,7 +604,7 @@ export default function HomePage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
             {services.map((service, idx) => (
               <StaggerItem key={service.title}>
-                <div className="group relative rounded-2xl bg-[#111114] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.2)] transition-all duration-500 overflow-hidden cursor-pointer hover-lift">
+                <div className="group relative rounded-2xl bg-[#111114] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.2)] transition-all duration-500 overflow-hidden cursor-pointer hover-lift card-shine-sweep">
                   {/* Numbered gold circle + title row */}
                   <div className="flex items-center gap-4 p-6 pb-4">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] flex items-center justify-center shrink-0">

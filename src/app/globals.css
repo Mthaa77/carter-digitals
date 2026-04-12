@@ -1174,3 +1174,92 @@ a {
   50% { transform: translate(-20px, 30px) scale(0.95); }
   75% { transform: translate(20px, 20px) scale(1.02); }
 }
+
+/* ============================================
+   Task 3-4 — Card Idle Pulse & Shine Sweep
+   ============================================ */
+
+/* Idle card gold border pulse - subtle breathing effect */
+@keyframes cardIdlePulse {
+  0%, 100% { border-color: rgba(212,168,83,0.06); }
+  50% { border-color: rgba(212,168,83,0.15); }
+}
+
+.card-idle-pulse {
+  animation: cardIdlePulse 4s ease-in-out infinite;
+}
+
+/* Card hover shine sweep */
+.card-shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine-sweep::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.05), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.card-shine-sweep:hover::after {
+  left: 120%;
+}
+
+/* ============================================
+   Task 1-2 — VLM Visual Fixes & Cookie Banner
+   ============================================ */
+
+/* Subtle gold text for improved readability */
+.text-subtle-gold {
+  color: rgba(212, 168, 83, 0.7);
+}
+
+/* Cookie banner — subtle gold noise texture overlay */
+.cookie-gold-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* Cookie banner — animated gold glow behind Shield icon */
+@keyframes cookieShieldGlow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(212, 168, 83, 0.15), 0 0 24px rgba(212, 168, 83, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 168, 83, 0.3), 0 0 40px rgba(212, 168, 83, 0.1);
+  }
+}
+
+.cookie-shield-glow {
+  animation: cookieShieldGlow 3s ease-in-out infinite;
+}
+
+/* Light mode overrides for cookie banner */
+.light .cookie-gold-noise::after {
+  opacity: 0.012;
+}
+
+.light .cookie-shield-glow {
+  animation: cookieShieldGlowLight 3s ease-in-out infinite;
+}
+
+@keyframes cookieShieldGlowLight {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(184, 146, 47, 0.1), 0 0 24px rgba(184, 146, 47, 0.04);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(184, 146, 47, 0.2), 0 0 40px rgba(184, 146, 47, 0.08);
+  }
+}

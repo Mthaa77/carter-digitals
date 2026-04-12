@@ -248,7 +248,7 @@ export default function ContactPage() {
 
             <AnimatedSection delay={0.35} direction="up">
               <p
-                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.5)] font-medium font-display"
+                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.65)] font-medium font-display"
               >
                 Ready When You Are
               </p>
@@ -491,7 +491,7 @@ export default function ContactPage() {
                             rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
                           >
                             <div
-                              className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover-gold cursor-pointer"
+                              className="group flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-hover-gold cursor-pointer card-idle-pulse"
                               style={{ transitionDelay: `${index * 50}ms` }}
                             >
                               <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center group-hover:bg-[rgba(212,168,83,0.15)] group-hover:shadow-[0_0_20px_rgba(212,168,83,0.2)] transition-all duration-300">
@@ -509,7 +509,7 @@ export default function ContactPage() {
                             </div>
                           </a>
                         ) : (
-                          <div className="flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)]">
+                          <div className="flex items-start gap-4 p-4 rounded-xl bg-[#131316] border border-[rgba(255,255,255,0.06)] card-idle-pulse">
                             <div className="w-10 h-10 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center">
                               <method.icon className="w-5 h-5 text-[#D4A853]" />
                             </div>
