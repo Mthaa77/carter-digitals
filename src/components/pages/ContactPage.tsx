@@ -39,6 +39,7 @@ import {
 } from "@/components/shared/AnimatedSection";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 
 /* ──────────────────────── contact methods ──────────────────────── */
 const contactMethods = [
@@ -273,6 +274,7 @@ export default function ContactPage() {
 
       {/* ────────────────── 2. CONTACT GRID ─────────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        <CosmicDecorations variant="constellation" intensity="subtle" />
         {/* Gold glow orbs */}
         <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
@@ -778,6 +780,7 @@ export default function ContactPage() {
 
       {/* ─────────────── 5. RESPONSE PROMISE SECTION ─────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        <CosmicDecorations variant="stardust" intensity="subtle" />
         {/* Background glow orbs */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[rgba(184,146,47,0.03)] rounded-full blur-[100px] pointer-events-none" />

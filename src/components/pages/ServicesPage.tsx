@@ -56,6 +56,7 @@ import { TiltCard } from "@/components/shared/TiltCard";
 import { CircularProgress } from "@/components/shared/CircularProgress";
 import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import { useNavigation } from "@/lib/navigation";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 import { toast } from "sonner";
 
 /* -------------------- flagship features -------------------- */
@@ -353,6 +354,7 @@ export default function ServicesPage() {
 
       {/* ---------- 2. FLAGSHIP SERVICE -- WEBSITE DEV ---------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint grain-texture">
+        <CosmicDecorations variant="nebula" intensity="subtle" />
         <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Ambient orbs */}
         <div className="ambient-orb ambient-orb-float w-[250px] h-[250px] bg-[rgba(212,168,83,0.03)] top-[20%] right-[-5%]" style={{animationDelay: '3s'}} />
@@ -453,6 +455,7 @@ export default function ServicesPage() {
 
       {/* ----------------- 3. CORE SERVICES GRID ----------------- */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="constellation" intensity="subtle" />
         <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />

@@ -66,6 +66,7 @@ import { QuickCalculator } from "@/components/shared/QuickCalculator";
 import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import InteractiveTestimonials from "@/components/shared/InteractiveTestimonials";
 import FaqSearch from "@/components/shared/FaqSearch";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 import { useNavigation } from "@/lib/navigation";
 
 /* ─────────────────────────── DATA ─────────────────────────── */
@@ -479,6 +480,8 @@ export default function HomePage() {
     <main className="relative overflow-hidden">
       {/* ════════════════════ 1. HERO SECTION ════════════════════ */}
       <section className="relative min-h-screen flex flex-col justify-center bg-[#0A0A0B] overflow-hidden">
+        {/* Cosmic ring decoration behind hero */}
+        <CosmicDecorations variant="cosmic-ring" intensity="subtle" />
         {/* Background layers */}
         <div className="absolute inset-0 bg-grid" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
@@ -614,6 +617,8 @@ export default function HomePage() {
 
       {/* ════════════════ 2. ABOUT PREVIEW — BENTO GRID ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Nebula decoration for about section */}
+        <CosmicDecorations variant="nebula" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
@@ -664,6 +669,8 @@ export default function HomePage() {
 
       {/* ════════════════════ 3. STATS SECTION ════════════════════ */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] bg-dots">
+        {/* Stardust decoration for stats */}
+        <CosmicDecorations variant="stardust" intensity="medium" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
@@ -708,6 +715,8 @@ export default function HomePage() {
 
       {/* ════════════════ 5. SERVICES — EXPAND-ON-HOVER ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Constellation decoration for services */}
+        <CosmicDecorations variant="constellation" intensity="subtle" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Our Services"
@@ -919,6 +928,8 @@ export default function HomePage() {
 
       {/* ════════════════ 10. FEATURED PROJECTS — INTERACTIVE SHOWCASE ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B] grain-texture overflow-hidden">
+        {/* Aurora decoration for featured projects */}
+        <CosmicDecorations variant="aurora" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[150px] pointer-events-none" />
@@ -1216,6 +1227,8 @@ export default function HomePage() {
 
       {/* ════════════════ 14. FAQ — SEARCHABLE ACCORDION ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Constellation decoration for FAQ */}
+        <CosmicDecorations variant="constellation" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
@@ -1237,6 +1250,8 @@ export default function HomePage() {
 
       {/* ════════════════ 15. START YOUR JOURNEY — PREMIUM CTA ════════════════ */}
       <section className="relative py-32 md:py-44 overflow-hidden">
+        {/* Nebula decoration for final CTA */}
+        <CosmicDecorations variant="nebula" intensity="medium" />
         {/* Dark gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-[#0D0B08] to-[#0A0A0B]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(212,168,83,0.02)] via-[rgba(212,168,83,0.04)] to-[rgba(212,168,83,0.02)]" />

@@ -25,6 +25,7 @@ import {
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
 import { useNavigation } from "@/lib/navigation";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 
 /* ──────────────────────── SME packages ─────────────────────────── */
 const smePackages = [
@@ -370,6 +371,7 @@ export default function PackagesPage() {
 
       {/* ────────────────── 2. SME PACKAGES TABS ─────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="nebula" intensity="subtle" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
 
@@ -494,6 +496,7 @@ export default function PackagesPage() {
 
       {/* ──────────────────── 4. FAQ SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="aurora" intensity="subtle" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

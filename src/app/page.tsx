@@ -15,6 +15,7 @@ import { CookieConsent } from "@/components/shared/CookieConsent";
 import { ScrollNavDots } from "@/components/shared/ScrollNavDots";
 import { LiveChatIndicator } from "@/components/shared/LiveChatIndicator";
 import { LiveStatus } from "@/components/shared/LiveStatus";
+import Starfield from "@/components/shared/Starfield";
 import { toast } from "sonner";
 import { PageTransitionSkeleton } from "@/components/shared/PageTransitionSkeleton";
 import HomePage from "@/components/pages/HomePage";
@@ -184,6 +185,8 @@ export default function Page() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0A0A0B] dark:bg-[#0A0A0B]">
+      {/* Galaxy starfield background — fixed behind all content */}
+      <Starfield />
       {/* Loading screen - shows only on first visit per session */}
       {!hasLoaded && <LoadingScreen onComplete={handleLoadingComplete} />}
       {/* Scroll progress bar */}

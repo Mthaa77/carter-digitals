@@ -47,6 +47,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
 import { TiltCard } from "@/components/shared/TiltCard";
 import { useNavigation } from "@/lib/navigation";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 
 /* ──────────────────────── value cards data ─────────────────────── */
 const values = [
@@ -275,6 +276,7 @@ export default function AboutPage() {
 
       {/* ────────────────── 2. OUR STORY SECTION ───────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="stardust" intensity="subtle" />
         <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Ambient floating orbs */}
         <div className="ambient-orb ambient-orb-float w-[300px] h-[300px] bg-[rgba(212,168,83,0.03)] top-[10%] right-[-5%]" style={{animationDelay: '0s'}} />
@@ -401,6 +403,7 @@ export default function AboutPage() {
       {/* ────────────────── 3. MISSION & VALUES ─────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div className="gold-glow-line mx-auto max-w-xs rounded-full" /></div>
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="aurora" intensity="subtle" />
         <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[140px] pointer-events-none" />

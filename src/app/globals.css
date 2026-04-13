@@ -1357,3 +1357,169 @@ a {
     box-shadow: 0 0 20px rgba(184, 146, 47, 0.2), 0 0 40px rgba(184, 146, 47, 0.08);
   }
 }
+
+/* ============================================
+   Galaxy / Cosmic Theme — Universe Background
+   ============================================ */
+
+/* Cosmic twinkle animation for sparkle dots */
+@keyframes cosmicTwinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.animate-cosmic-twinkle {
+  animation: cosmicTwinkle 3s ease-in-out infinite;
+}
+
+/* Slow shooting star streak */
+@keyframes shootingStar {
+  0% { transform: translateX(0) translateY(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateX(300px) translateY(150px); opacity: 0; }
+}
+
+.animate-shooting-star {
+  animation: shootingStar 1.2s ease-out forwards;
+}
+
+/* Nebula drift — slow floating motion */
+@keyframes nebulaDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(15px, -10px) scale(1.02); }
+  50% { transform: translate(-10px, 20px) scale(0.98); }
+  75% { transform: translate(20px, 10px) scale(1.01); }
+}
+
+.animate-nebula-drift {
+  animation: nebulaDrift 25s ease-in-out infinite;
+}
+
+/* Cosmic dust particles floating up */
+@keyframes cosmicDustFloat {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-200px) translateX(30px) rotate(180deg); opacity: 0; }
+}
+
+.animate-cosmic-dust {
+  animation: cosmicDustFloat 8s ease-in-out infinite;
+}
+
+/* Subtle cosmic glow for section backgrounds */
+.cosmic-glow-purple {
+  background: radial-gradient(ellipse at 20% 50%, rgba(60, 20, 80, 0.08) 0%, transparent 60%);
+}
+
+.cosmic-glow-blue {
+  background: radial-gradient(ellipse at 80% 30%, rgba(20, 40, 80, 0.06) 0%, transparent 60%);
+}
+
+.cosmic-glow-gold {
+  background: radial-gradient(ellipse at 50% 80%, rgba(100, 70, 20, 0.06) 0%, transparent 60%);
+}
+
+/* Cosmic section overlay — combines nebula colors */
+.cosmic-section-overlay {
+  position: relative;
+}
+
+.cosmic-section-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(60, 20, 80, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 75%, rgba(20, 40, 80, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.02) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cosmic star dot (tiny decorative dot) */
+.cosmic-star-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.cosmic-star-dot-gold {
+  background: rgba(212, 168, 83, 0.6);
+  box-shadow: 0 0 6px rgba(212, 168, 83, 0.3);
+}
+
+/* Cosmic gradient divider (subtle multi-color) */
+.cosmic-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(60, 20, 80, 0.2) 20%,
+    rgba(212, 168, 83, 0.3) 50%,
+    rgba(20, 40, 80, 0.2) 80%,
+    transparent 100%
+  );
+}
+
+/* Galaxy swirl background for special sections */
+.galaxy-bg {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(60, 20, 80, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 80%, rgba(20, 50, 90, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.03) 0%, transparent 30%);
+}
+
+/* Cosmic card border glow */
+.cosmic-card-glow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cosmic-card-glow:hover {
+  box-shadow:
+    0 0 30px rgba(212, 168, 83, 0.08),
+    0 0 60px rgba(60, 20, 80, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(212, 168, 83, 0.2);
+}
+
+/* Light mode cosmic overrides */
+.light .cosmic-section-overlay::before {
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(60, 20, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 75%, rgba(20, 40, 80, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(184, 146, 47, 0.02) 0%, transparent 40%);
+}
+
+.light .cosmic-glow-purple {
+  background: radial-gradient(ellipse at 20% 50%, rgba(60, 20, 80, 0.04) 0%, transparent 60%);
+}
+
+.light .cosmic-glow-blue {
+  background: radial-gradient(ellipse at 80% 30%, rgba(20, 40, 80, 0.03) 0%, transparent 60%);
+}
+
+.light .cosmic-glow-gold {
+  background: radial-gradient(ellipse at 50% 80%, rgba(100, 70, 20, 0.03) 0%, transparent 60%);
+}
+
+.light .cosmic-divider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(60, 20, 80, 0.1) 20%,
+    rgba(184, 146, 47, 0.15) 50%,
+    rgba(20, 40, 80, 0.1) 80%,
+    transparent 100%
+  );
+}
+
+.light .galaxy-bg {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(60, 20, 80, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 80%, rgba(20, 50, 90, 0.02) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(184, 146, 47, 0.02) 0%, transparent 30%);
+}

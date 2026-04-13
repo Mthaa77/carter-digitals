@@ -39,6 +39,7 @@ import {
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { useNavigation } from "@/lib/navigation";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
+import CosmicDecorations from "@/components/shared/CosmicDecorations";
 import ImageLightbox from "@/components/shared/ImageLightbox";
 import type { LightboxImage } from "@/components/shared/ImageLightbox";
 
@@ -546,6 +547,7 @@ export default function PortfolioPage() {
     <main className="relative overflow-hidden">
       {/* ───────────────────── 1. PAGE HERO ───────────────────── */}
       <section className="relative py-28 md:py-40 bg-[#0A0A0B]">
+        <CosmicDecorations variant="cosmic-ring" intensity="subtle" />
         {/* Background */}
         <div className="absolute inset-0 bg-grid pattern-grid-animated" />
 
@@ -773,6 +775,7 @@ export default function PortfolioPage() {
 
       {/* ──────────────────── 3. PROJECT GRID ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-[#0A0A0B] section-gold-tint">
+        <CosmicDecorations variant="stardust" intensity="subtle" />
         {/* Background glow orbs */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[100px] pointer-events-none" />
