@@ -40,6 +40,7 @@ import {
   Play,
   Rocket,
   ChevronDown,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -63,7 +64,6 @@ import { MagneticButton } from "@/components/shared/MagneticButton";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
 import { CircularProgress } from "@/components/shared/CircularProgress";
 import { QuickCalculator } from "@/components/shared/QuickCalculator";
-import { BeforeAfterSlider } from "@/components/shared/BeforeAfterSlider";
 import InteractiveTestimonials from "@/components/shared/InteractiveTestimonials";
 import FaqSearch from "@/components/shared/FaqSearch";
 import CosmicDecorations from "@/components/shared/CosmicDecorations";
@@ -157,6 +157,7 @@ const featuredProjects = [
     ],
     gradient: "from-blue-900/30 via-indigo-900/20 to-slate-900/40",
     accentColor: "#6366f1",
+    image: "/images/portfolio-school.png",
   },
   {
     name: "Mogale & Associates Law",
@@ -169,6 +170,7 @@ const featuredProjects = [
     ],
     gradient: "from-amber-900/30 via-yellow-900/20 to-stone-900/40",
     accentColor: "#D4A853",
+    image: "/images/website-mockup.png",
   },
   {
     name: "Gateway Hospitality Group",
@@ -181,6 +183,7 @@ const featuredProjects = [
     ],
     gradient: "from-emerald-900/30 via-teal-900/20 to-cyan-900/40",
     accentColor: "#10b981",
+    image: "/images/portfolio-ecommerce.png",
   },
 ];
 
@@ -203,22 +206,10 @@ const processSteps = [
 
 const testimonials = [
   {
-    quote: "Carter Digitals transformed our school's online presence completely. Parents now enroll their children directly through the website, and our Google ranking jumped from page 5 to the top 3 results within two months. The team understood exactly what an educational institution needs.",
-    name: "Dr. Thabo Molefe",
-    role: "School Principal",
-    company: "Rise & Shine Academy, Gauteng",
-  },
-  {
-    quote: "As a growing SME, we needed a professional web presence without the enterprise price tag. Carter Digitals delivered a stunning e-commerce site in under a week. Our online sales increased by 340% in the first quarter. Absolute game-changer.",
-    name: "Nomsa Dlamini",
-    role: "Founder & CEO",
-    company: "Lush Naturals Co., Johannesburg",
-  },
-  {
-    quote: "In the legal industry, credibility is everything. Carter Digitals built us a website that projects authority and professionalism. Client inquiries through the site have tripled. Truly exceptional work from a team that understands our world.",
-    name: "Adv. Pieter van der Merwe",
-    role: "Senior Partner",
-    company: "Van der Merwe & Associates, Pretoria",
+    quote: "Carter Digitals transformed our school's digital presence. The new website has made it easier for parents to engage with us, and enrollment inquiries have increased significantly. They truly understood what a school of specialisation needs.",
+    name: "School of Specialisation",
+    role: "Soshanguve Secondary",
+    company: "Gauteng, South Africa",
   },
 ];
 
@@ -489,12 +480,25 @@ export default function HomePage() {
   return (
     <main className="relative overflow-hidden">
       {/* ════════════════════ 1. HERO SECTION ════════════════════ */}
-      <section className="relative min-h-screen flex flex-col justify-center bg-[#0A0A0B] overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center bg-background overflow-hidden">
+        {/* Animated gradient mesh background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-[40%] -left-[20%] w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,rgba(30,58,95,0.08)_0%,transparent_70%)] animate-[float_20s_ease-in-out_infinite]" />
+          <div className="absolute -bottom-[30%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,rgba(196,30,58,0.06)_0%,transparent_70%)] animate-[float_25s_ease-in-out_infinite_reverse]" />
+          <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] rounded-full bg-[radial-gradient(circle,rgba(212,168,83,0.04)_0%,transparent_70%)] animate-[float_18s_ease-in-out_infinite_2s]" />
+        </div>
         {/* Cosmic ring decoration behind hero */}
         <CosmicDecorations variant="cosmic-ring" intensity="subtle" />
+        {/* Subtle hero background image layer */}
+        <ParallaxSection speed={0.05} direction="up" className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute inset-0 opacity-[0.18]">
+            <Image src="/images/hero-tech-bg.png" alt="" fill className="object-cover object-center" unoptimized />
+          </div>
+        </ParallaxSection>
+
         {/* Background layers */}
         <div className="absolute inset-0 bg-grid" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(212,168,83,0.03)] via-transparent to-[rgba(212,168,83,0.02)]" />
 
         {/* Floating shapes with parallax */}
@@ -547,17 +551,17 @@ export default function HomePage() {
               </AnimatedSection>
 
               <AnimatedSection delay={0.2} direction="up">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-extrabold leading-[1.05] tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  <span className="text-gradient-gold animate-gradient-text">Built Different.</span>
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.0] tracking-[-0.04em] text-display-hero">
+                  <span className="text-gradient-hero">Built Different.</span>
                   <br />
-                  <span className="text-gradient-gold animate-gradient-text">Built African.</span>
+                  <span className="text-gradient-hero">Built African.</span>
                   <br />
-                  <span className="text-[#F5F5F5]">Built to Win.</span>
+                  <span className="text-gradient-gold">Built to Win.</span>
                 </h1>
               </AnimatedSection>
 
               <AnimatedSection delay={0.4} direction="up">
-                <p className="mt-6 md:mt-8 text-lg md:text-xl text-[rgba(245,245,245,0.55)] max-w-xl leading-[1.8]">
+                <p className="mt-6 md:mt-8 text-lg md:text-xl text-[rgba(245,245,245,0.65)] max-w-xl text-body-refined">
                   South Africa&apos;s forward-thinking institutions don&apos;t need another digital vendor. They need a builder — someone who delivers on time and leaves institutions stronger.
                 </p>
               </AnimatedSection>
@@ -572,7 +576,7 @@ export default function HomePage() {
                   </MagneticButton>
                   <MagneticButton strength={0.2}>
                     <Button onClick={() => handleNavClick("services")} size="lg" variant="outline"
-                      className="border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-white/5 text-white font-semibold px-8 py-6 text-base rounded-xl transition-all duration-300 group">
+                      className="border-foreground/20 bg-transparent hover:bg-foreground/5 text-foreground font-semibold px-8 py-6 text-base rounded-xl transition-all duration-300 group">
                       View Our Work <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </MagneticButton>
@@ -580,19 +584,22 @@ export default function HomePage() {
               </AnimatedSection>
             </div>
 
-            {/* Right column — logo in glass-morphism frame */}
+            {/* Right column — Cinematic hero banner */}
             <div className="flex justify-center lg:justify-end order-first lg:order-last">
               <AnimatedSection delay={0.3} direction="up">
                 <div className="relative">
-                  {/* Ambient glow behind logo */}
+                  {/* Ambient glow behind banner */}
                   <div className="absolute -inset-8 bg-[rgba(212,168,83,0.06)] rounded-full blur-[80px] pointer-events-none" />
-                  <div className="relative hero-logo-frame animate-logo-glow rounded-3xl p-6 md:p-8">
-                    <div className="relative w-[220px] h-[220px] md:w-[300px] md:h-[300px] rounded-2xl overflow-hidden">
-                      <Image src="/images/carter-digitals-logo.png" alt="Carter Digitals Logo" fill className="object-contain" priority />
+                  <div className="relative rounded-2xl overflow-hidden chrome-image-frame shadow-2xl shadow-[rgba(0,0,0,0.5)]">
+                    <div className="relative w-full max-w-[520px] aspect-[1376/740]">
+                      <Image src="/images/hero-blockbuster-banner.png" alt="Carter Digitals — Built Different. Built African. Built to Win." fill className="object-cover object-center" unoptimized priority />
                     </div>
                   </div>
-                  {/* Decorative gold accent line below logo */}
-                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-50" />
+                  {/* Decorative floating elements */}
+                  <motion.div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4A853] to-[#B8922F] opacity-60 blur-[1px]"
+                    animate={{ y: [0, -8, 0], rotate: [0, 90, 180] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+                  <motion.div className="absolute -bottom-3 -left-3 w-5 h-5 rounded-sm bg-gradient-to-br from-[#E8C97A] to-[#D4A853] opacity-40"
+                    animate={{ y: [0, 6, 0], rotate: [0, -45, -90] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
                 </div>
               </AnimatedSection>
             </div>
@@ -601,11 +608,11 @@ export default function HomePage() {
 
         {/* Trust badges strip */}
         <div className="relative z-10 mt-auto">
-          <div className="border-t border-[rgba(212,168,83,0.08)] bg-[rgba(10,10,11,0.8)] backdrop-blur-md">
+          <div className="bg-card/80 backdrop-blur-md border border-border/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
               <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10">
                 {trustBadges.map((badge) => (
-                  <div key={badge} className="flex items-center gap-2 text-[rgba(245,245,245,0.5)]">
+                  <div key={badge} className="flex items-center gap-2 text-muted-foreground">
                     <CheckCircle className="w-4 h-4 text-[#D4A853] shrink-0" />
                     <span className="text-xs md:text-sm font-medium whitespace-nowrap">{badge}</span>
                   </div>
@@ -617,9 +624,12 @@ export default function HomePage() {
 
         {/* Scroll down indicator */}
         <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-scroll-bounce">
-          <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[rgba(245,245,245,0.3)]">Scroll</span>
+          <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-muted-foreground/50">Scroll</span>
           <ChevronDown className="w-5 h-5 text-[rgba(212,168,83,0.5)]" />
         </div>
+
+        {/* Subtle decorative gradient line at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E3A5F]/20 via-[#C41E3A]/15 to-transparent" />
       </section>
 
       {/* ════════════════ 1.5 LIVE TICKER ════════════════ */}
@@ -627,6 +637,12 @@ export default function HomePage() {
 
       {/* ════════════════ 2. ABOUT PREVIEW — BENTO GRID ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Subtle diagonal background accent image — right side */}
+        <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none z-0 opacity-[0.06] hidden lg:block"
+          style={{ clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)' }}>
+          <Image src="/images/digital-transformation.png" alt="" fill className="object-cover object-center" unoptimized />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B] via-transparent to-[#0A0A0B]/60" />
+        </div>
         {/* Nebula decoration for about section */}
         <CosmicDecorations variant="nebula" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
@@ -674,6 +690,23 @@ export default function HomePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+
+          {/* Promotional banner — Pitch Deck */}
+          <AnimatedSection delay={0.3} direction="up" className="mt-16">
+            <div className="group relative rounded-2xl overflow-hidden cursor-pointer chrome-image-frame">
+              <div className="relative w-full aspect-[1376/400]">
+                <Image src="/images/pitch-deck-cover.png" alt="Carter Digitals Premium Pitch Deck" fill className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700" unoptimized />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/90 via-[#0A0A0B]/40 to-transparent" />
+                <div className="absolute inset-0 flex items-center px-8 md:px-12">
+                  <div className="max-w-md">
+                    <Badge className="bg-[rgba(212,168,83,0.15)] border border-[rgba(212,168,83,0.3)] text-[#E8C97A] text-[10px] font-medium px-3 py-1 mb-4">Brand Collateral</Badge>
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-3 tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Investor-Ready Pitch Decks &amp; Profiles</h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.6)] leading-[1.8]">Premium presentation design that commands boardrooms and wins stakeholder buy-in.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -723,8 +756,92 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ════════════════ 4.5 VISUAL SHOWCASE — BENTO GRID ════════════════ */}
+      <AnimatedSection direction="up">
+        <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+          <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              label="Our Craft"
+              title="We Build Digital"
+              titleHighlight="Masterpieces"
+              description="From pixel-perfect interfaces to robust backend architectures — every project is a showcase of what premium South African engineering looks like."
+              align="center"
+            />
+            <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-12 md:mt-16" staggerDelay={0.1}>
+              {/* Large card — spans 2 cols on desktop */}
+              <StaggerItem className="md:col-span-2">
+                <div className="group relative rounded-2xl overflow-hidden h-[280px] md:h-[380px] cursor-pointer chrome-image-frame hover:-translate-y-1 transition-transform duration-500 hover-lift">
+                  <Image src="/images/website-mockup.png" alt="Modern Web Design" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <Badge className="bg-[rgba(212,168,83,0.15)] border border-[rgba(212,168,83,0.3)] text-[#E8C97A] text-[10px] font-medium px-3 py-1 mb-3">Featured</Badge>
+                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Modern Web Design</h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.5)] mt-1 max-w-md">High-performance, conversion-optimised websites engineered to dominate search and captivate audiences.</p>
+                  </div>
+                </div>
+              </StaggerItem>
+              {/* Responsive Development */}
+              <StaggerItem>
+                <div className="group relative rounded-2xl overflow-hidden h-[240px] md:h-[300px] cursor-pointer chrome-image-frame hover:-translate-y-1 transition-transform duration-500 hover-lift">
+                  <Image src="/images/responsive-mockup.png" alt="Responsive Development" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-lg md:text-xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Responsive Development</h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.45)] mt-1">Pixel-perfect on every device, from mobile to ultrawide.</p>
+                  </div>
+                </div>
+              </StaggerItem>
+              {/* UI/UX Excellence */}
+              <StaggerItem>
+                <div className="group relative rounded-2xl overflow-hidden h-[240px] md:h-[300px] cursor-pointer chrome-image-frame hover:-translate-y-1 transition-transform duration-500 hover-lift">
+                  <Image src="/images/ui-design-process.png" alt="UI/UX Excellence" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-lg md:text-xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>UI/UX Excellence</h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.45)] mt-1">Research-driven interfaces that convert visitors into customers.</p>
+                  </div>
+                </div>
+              </StaggerItem>
+              {/* Clean Code Architecture */}
+              <StaggerItem className="md:col-span-2">
+                <div className="group relative rounded-2xl overflow-hidden h-[240px] md:h-[320px] cursor-pointer chrome-image-frame hover:-translate-y-1 transition-transform duration-500 hover-lift">
+                  <Image src="/images/dev-workspace-showcase.png" alt="Clean Code Architecture" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Clean Code Architecture</h3>
+                    <p className="text-sm text-[rgba(245,245,245,0.45)] mt-1 max-w-lg">Battle-tested, maintainable codebases built on Next.js, TypeScript, and industry best practices.</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+
+            {/* Email Marketing Banner — Full Width Card */}
+            <AnimatedSection delay={0.5} direction="up" className="mt-5">
+              <div className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[300px] cursor-pointer chrome-image-frame hover:-translate-y-1 transition-transform duration-500 hover-lift">
+                <Image src="/images/email-marketing-banner.png" alt="Email Marketing" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" unoptimized />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Mail className="w-5 h-5 text-[#D4A853]" />
+                    <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[rgba(212,168,83,0.7)]">Marketing Collateral</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Cinematic Email Headers &amp; Marketing Banners</h3>
+                  <p className="text-sm text-[rgba(245,245,245,0.5)] mt-1 max-w-lg">High-impact visual assets that boost open rates and brand recall.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      </AnimatedSection>
+
       {/* ════════════════ 5. SERVICES — EXPAND-ON-HOVER ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Subtle workspace background image */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.12]">
+          <Image src="/images/abstract-tech-bg.png" alt="" fill className="object-cover object-center" unoptimized />
+        </div>
         {/* Constellation decoration for services */}
         <CosmicDecorations variant="constellation" intensity="subtle" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -780,6 +897,28 @@ export default function HomePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+
+          {/* Social Media Ad Showcase */}
+          <AnimatedSection delay={0.4} direction="up" className="mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+              <div className="relative rounded-2xl overflow-hidden chrome-image-frame aspect-[1024/1000] max-h-[400px]">
+                <Image src="/images/social-media-ad.png" alt="Carter Digitals Social Media Advertisement" fill className="object-cover object-center" unoptimized />
+              </div>
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D4A853]" />
+                  <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#D4A853]">Social Media Design</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  Scroll-Stopping <span className="text-gradient-gold">Visual Content</span>
+                </h3>
+                <p className="text-sm text-[rgba(245,245,245,0.55)] leading-[1.8]">Premium social media advertisements, email headers, and digital collateral that elevate your brand across every touchpoint.</p>
+                <Button onClick={() => handleNavClick("services")} variant="outline" className="border-[rgba(212,168,83,0.3)] hover:bg-[rgba(212,168,83,0.08)] text-[#D4A853] font-semibold group">
+                  Explore Our Services <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -831,6 +970,10 @@ export default function HomePage() {
 
       {/* ════════════════ 7. WHY CHOOSE US — SCROLLING TICKER ════════════════ */}
       <section className="relative py-20 md:py-24 bg-[#0A0A0B]">
+        {/* Subtle UI design floating background image */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.10]">
+          <Image src="/images/team-collaboration.png" alt="" fill className="object-cover object-center" unoptimized />
+        </div>
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
@@ -867,6 +1010,10 @@ export default function HomePage() {
 
       {/* ════════════════ 8. PROCESS TIMELINE ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+        {/* Subtle dev process background image */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.12]">
+          <Image src="/images/dev-process-diagram.png" alt="" fill className="object-cover object-center" unoptimized />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -938,6 +1085,10 @@ export default function HomePage() {
 
       {/* ════════════════ 10. FEATURED PROJECTS — INTERACTIVE SHOWCASE ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B] grain-texture overflow-hidden">
+        {/* Subtle website showcase background image */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.10]">
+          <Image src="/images/website-showcase.png" alt="" fill className="object-cover object-center" unoptimized />
+        </div>
         {/* Aurora decoration for featured projects */}
         <CosmicDecorations variant="aurora" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
@@ -955,9 +1106,10 @@ export default function HomePage() {
             {featuredProjects.map((project, idx) => (
               <StaggerItem key={project.name}>
                 <div className="group relative rounded-2xl border border-[rgba(255,255,255,0.06)] hover:border-[rgba(212,168,83,0.2)] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[rgba(212,168,83,0.08)] bg-[#111114] h-full hover-lift">
-                  {/* Gradient header */}
+                  {/* Gradient header with project image */}
                   <div className={`relative h-40 md:h-48 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111114] via-transparent to-transparent" />
+                    <Image src={project.image} alt={project.name} fill className="object-cover object-center opacity-60" unoptimized />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111114] via-[#111114]/40 to-transparent" />
                     {/* Animated stat counters on hover */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
                       <div className="flex items-center gap-4">
@@ -1001,26 +1153,34 @@ export default function HomePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </div>
-      </section>
 
-      {/* ════════════════ 11. BEFORE & AFTER — TRANSFORMATION SHOWCASE ════════════════ */}
-      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(212,168,83,0.015)] to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            label="Transformations"
-            title="Before & After."
-            titleHighlight="See The Difference."
-            description="Drag the slider to compare what our clients had before — and what they got after partnering with Carter Digitals. Real projects, real results."
-            align="center"
-          />
-          <AnimatedSection delay={0.15} direction="up">
-            <BeforeAfterSlider />
+          {/* Phone Mockup — Mobile-First Showcase */}
+          <AnimatedSection delay={0.5} direction="up" className="mt-16 flex justify-center">
+            <div className="relative">
+              {/* Phone frame */}
+              <div className="relative w-[280px] md:w-[320px] rounded-[40px] overflow-hidden shadow-2xl shadow-[rgba(0,0,0,0.6)] border-[6px] border-[#1A1A1F] bg-[#1A1A1F]">
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[28px] bg-[#1A1A1F] rounded-b-2xl z-20" />
+                <div className="relative w-full aspect-[9/19]">
+                  <Image src="/images/phone-screenshot.jpg" alt="Carter Digitals mobile experience" fill className="object-cover object-top" unoptimized />
+                </div>
+              </div>
+              {/* Glow behind phone */}
+              <div className="absolute -inset-12 bg-[rgba(212,168,83,0.06)] rounded-full blur-[60px] pointer-events-none -z-10" />
+              {/* Floating accent badges */}
+              <motion.div className="absolute -right-8 top-1/4 px-3 py-2 rounded-xl bg-[#131316] border border-[rgba(212,168,83,0.2)] shadow-lg"
+                animate={{ y: [0, -6, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+                <span className="text-xs font-semibold text-[#D4A853]">Mobile-First</span>
+              </motion.div>
+              <motion.div className="absolute -left-12 top-2/3 px-3 py-2 rounded-xl bg-[#131316] border border-[rgba(212,168,83,0.2)] shadow-lg"
+                animate={{ y: [0, 6, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+                <span className="text-xs font-semibold text-[#E8C97A]">99.9% Uptime</span>
+              </motion.div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
+
 
       {/* ════════════════ 12. QUICK CALCULATOR ════════════════ */}
       <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
@@ -1260,6 +1420,10 @@ export default function HomePage() {
 
       {/* ════════════════ 15. START YOUR JOURNEY — PREMIUM CTA ════════════════ */}
       <section className="relative py-32 md:py-44 overflow-hidden">
+        {/* Gold chrome background image — very subtle */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.15]">
+          <Image src="/images/gold-chrome-metal.png" alt="" fill className="object-cover object-center" unoptimized />
+        </div>
         {/* Nebula decoration for final CTA */}
         <CosmicDecorations variant="nebula" intensity="medium" />
         {/* Dark gradient background */}

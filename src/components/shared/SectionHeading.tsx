@@ -25,16 +25,16 @@ export function SectionHeading({
 
   const sizeClasses = {
     sm: {
-      heading: "text-2xl md:text-3xl lg:text-4xl",
+      heading: "text-2xl md:text-3xl lg:text-[2.5rem]",
     },
     md: {
-      heading: "text-3xl md:text-4xl lg:text-[2.75rem]",
+      heading: "text-3xl md:text-[2.75rem] lg:text-[3rem]",
     },
     lg: {
-      heading: "text-3xl md:text-[2.75rem] lg:text-[3.25rem]",
+      heading: "text-3xl md:text-[2.75rem] lg:text-[3.5rem]",
     },
     xl: {
-      heading: "text-4xl md:text-5xl lg:text-[3.5rem]",
+      heading: "text-4xl md:text-5xl lg:text-[4rem]",
     },
   };
 
@@ -52,13 +52,12 @@ export function SectionHeading({
       )}
       <AnimatedSection delay={0.1} direction="up">
         <h2
-          className={`${headingClass} font-extrabold tracking-[-0.02em] leading-[1.1]`}
-          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          className={`${headingClass} font-bold tracking-[-0.025em] leading-[1.1] text-display-section`}
         >
           {titleHighlight ? (
             <>
               {title}{" "}
-              <span className="text-gradient-gold font-serif-accent">{titleHighlight}</span>
+              <span className="text-gradient-gold">{titleHighlight}</span>
             </>
           ) : (
             title
@@ -69,7 +68,7 @@ export function SectionHeading({
         <AnimatedSection delay={0.2} direction="up">
           <div className="relative">
             <div className={`mx-auto h-[3px] bg-gradient-to-r from-[#D4A853] to-[#E8C97A] rounded-full mb-6 ${align === 'center' ? 'animate-gold-line' : 'w-[60px]'}`} />
-            <p className="animate-reveal text-base md:text-lg text-[rgba(245,245,245,0.55)] leading-[1.8] font-light section-description">
+            <p className="animate-reveal text-base md:text-lg text-[rgba(245,245,245,0.55)] leading-[1.85] font-light text-body-refined section-description">
               {description}
             </p>
           </div>

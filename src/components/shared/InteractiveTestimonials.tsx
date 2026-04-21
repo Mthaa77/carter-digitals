@@ -14,28 +14,11 @@ interface Testimonial {
 
 const defaultTestimonials: Testimonial[] = [
   {
-    quote:
-      "Carter Digitals transformed our school's online presence completely. Parents now enroll their children directly through the website, and our Google ranking jumped from page 5 to the top 3 results within two months.",
-    name: "Dr. Thabo Molefe",
-    role: "School Principal",
-    company: "Rise & Shine Academy, Gauteng",
-    metric: "340% Enrollment Increase",
-  },
-  {
-    quote:
-      "Carter Digitals delivered a stunning e-commerce site in under a week. Our online sales increased by 340% in the first quarter. Absolute game-changer for our business.",
-    name: "Nomsa Dlamini",
-    role: "Founder & CEO",
-    company: "Lush Naturals Co., Johannesburg",
-    metric: "R2.1M Online Sales",
-  },
-  {
-    quote:
-      "In the legal industry, credibility is everything. Carter Digitals built us a website that projects authority and professionalism. Client inquiries through the site have tripled.",
-    name: "Adv. Pieter van der Merwe",
-    role: "Senior Partner",
-    company: "Van der Merwe & Associates, Pretoria",
-    metric: "3x Client Inquiries",
+    quote: "Carter Digitals transformed our school's digital presence. The new website has made it easier for parents to engage with us, and enrollment inquiries have increased significantly. They truly understood what a school of specialisation needs.",
+    name: "School of Specialisation",
+    role: "Soshanguve Secondary",
+    company: "Gauteng, South Africa",
+    metric: "Digital Transformation Partner",
   },
 ];
 
@@ -128,7 +111,7 @@ export default function InteractiveTestimonials({
       <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 items-stretch">
         {/* Main Testimonial Card */}
         <div className="flex-1 relative">
-          <div className="relative rounded-2xl bg-[#131316] border border-[rgba(255,255,255,0.06)] p-8 md:p-12 overflow-hidden">
+          <div className="relative rounded-2xl bg-card border border-border p-8 md:p-12 overflow-hidden">
             {/* Background Gold Quotation Watermark */}
             <div className="absolute top-4 left-6 md:top-6 md:left-10 pointer-events-none select-none">
               <Quote
@@ -158,7 +141,7 @@ export default function InteractiveTestimonials({
                   className={`transition-all duration-300 rounded-full ${
                     idx === activeIndex
                       ? "w-6 h-2 bg-[#D4A853]"
-                      : "w-2 h-2 bg-[rgba(255,255,255,0.15)] hover:bg-[rgba(255,255,255,0.3)]"
+                      : "w-2 h-2 bg-foreground/10 hover:bg-foreground/20"
                   }`}
                 />
               ))}
@@ -180,7 +163,7 @@ export default function InteractiveTestimonials({
 
                 {/* Testimonial Text */}
                 <blockquote className="mb-8">
-                  <p className="text-lg md:text-xl text-[rgba(245,245,245,0.7)] leading-[1.9] font-light">
+                  <p className="text-lg md:text-xl text-muted-foreground leading-[1.9] font-light">
                     &ldquo;{activeTestimonial.quote}&rdquo;
                   </p>
                 </blockquote>
@@ -212,13 +195,13 @@ export default function InteractiveTestimonials({
                     {getInitials(activeTestimonial.name)}
                   </div>
                   <div>
-                    <p className="text-white font-semibold text-base font-['Space_Grotesk']">
+                    <p className="text-foreground font-semibold text-base font-['Space_Grotesk']">
                       {activeTestimonial.name}
                     </p>
-                    <p className="text-[rgba(245,245,245,0.45)] text-sm mt-0.5">
+                    <p className="text-muted-foreground text-sm mt-0.5">
                       {activeTestimonial.role}
                     </p>
-                    <p className="text-[rgba(245,245,245,0.35)] text-sm">
+                    <p className="text-muted-foreground/70 text-sm">
                       {activeTestimonial.company}
                     </p>
                   </div>
@@ -246,7 +229,7 @@ export default function InteractiveTestimonials({
                 ${
                   idx === activeIndex
                     ? "border-2 border-[#D4A853] shadow-[0_0_12px_rgba(212,168,83,0.25)]"
-                    : "border border-[rgba(255,255,255,0.1)] hover:border-[rgba(212,168,83,0.4)]"
+                    : "border border-border hover:border-[rgba(212,168,83,0.4)]"
                 }
               `}
             >
@@ -266,7 +249,7 @@ export default function InteractiveTestimonials({
                   ${
                     idx === activeIndex
                       ? "bg-gradient-to-br from-[#D4A853] to-[#B8922F] text-[#0A0A0B]"
-                      : "bg-[#1A1A1E] text-[rgba(255,255,255,0.5)] group-hover:text-[rgba(212,168,83,0.8)] group-hover:bg-[rgba(212,168,83,0.08)]"
+                      : "bg-muted text-muted-foreground group-hover:text-[rgba(212,168,83,0.8)] group-hover:bg-[rgba(212,168,83,0.08)]"
                   }
                 `}
               >
@@ -281,15 +264,15 @@ export default function InteractiveTestimonials({
                   transition-all duration-200 pointer-events-none
                   ${
                     idx === activeIndex
-                      ? "opacity-100 bg-[#1A1A1E] text-[rgba(245,245,245,0.8)] border border-[rgba(212,168,83,0.2)]"
-                      : "opacity-0 group-hover:opacity-100 bg-[#1A1A1E] text-[rgba(245,245,245,0.6)] border border-[rgba(255,255,255,0.08)]"
+                      ? "opacity-100 bg-muted text-foreground border border-[rgba(212,168,83,0.2)]"
+                      : "opacity-0 group-hover:opacity-100 bg-muted text-muted-foreground border border-border"
                   }
                 `}
               >
                 <span className="text-[#D4A853]">{testimonial.name}</span>
-                <span className="text-[rgba(245,245,245,0.4)] ml-1">— {testimonial.role}</span>
+                <span className="text-muted-foreground/70 ml-1">— {testimonial.role}</span>
                 {/* Arrow */}
-                <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#1A1A1E]" />
+                <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-muted" />
               </div>
             </button>
           ))}
@@ -299,7 +282,7 @@ export default function InteractiveTestimonials({
             <button
               onClick={goPrev}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[rgba(255,255,255,0.4)] hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
             >
               <svg
                 width="14"
@@ -320,7 +303,7 @@ export default function InteractiveTestimonials({
             <button
               onClick={goNext}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[rgba(255,255,255,0.4)] hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
             >
               <svg
                 width="14"
@@ -348,7 +331,7 @@ export default function InteractiveTestimonials({
           <button
             onClick={goPrev}
             aria-label="Previous testimonial"
-            className="w-10 h-10 rounded-full border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[rgba(255,255,255,0.4)] hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
           >
             <svg
               width="14"
@@ -368,7 +351,7 @@ export default function InteractiveTestimonials({
           <button
             onClick={goNext}
             aria-label="Next testimonial"
-            className="w-10 h-10 rounded-full border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[rgba(255,255,255,0.4)] hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
+            className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-[#D4A853] hover:border-[rgba(212,168,83,0.3)] transition-all duration-200"
           >
             <svg
               width="14"
@@ -386,7 +369,7 @@ export default function InteractiveTestimonials({
             </svg>
           </button>
         </div>
-        <span className="text-xs text-[rgba(255,255,255,0.3)]">
+        <span className="text-xs text-muted-foreground">
           {activeIndex + 1} / {testimonials.length}
         </span>
       </div>

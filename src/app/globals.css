@@ -27,6 +27,14 @@
   src: url('https://fonts.gstatic.com/s/dmserifdisplay/v15/rnCu-xZa_krGokauCeNqKlw.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/bricolagegrotesque/v7/3y976T1CH0SbNkMJfJMQfzLhLFqbJGMfS3V_rKY.woff2') format('woff2');
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -34,6 +42,7 @@
   --font-mono: var(--font-geist-mono);
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-display-premium: 'Bricolage Grotesque', system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -105,33 +114,34 @@
 
 /* ─── Light theme overrides ─── */
 .light {
-  --background: oklch(0.98 0.003 80);
-  --foreground: oklch(0.12 0.01 80);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0.01 80);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0.01 80);
-  --primary: oklch(0.70 0.15 75);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.94 0.01 80);
-  --secondary-foreground: oklch(0.18 0.01 80);
-  --muted: oklch(0.94 0.005 80);
-  --muted-foreground: oklch(0.50 0.01 80);
-  --accent: oklch(0.94 0.02 75);
-  --accent-foreground: oklch(0.18 0.01 80);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.01 80);
-  --input: oklch(0.88 0.01 80);
-  --ring: oklch(0.70 0.15 75);
-  --chart-1: oklch(0.70 0.15 75);
-  --chart-2: oklch(0.65 0.18 160);
-  --chart-3: oklch(0.70 0.15 30);
-  --chart-4: oklch(0.60 0.20 280);
-  --chart-5: oklch(0.75 0.12 60);
-  --color-surface: #FAFAF8;
-  --color-surface-light: #F3F2EF;
-  --color-surface-lighter: #EBEAE6;
-  --color-gold-muted: rgba(184, 146, 47, 0.1);
+  --background: #FAFBFF;
+  --foreground: #0F0F12;
+  --card: #FFFFFF;
+  --card-foreground: #0F0F12;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F0F12;
+  --primary: #1E3A5F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F4FF;
+  --secondary-foreground: #1E3A5F;
+  --muted: #F1F3F9;
+  --muted-foreground: #64748B;
+  --accent: #C41E3A;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(30, 58, 95, 0.12);
+  --input: rgba(30, 58, 95, 0.2);
+  --ring: #1E3A5F;
+  --radius: 0.625rem;
+
+  --color-surface: #FAFBFF;
+  --color-surface-light: #F0F4FF;
+  --color-surface-lighter: #E8ECF8;
+  --color-gold-muted: rgba(212, 168, 83, 0.08);
+  --color-text-primary: #0F0F12;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6B7280;
 }
 
 @layer base {
@@ -147,6 +157,400 @@
   }
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════
+   COMPREHENSIVE LIGHT MODE OVERRIDES — PREMIUM BLUE/RED/BLACK THEME
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* --- Section Backgrounds --- */
+.light .bg-\[\#0A0A0B\],
+.light .bg-\[\#060607\],
+.light .bg-\[\#080809\],
+.light .bg-\[\#0B0B0E\],
+.light .bg-\[\#0D0D10\],
+.light .bg-\[\#0E0E11\],
+.light .bg-\[\#0F0F12\],
+.light .bg-\[\#101014\],
+.light .bg-\[\#111114\],
+.light .bg-\[\#131316\],
+.light .bg-\[\#151519\],
+.light .bg-\[\#1A1A1E\],
+.light .bg-\[\#1A1A1F\],
+.light .bg-\[\#1E1E22\] {
+  background-color: #FFFFFF !important;
+}
+
+/* --- Card & Panel Backgrounds --- */
+.light .bg-\[\#111114\],
+.light .bg-\[rgba\(19\,19\,22\,0\.9\)\],
+.light .bg-\[rgba\(19\,19\,22\,0\.95\)\],
+.light .bg-\[rgba\(10\,10\,11\,0\.8\)\],
+.light .bg-\[rgba\(10\,10\,11\,0\.9\)\],
+.light .bg-\[rgba\(15\,15\,18\,0\.8\)\],
+.light .bg-\[rgba\(15\,15\,18\,0\.9\)\],
+.light .bg-\[rgba\(0\,0\,0\,0\.7\)\],
+.light .bg-\[rgba\(0\,0\,0\,0\.8\)\],
+.light .bg-black\/70,
+.light .bg-black\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* --- Gradient Backgrounds --- */
+.light .from-\[\#0A0A0B\] {
+  --tw-gradient-from: #FFFFFF !important;
+}
+.light .via-\[\#0D0B08\],
+.light .via-\[\#080809\],
+.light .via-\[\#0D0D10\],
+.light .via-transparent {
+  --tw-gradient-via: rgba(240, 244, 255, 0.5) !important;
+}
+.light .to-\[\#0A0A0B\],
+.light .to-\[\#060607\],
+.light .to-\[\#0B0B0E\] {
+  --tw-gradient-to: #FFFFFF !important;
+}
+
+/* --- Text Colors (PRIMARY - must be dark for readability) --- */
+.light .text-white,
+.light .text-\[\#F5F5F5\],
+.light .text-\[\#E8E8E8\],
+.light .text-\[\#EEEEEE\] {
+  color: #0F0F12 !important;
+}
+
+/* --- Text Colors (SECONDARY - dark gray) --- */
+.light .text-\[rgba\(245\,245\,245\,0\.7\)\],
+.light .text-\[rgba\(245\,245\,255\,0\.7\)\],
+.light .text-\[rgba\(245\,245\,245\,0\.65\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.7\)\] {
+  color: #374151 !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.55\)\] {
+  color: #4B5563 !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.5\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.5\)\],
+.light .text-\[rgba\(245\,245\,255\,0\.5\)\] {
+  color: #6B7280 !important;
+}
+
+/* --- Text Colors (TERTIARY - muted) --- */
+.light .text-\[rgba\(245\,245\,245\,0\.45\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.45\)\] {
+  color: #9CA3AF !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.4\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.4\)\] {
+  color: #9CA3AF !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.35\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.35\)\],
+.light .text-\[rgba\(245\,245\,255\,0\.35\)\] {
+  color: #B0B8C8 !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.3\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.3\)\] {
+  color: #CBD5E1 !important;
+}
+
+.light .text-\[rgba\(245\,245\,245\,0\.25\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.25\)\],
+.light .text-\[rgba\(245\,245\,245\,0\.15\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.15\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.1\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.06\)\],
+.light .text-\[rgba\(255\,255\,255\,0\.05\)\] {
+  color: #D1D5DB !important;
+}
+
+/* --- Gold Text Accent --- */
+.light .text-\[rgba\(212\,168\,83\,0\.65\)\],
+.light .text-\[rgba\(212\,168\,83\,0\.5\)\],
+.light .text-\[rgba\(212\,168\,83\,0\.4\)\] {
+  color: #B8922F !important;
+}
+
+/* --- Border Colors --- */
+.light .border-\[rgba\(255\,255\,255\,0\.06\)\],
+.light .border-\[rgba\(255\,255\,255\,0\.08\)\],
+.light .border-\[rgba\(255\,255\,255\,0\.05\)\] {
+  border-color: rgba(30, 58, 95, 0.08) !important;
+}
+
+.light .border-\[rgba\(255\,255\,255\,0\.1\)\] {
+  border-color: rgba(30, 58, 95, 0.1) !important;
+}
+
+.light .border-\[rgba\(255\,255\,255\,0\.15\)\] {
+  border-color: rgba(30, 58, 95, 0.12) !important;
+}
+
+.light .border-\[rgba\(212\,168\,83\,0\.2\)\] {
+  border-color: rgba(30, 58, 95, 0.15) !important;
+}
+
+.light .border-\[rgba\(212\,168\,83\,0\.15\)\] {
+  border-color: rgba(30, 58, 95, 0.1) !important;
+}
+
+/* --- Subtle Backgrounds --- */
+.light .bg-\[rgba\(255\,255\,255\,0\.03\)\],
+.light .bg-\[rgba\(255\,255\,255\,0\.04\)\],
+.light .bg-\[rgba\(255\,255\,255\,0\.05\)\] {
+  background-color: rgba(30, 58, 95, 0.04) !important;
+}
+
+.light .bg-\[rgba\(255\,255\,255\,0\.06\)\] {
+  background-color: rgba(30, 58, 95, 0.06) !important;
+}
+
+.light .bg-\[rgba\(212\,168\,83\,0\.02\)\],
+.light .bg-\[rgba\(212\,168\,83\,0\.04\)\],
+.light .bg-\[rgba\(212\,168\,83\,0\.06\)\] {
+  background-color: rgba(30, 58, 95, 0.03) !important;
+}
+
+/* --- Gradient Text Overrides --- */
+.light .text-gradient-gold {
+  background: linear-gradient(135deg, #1E3A5F 0%, #C41E3A 50%, #1E3A5F 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* --- Glass Effects --- */
+.light .glass,
+.light .glass-light {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  border-color: rgba(30, 58, 95, 0.1) !important;
+  box-shadow: 0 4px 24px rgba(30, 58, 95, 0.06) !important;
+}
+
+.light .glass-gold,
+.light .glass-gold-premium {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: rgba(30, 58, 95, 0.12) !important;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.08) !important;
+}
+
+/* --- Card Hover Effects --- */
+.light .card-hover {
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(30, 58, 95, 0.04) !important;
+}
+.light .card-hover:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 40px rgba(30, 58, 95, 0.1), 0 4px 12px rgba(196, 30, 58, 0.04) !important;
+  border-color: rgba(30, 58, 95, 0.15) !important;
+}
+
+.light .card-hover-gold {
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.06) !important;
+}
+.light .card-hover-gold:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 40px rgba(212, 168, 83, 0.12), 0 4px 12px rgba(196, 30, 58, 0.04) !important;
+}
+
+/* --- Section Dividers --- */
+.light .section-divider,
+.light .section-divider-gold {
+  background: linear-gradient(to right, transparent, rgba(30, 58, 95, 0.15), rgba(196, 30, 58, 0.1), rgba(30, 58, 95, 0.15), transparent) !important;
+}
+
+/* --- Section Gold Tint --- */
+.light .section-gold-tint {
+  background: linear-gradient(135deg, rgba(240, 244, 255, 0.4) 0%, rgba(255, 240, 245, 0.2) 50%, rgba(240, 244, 255, 0.4) 100%) !important;
+}
+
+/* --- Section Description --- */
+.light .section-description {
+  color: #64748B !important;
+}
+
+/* --- Background Patterns --- */
+.light .bg-grid {
+  background-image: linear-gradient(rgba(30, 58, 95, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(30, 58, 95, 0.03) 1px, transparent 1px) !important;
+}
+
+.light .bg-dots {
+  background-image: radial-gradient(circle, rgba(30, 58, 95, 0.06) 1px, transparent 1px) !important;
+}
+
+/* --- Gold Glow --- */
+.light .glow-gold {
+  background: radial-gradient(circle, rgba(30, 58, 95, 0.04) 0%, transparent 70%) !important;
+}
+
+/* --- Gold Border Animated --- */
+.light .gold-border-animated::before,
+.light .gold-border-animated::after {
+  background: conic-gradient(from 0deg, #1E3A5F, #C41E3A, #D4A853, #1E3A5F) !important;
+}
+
+.light .gold-border-animated {
+  --gold-border-fill: #FAFBFF !important;
+}
+
+/* --- Hover Lift --- */
+.light .hover-lift:hover {
+  box-shadow: 0 16px 48px rgba(30, 58, 95, 0.12), 0 6px 16px rgba(196, 30, 58, 0.06) !important;
+}
+
+/* --- Text Glow --- */
+.light .text-glow-gold {
+  text-shadow: 0 0 20px rgba(30, 58, 95, 0.15) !important;
+}
+
+/* --- Counter Glow --- */
+.light .counter-glow {
+  text-shadow: none !important;
+}
+
+/* --- Noise Overlays --- */
+.light .noise-overlay::after,
+.light .noise-gold::after {
+  opacity: 0.015 !important;
+}
+
+/* --- Input Focus --- */
+.light .input-gold:focus {
+  border-color: #1E3A5F !important;
+  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1) !important;
+}
+
+/* --- Accordion --- */
+.light .accordion-gold {
+  border-color: rgba(30, 58, 95, 0.1) !important;
+}
+
+/* --- Animations (subtle in light mode) --- */
+.light .animate-gold-float,
+.light .animate-shimmer-gold {
+  opacity: 0.4 !important;
+}
+
+/* --- Floating Particles --- */
+.light .animate-particle-drift {
+  background-color: #1E3A5F !important;
+}
+
+/* --- Scrollbar --- */
+.light ::-webkit-scrollbar-track {
+  background: #F1F3F9;
+}
+.light ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #1E3A5F, #C41E3A) !important;
+}
+.light * {
+  scrollbar-color: #1E3A5F #F1F3F9;
+}
+
+/* --- Selection --- */
+.light ::selection {
+  background: rgba(196, 30, 58, 0.15);
+  color: #0F0F12;
+}
+
+/* --- Starfield Canvas --- */
+.light canvas {
+  opacity: 0.05 !important;
+}
+
+/* --- Hero Logo Frame --- */
+.light .hero-logo-frame {
+  border-color: rgba(30, 58, 95, 0.15) !important;
+  box-shadow: 0 0 40px rgba(30, 58, 95, 0.06), 0 0 80px rgba(196, 30, 58, 0.04) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+.light .hero-logo-frame:hover {
+  border-color: rgba(196, 30, 58, 0.3) !important;
+  box-shadow: 0 0 60px rgba(196, 30, 58, 0.1), 0 0 120px rgba(30, 58, 95, 0.08) !important;
+}
+
+/* --- Pricing Slider --- */
+.light .pricing-slider::-webkit-slider-thumb {
+  border-color: #1E3A5F !important;
+}
+.light .pricing-slider::-moz-range-thumb {
+  border-color: #1E3A5F !important;
+}
+
+/* --- Lightbox --- */
+.light .lightbox-backdrop {
+  background: rgba(15, 15, 18, 0.7) !important;
+  backdrop-filter: blur(8px) !important;
+}
+.light .lightbox-container {
+  background: #FFFFFF !important;
+  border-color: rgba(30, 58, 95, 0.12) !important;
+}
+
+/* --- Theme Toggle Button --- */
+.light .theme-toggle-btn {
+  background: rgba(30, 58, 95, 0.06) !important;
+  border-color: rgba(30, 58, 95, 0.12) !important;
+}
+.light .theme-toggle-btn:hover {
+  background: rgba(30, 58, 95, 0.1) !important;
+  border-color: rgba(196, 30, 58, 0.2) !important;
+}
+
+/* --- Ticker / Marquee --- */
+.light .ticker-fade-mask {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent) !important;
+}
+
+/* --- Trust Badges --- */
+.light .bg-\[rgba\(10\,10\,11\,0\.6\)\] {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+/* --- Tooltip --- */
+.light .bg-\[\#1A1A1F\] {
+  background-color: #1E3A5F !important;
+  color: #FFFFFF !important;
+}
+
+.light .border-l-\[\#1A1A1E\],
+.light .border-l-\[\#1A1A1F\] {
+  border-left-color: #1E3A5F !important;
+}
+
+/* --- Dot Indicators --- */
+.light .bg-\[rgba\(255\,255\,255\,0\.15\)\] {
+  background-color: rgba(30, 58, 95, 0.15) !important;
+}
+
+.light .hover\:bg-\[rgba\(255\,255\,255\,0\.3\)\]:hover {
+  background-color: rgba(30, 58, 95, 0.25) !important;
+}
+
+/* --- Checkbox/radio accents --- */
+.light .bg-\[\#D4A853\] {
+  background-color: #C41E3A !important;
+}
+
+/* --- WhatsApp / CTA buttons keep their brand colors --- */
+/* (No override needed - green/red buttons look fine in light mode) */
+
+/* --- Cosmic / Galaxy section overrides --- */
+.light .cosmic-section-overlay::before {
+  background: radial-gradient(ellipse at center, rgba(240, 244, 255, 0.3) 0%, transparent 70%) !important;
+}
+
 /* Premium scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -155,10 +559,6 @@
 ::-webkit-scrollbar-track {
   background: #0A0A0B;
   transition: background-color 0.5s ease;
-}
-
-.light ::-webkit-scrollbar-track {
-  background: #FAFAF8;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -185,9 +585,46 @@
   border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-/* Gold gradient text */
+/* Gold gradient text — CHROME METALLIC UPGRADE */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #E8C97A 0%, #D4A853 50%, #B8922F 100%);
+  background: linear-gradient(
+    135deg,
+    #FFF7E0 0%,
+    #E8C97A 12%,
+    #FFD700 25%,
+    #D4A853 38%,
+    #F5E6B8 50%,
+    #D4A853 62%,
+    #FFD700 75%,
+    #E8C97A 88%,
+    #FFF7E0 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: chromeShine 4s ease-in-out infinite;
+}
+
+@keyframes chromeShine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Chrome metallic text — static variant for headings */
+.text-gradient-chrome {
+  background: linear-gradient(
+    170deg,
+    #FFF8E8 0%,
+    #FFD700 15%,
+    #E8C97A 30%,
+    #B8922F 50%,
+    #D4A853 65%,
+    #F5E6B8 80%,
+    #FFD700 95%,
+    #FFF8E8 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -236,9 +673,73 @@
   z-index: 0;
 }
 
-/* Glow effect */
+/* Glow effect — CHROME METALLIC UPGRADE */
 .glow-gold {
-  box-shadow: 0 0 40px rgba(212, 168, 83, 0.15), 0 0 80px rgba(212, 168, 83, 0.05);
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.12),
+    0 0 40px rgba(212, 168, 83, 0.15),
+    0 0 80px rgba(184, 146, 47, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Chrome metallic glow — stronger version for hero/CTA */
+.glow-chrome {
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.18),
+    0 0 60px rgba(232, 201, 122, 0.12),
+    0 0 120px rgba(212, 168, 83, 0.06);
+}
+
+/* Chrome metallic sheen overlay */
+.chrome-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.chrome-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 248, 232, 0.08) 35%,
+    rgba(255, 215, 0, 0.15) 45%,
+    rgba(255, 248, 232, 0.08) 55%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: chromeSheenSlide 5s ease-in-out infinite;
+}
+@keyframes chromeSheenSlide {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  50% { transform: translateX(150%) skewX(-15deg); }
+  100% { transform: translateX(-150%) skewX(-15deg); }
+}
+
+/* Chrome metallic border gradient */
+.border-chrome {
+  position: relative;
+}
+.border-chrome::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #FFD700 0%,
+    #E8C97A 20%,
+    #D4A853 40%,
+    #FFF7E0 50%,
+    #D4A853 60%,
+    #E8C97A 80%,
+    #FFD700 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Shimmer animation */
@@ -394,19 +895,25 @@
   animation: particleDrift 6s ease-in-out infinite;
 }
 
-/* Glass morphism frame for hero logo */
+/* Glass morphism frame for hero logo — CHROME METALLIC */
 .hero-logo-frame {
   background: rgba(19, 19, 22, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(212, 168, 83, 0.2);
-  box-shadow: 0 0 60px rgba(212, 168, 83, 0.08), 0 0 120px rgba(212, 168, 83, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.1),
+    0 0 80px rgba(232, 201, 122, 0.06),
+    inset 0 1px 0 rgba(255, 248, 232, 0.1);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-logo-frame:hover {
-  border-color: rgba(212, 168, 83, 0.35);
-  box-shadow: 0 0 80px rgba(212, 168, 83, 0.12), 0 0 160px rgba(212, 168, 83, 0.06);
+  border-color: rgba(255, 215, 0, 0.45);
+  box-shadow:
+    0 0 60px rgba(255, 215, 0, 0.15),
+    0 0 120px rgba(232, 201, 122, 0.08),
+    inset 0 1px 0 rgba(255, 248, 232, 0.15);
 }
 
 /* Gold glow pulse behind logo */
@@ -429,22 +936,6 @@
 .ticker-vertical-fade {
   mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-}
-
-/* Light mode overrides for new hero elements */
-.light .hero-logo-frame {
-  background: rgba(255, 255, 255, 0.6);
-  border-color: rgba(184, 146, 47, 0.2);
-  box-shadow: 0 0 60px rgba(184, 146, 47, 0.06), 0 0 120px rgba(184, 146, 47, 0.03);
-}
-
-.light .hero-logo-frame:hover {
-  border-color: rgba(184, 146, 47, 0.35);
-  box-shadow: 0 0 80px rgba(184, 146, 47, 0.1), 0 0 160px rgba(184, 146, 47, 0.05);
-}
-
-.light .animate-logo-glow {
-  animation: logoGlowPulseLight 4s ease-in-out infinite;
 }
 
 @keyframes logoGlowPulseLight {
@@ -492,13 +983,20 @@
   border-radius: inherit;
   background: conic-gradient(
     from var(--angle),
-    rgba(212, 168, 83, 0.5),
-    rgba(232, 201, 122, 0.8),
-    rgba(184, 146, 47, 0.4),
-    rgba(212, 168, 83, 0.5)
+    #FFD700,
+    #FFF7E0,
+    #E8C97A,
+    #D4A853,
+    #FFD700,
+    #B8922F,
+    #D4A853,
+    #E8C97A,
+    #FFF7E0,
+    #FFD700
   );
   animation: borderRotate 4s linear infinite;
   z-index: -1;
+  filter: brightness(1.2);
 }
 
 .gold-border-animated::after {
@@ -520,9 +1018,12 @@
   animation: goldFloat 3s ease-in-out infinite;
 }
 
-/* 3. Gold text shadow glow */
+/* 3. Gold text shadow glow — CHROME METALLIC */
 .text-glow-gold {
-  text-shadow: 0 0 20px rgba(212, 168, 83, 0.3), 0 0 40px rgba(212, 168, 83, 0.1);
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.4),
+    0 0 20px rgba(232, 201, 122, 0.25),
+    0 0 40px rgba(212, 168, 83, 0.15);
 }
 
 /* 4. Premium section background with subtle gold tint */
@@ -543,7 +1044,7 @@
 }
 
 .animate-shimmer-gold {
-  background: linear-gradient(90deg, transparent 0%, rgba(212, 168, 83, 0.15) 25%, rgba(232, 201, 122, 0.25) 50%, rgba(212, 168, 83, 0.15) 75%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.1) 20%, rgba(255, 248, 232, 0.25) 40%, rgba(255, 215, 0, 0.3) 50%, rgba(255, 248, 232, 0.25) 60%, rgba(255, 215, 0, 0.1) 80%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmerGold 3s ease-in-out infinite;
 }
@@ -655,63 +1156,6 @@
 ::selection {
   background: rgba(212, 168, 83, 0.3);
   color: #F5F5F5;
-}
-
-.light ::selection {
-  background: rgba(184, 146, 47, 0.25);
-  color: #1A1A1F;
-}
-
-/* ─── Light mode overrides for custom utilities ─── */
-
-.light .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.light .glass-light {
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.light .bg-grid {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-}
-
-.light .bg-dots {
-  background-image: radial-gradient(rgba(184, 146, 47, 0.1) 1px, transparent 1px);
-}
-
-.light .glow-gold {
-  box-shadow: 0 0 40px rgba(212, 168, 83, 0.08), 0 0 80px rgba(212, 168, 83, 0.03);
-}
-
-.light .card-hover:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 30px rgba(212, 168, 83, 0.06);
-}
-
-.light .card-hover-gold:hover {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 0 0 40px rgba(212, 168, 83, 0.1);
-}
-
-.light .glass-gold {
-  background: rgba(212, 168, 83, 0.04);
-  border: 1px solid rgba(184, 146, 47, 0.12);
-}
-
-.light .noise-overlay::after,
-.light .noise-gold::after {
-  opacity: 0.015;
-}
-
-.light .gold-border-animated::after {
-  background: #FAFAF8;
 }
 
 /* ============================================
@@ -938,19 +1382,10 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 168, 83, 0.08);
 }
 
-/* Light mode hover-lift */
-.light .hover-lift:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 30px rgba(212, 168, 83, 0.06);
-}
-
 /* Smooth scrollbar everywhere */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 168, 83, 0.3) transparent;
-}
-
-.light * {
-  scrollbar-color: rgba(184, 146, 47, 0.25) transparent;
 }
 
 /* Focus visible for accessibility */
@@ -987,117 +1422,130 @@ a {
   box-shadow: 0 0 20px rgba(212, 168, 83, 0.08);
 }
 
-/* Glass morphism light mode for navbar & cards */
-.light .glass-gold-premium {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(184, 146, 47, 0.12);
-}
-
-.light .glass-gold-premium:hover {
-  border-color: rgba(184, 146, 47, 0.25);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), 0 0 40px rgba(212, 168, 83, 0.04);
-}
-
-/* Section dividers visible in light mode */
-.light .section-divider {
-  background: linear-gradient(90deg, transparent, rgba(184, 146, 47, 0.2), transparent);
-}
-
-.light .section-divider-gold {
-  background: linear-gradient(90deg, transparent 0%, rgba(184, 146, 47, 0.3) 50%, transparent 100%);
-}
-
-/* Light mode gradient text */
-.light .text-gradient-gold {
-  background: linear-gradient(135deg, #B8922F 0%, #D4A853 50%, #B8922F 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Light mode text glow */
-.light .text-glow-gold {
-  text-shadow: 0 0 20px rgba(184, 146, 47, 0.15), 0 0 40px rgba(184, 146, 47, 0.05);
-}
-
-/* Light mode counter glow */
-.light .counter-glow {
-  text-shadow: 0 0 30px rgba(184, 146, 47, 0.1);
-}
-
-/* Light mode section gold tint */
-.light .section-gold-tint {
-  background: linear-gradient(180deg, rgba(212, 168, 83, 0.02) 0%, transparent 50%, rgba(212, 168, 83, 0.015) 100%);
-}
-
-/* Light mode gold gradient backgrounds */
-.light .bg-gold-gradient-subtle {
-  background: linear-gradient(135deg, rgba(212, 168, 83, 0.03) 0%, transparent 50%, rgba(212, 168, 83, 0.02) 100%);
-}
-
-.light .bg-gold-gradient-radial {
-  background: radial-gradient(ellipse at center, rgba(212, 168, 83, 0.04) 0%, transparent 70%);
-}
-
-/* Light mode card backgrounds */
-.light .card-hover {
-  border-color: rgba(0, 0, 0, 0.06);
-}
-
-/* Light mode input gold focus */
-.light .input-gold:focus {
-  border-color: rgba(184, 146, 47, 0.4);
-  box-shadow: 0 0 0 3px rgba(184, 146, 47, 0.08);
-}
-
-/* Light mode accordion gold */
-.light .accordion-gold[data-state="open"] {
-  border-color: rgba(184, 146, 47, 0.2);
-  background: rgba(212, 168, 83, 0.03);
-}
-
-.light .accordion-gold[data-state="open"] > button {
-  color: #B8922F;
-}
-
-/* Light mode animated gold float */
-.light .animate-gold-float {
-  filter: brightness(0.7);
-}
-
-/* Light mode shimmer gold */
-.light .animate-shimmer-gold {
-  background: linear-gradient(90deg, transparent 0%, rgba(184, 146, 47, 0.1) 25%, rgba(212, 168, 83, 0.15) 50%, rgba(184, 146, 47, 0.1) 75%, transparent 100%);
-  background-size: 200% 100%;
-  animation: shimmerGold 3s ease-in-out infinite;
-}
-
-/* Light mode pulse glow */
-.light .animate-pulse-glow {
-  animation: pulseGlowLight 3s ease-in-out infinite;
-}
-
 @keyframes pulseGlowLight {
   0%, 100% { box-shadow: 0 0 20px rgba(212, 168, 83, 0.06); }
   50% { box-shadow: 0 0 40px rgba(212, 168, 83, 0.12); }
 }
 
-/* Light mode gold border animated */
-.light .gold-border-animated::before {
-  background: conic-gradient(
-    from var(--angle),
-    rgba(184, 146, 47, 0.4),
-    rgba(212, 168, 83, 0.6),
-    rgba(184, 146, 47, 0.3),
-    rgba(184, 146, 47, 0.4)
-  );
+/* ============================================
+   Task 8 — Premium Typography Utilities
+   ============================================ */
+
+/* Premium Display Headings */
+.font-display-premium {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
 }
 
-/* Light mode description text */
-.light .section-description {
-  color: rgba(26, 26, 31, 0.55);
+/* Ultra-large display text for hero */
+.text-display-hero {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+}
+
+/* Section title — large */
+.text-display-section {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+/* Body copy — refined */
+.text-body-refined {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* Accent serif for decorative text */
+.text-accent-serif {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-style: italic;
+}
+
+/* Micro label — small uppercase */
+.text-micro-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Small label */
+.text-label-sm {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Drop cap for featured content */
+.drop-cap::first-letter {
+  font-family: 'DM Serif Display', Georgia, serif;
+  float: left;
+  font-size: 3.5em;
+  line-height: 0.8;
+  padding-right: 0.12em;
+  color: #D4A853;
+  font-weight: 400;
+}
+
+/* Decorative quote marks */
+.quote-decorative::before {
+  content: '"';
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: #D4A853;
+  opacity: 0.4;
+  position: absolute;
+  top: -1rem;
+  left: -0.5rem;
+}
+
+/* Gradient text — larger variant for hero */
+.text-gradient-hero {
+  background: linear-gradient(
+    135deg,
+    #FFF7E0 0%,
+    #FFD700 20%,
+    #F5E6B8 40%,
+    #E8C97A 60%,
+    #D4A853 80%,
+    #FFF7E0 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: chromeShine 6s ease-in-out infinite;
+}
+
+/* Typewriter mono text */
+.font-mono-accent {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle text shimmer */
+.text-shimmer {
+  background: linear-gradient(110deg, #F5F5F5 40%, #D4A853 50%, #F5F5F5 60%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 3s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
 }
 
 /* Theme toggle glassmorphism */
@@ -1113,17 +1561,6 @@ a {
   background: rgba(212, 168, 83, 0.1);
   border-color: rgba(212, 168, 83, 0.35);
   box-shadow: 0 0 20px rgba(212, 168, 83, 0.1);
-}
-
-.light .theme-toggle-btn {
-  background: rgba(184, 146, 47, 0.06);
-  border-color: rgba(184, 146, 47, 0.15);
-}
-
-.light .theme-toggle-btn:hover {
-  background: rgba(184, 146, 47, 0.1);
-  border-color: rgba(184, 146, 47, 0.3);
-  box-shadow: 0 0 20px rgba(184, 146, 47, 0.08);
 }
 
 /* ============================================
@@ -1147,13 +1584,104 @@ a {
   border-radius: inherit;
   background: linear-gradient(
     135deg,
-    rgba(212, 168, 83, 0.4) 0%,
-    rgba(232, 201, 122, 0.2) 25%,
-    rgba(184, 146, 47, 0.15) 50%,
-    rgba(232, 201, 122, 0.2) 75%,
-    rgba(212, 168, 83, 0.4) 100%
+    #FFD700 0%,
+    rgba(232, 201, 122, 0.4) 25%,
+    rgba(184, 146, 47, 0.3) 50%,
+    rgba(232, 201, 122, 0.4) 75%,
+    #FFD700 100%
   );
   z-index: -1;
+  pointer-events: none;
+}
+
+/* ============================================
+   IMAGE-BACKED SECTION UTILITIES
+   ============================================ */
+
+/* Hero section with parallax background image */
+.section-bg-image {
+  position: relative;
+  overflow: hidden;
+}
+.section-bg-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.08;
+}
+.section-bg-image > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark overlay for image backgrounds */
+.section-bg-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 11, 0.85) 0%,
+    rgba(10, 10, 11, 0.6) 50%,
+    rgba(10, 10, 11, 0.85) 100%
+  );
+  z-index: 0;
+}
+
+/* Image reveal animation */
+@keyframes imageReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.animate-image-reveal {
+  animation: imageReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Image float animation */
+@keyframes imageFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(0.5deg); }
+  66% { transform: translateY(-4px) rotate(-0.5deg); }
+}
+.animate-image-float {
+  animation: imageFloat 6s ease-in-out infinite;
+}
+
+/* Chrome frame around images */
+.chrome-image-frame {
+  position: relative;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.chrome-image-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #FFD700, #E8C97A, #FFF7E0, #D4A853, #FFD700) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Background image parallax containers */
+.bg-parallax-image {
+  position: relative;
+}
+.bg-parallax-image > .bg-image-layer {
+  position: absolute;
+  inset: -20%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  filter: blur(1px);
   pointer-events: none;
 }
 
@@ -1168,27 +1696,6 @@ a {
 
 .lightbox-thumb[aria-selected="true"] {
   transform: translateY(-2px) scale(1.05);
-}
-
-/* Light mode lightbox overrides */
-.light .lightbox-image::before {
-  background: linear-gradient(
-    135deg,
-    rgba(184, 146, 47, 0.3) 0%,
-    rgba(212, 168, 83, 0.15) 25%,
-    rgba(184, 146, 47, 0.1) 50%,
-    rgba(212, 168, 83, 0.15) 75%,
-    rgba(184, 146, 47, 0.3) 100%
-  );
-}
-
-.light .lightbox-overlay {
-  background: rgba(255, 255, 255, 0.92);
-}
-
-.light .lightbox-image {
-  background: #F3F2EF;
-  border-color: rgba(184, 146, 47, 0.2);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1340,15 +1847,6 @@ a {
   animation: cookieShieldGlow 3s ease-in-out infinite;
 }
 
-/* Light mode overrides for cookie banner */
-.light .cookie-gold-noise::after {
-  opacity: 0.012;
-}
-
-.light .cookie-shield-glow {
-  animation: cookieShieldGlowLight 3s ease-in-out infinite;
-}
-
 @keyframes cookieShieldGlowLight {
   0%, 100% {
     box-shadow: 0 0 12px rgba(184, 146, 47, 0.1), 0 0 24px rgba(184, 146, 47, 0.04);
@@ -1486,40 +1984,9 @@ a {
   border-color: rgba(212, 168, 83, 0.2);
 }
 
-/* Light mode cosmic overrides */
-.light .cosmic-section-overlay::before {
-  background:
-    radial-gradient(ellipse at 15% 25%, rgba(60, 20, 80, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 75%, rgba(20, 40, 80, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(184, 146, 47, 0.02) 0%, transparent 40%);
-}
+/* ============================================
+   Light mode — warm & colourful enhancements
+   ============================================ */
 
-.light .cosmic-glow-purple {
-  background: radial-gradient(ellipse at 20% 50%, rgba(60, 20, 80, 0.04) 0%, transparent 60%);
-}
+/* Override dark backgrounds used throughout the site */
 
-.light .cosmic-glow-blue {
-  background: radial-gradient(ellipse at 80% 30%, rgba(20, 40, 80, 0.03) 0%, transparent 60%);
-}
-
-.light .cosmic-glow-gold {
-  background: radial-gradient(ellipse at 50% 80%, rgba(100, 70, 20, 0.03) 0%, transparent 60%);
-}
-
-.light .cosmic-divider {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(60, 20, 80, 0.1) 20%,
-    rgba(184, 146, 47, 0.15) 50%,
-    rgba(20, 40, 80, 0.1) 80%,
-    transparent 100%
-  );
-}
-
-.light .galaxy-bg {
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(60, 20, 80, 0.03) 0%, transparent 40%),
-    radial-gradient(ellipse at 70% 80%, rgba(20, 50, 90, 0.02) 0%, transparent 40%),
-    radial-gradient(ellipse at 50% 50%, rgba(184, 146, 47, 0.02) 0%, transparent 30%);
-}
