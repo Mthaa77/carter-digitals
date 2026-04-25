@@ -11,6 +11,9 @@ import {
   Server,
   FileText,
   CircleDollarSign,
+  Shield,
+  Eye,
+  Gift,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,8 +27,33 @@ import {
 } from "@/components/shared/AnimatedSection";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ParallaxSection } from "@/components/shared/ParallaxSection";
+import { TiltCard } from "@/components/shared/TiltCard";
 import { useNavigation } from "@/lib/navigation";
 import CosmicDecorations from "@/components/shared/CosmicDecorations";
+
+/* ────────────────── Color accent helpers ──────────────────── */
+const tierAccents = {
+  sme: [
+    { name: "sapphire", border: "rgba(30,58,95,0.35)", bg: "rgba(30,58,95,0.08)", iconBg: "rgba(30,58,95,0.12)", iconBorder: "rgba(30,58,95,0.2)", text: "#4A7AB5", glow: "rgba(30,58,95,0.15)", cta: "from-[#1E3A5F] to-[#2A5580]" },
+    { name: "gold", border: "rgba(212,168,83,0.3)", bg: "rgba(212,168,83,0.08)", iconBg: "rgba(212,168,83,0.12)", iconBorder: "rgba(212,168,83,0.2)", text: "#D4A853", glow: "rgba(212,168,83,0.15)", cta: "from-[#D4A853] to-[#B8922F]" },
+    { name: "emerald", border: "rgba(16,185,129,0.3)", bg: "rgba(16,185,129,0.08)", iconBg: "rgba(16,185,129,0.12)", iconBorder: "rgba(16,185,129,0.2)", text: "#34D399", glow: "rgba(16,185,129,0.15)", cta: "from-[#10B981] to-[#059669]" },
+  ],
+  school: [
+    { name: "emerald", border: "rgba(16,185,129,0.35)", bg: "rgba(16,185,129,0.08)", iconBg: "rgba(16,185,129,0.12)", iconBorder: "rgba(16,185,129,0.2)", text: "#34D399", glow: "rgba(16,185,129,0.15)", cta: "from-[#10B981] to-[#059669]" },
+    { name: "gold", border: "rgba(212,168,83,0.3)", bg: "rgba(212,168,83,0.08)", iconBg: "rgba(212,168,83,0.12)", iconBorder: "rgba(212,168,83,0.2)", text: "#D4A853", glow: "rgba(212,168,83,0.15)", cta: "from-[#D4A853] to-[#B8922F]" },
+    { name: "purple", border: "rgba(139,92,246,0.3)", bg: "rgba(139,92,246,0.08)", iconBg: "rgba(139,92,246,0.12)", iconBorder: "rgba(139,92,246,0.2)", text: "#A78BFA", glow: "rgba(139,92,246,0.15)", cta: "from-[#8B5CF6] to-[#7C3AED]" },
+  ],
+} as const;
+
+type AccentKey = (typeof tierAccents)[keyof typeof tierAccents][number];
+
+/* Add-on color mapping */
+const addonColors: Record<string, { iconBg: string; iconBorder: string; text: string; hoverBorder: string }> = {
+  bot: { iconBg: "rgba(139,92,246,0.12)", iconBorder: "rgba(139,92,246,0.2)", text: "#A78BFA", hoverBorder: "rgba(139,92,246,0.4)" },
+  search: { iconBg: "rgba(16,185,129,0.12)", iconBorder: "rgba(16,185,129,0.2)", text: "#34D399", hoverBorder: "rgba(16,185,129,0.4)" },
+  server: { iconBg: "rgba(30,58,95,0.12)", iconBorder: "rgba(30,58,95,0.2)", text: "#4A7AB5", hoverBorder: "rgba(30,58,95,0.4)" },
+  filetext: { iconBg: "rgba(196,30,58,0.12)", iconBorder: "rgba(196,30,58,0.2)", text: "#EF4444", hoverBorder: "rgba(196,30,58,0.4)" },
+};
 
 /* ──────────────────────── SME packages ─────────────────────────── */
 const smePackages = [
@@ -129,6 +157,7 @@ const schoolPackages = [
 const addons = [
   {
     icon: Bot,
+    iconKey: "bot",
     title: "AI Chatbot & WhatsApp Automation",
     onceOff: "R4,999",
     monthly: "R499/mo",
@@ -137,6 +166,7 @@ const addons = [
   },
   {
     icon: Search,
+    iconKey: "search",
     title: "SEO & Google Setup",
     onceOff: "R999",
     monthly: null,
@@ -145,6 +175,7 @@ const addons = [
   },
   {
     icon: Server,
+    iconKey: "server",
     title: "Hosting & Domain Management",
     onceOff: null,
     monthly: "R1,990/yr | R199/mo",
@@ -153,6 +184,7 @@ const addons = [
   },
   {
     icon: FileText,
+    iconKey: "filetext",
     title: "Company Profile & Pitch Deck",
     onceOff: "R1,999",
     monthly: null,
@@ -174,6 +206,8 @@ const packagesFaqItems = [
 /* ──────────────────── Pricing card component ───────────────────── */
 function PricingCard({
   pkg,
+  tierIndex,
+  type,
 }: {
   pkg: {
     name: string;
@@ -183,87 +217,125 @@ function PricingCard({
     popular: boolean;
     features: string[];
   };
+  tierIndex: number;
+  type: "sme" | "school";
 }) {
   const { navigate } = useNavigation();
+  const accent = tierAccents[type][tierIndex] as AccentKey;
 
   return (
-    <div
-      className={`relative h-full rounded-2xl ${
-        pkg.popular
-          ? "bg-card border-2 border-[rgba(212,168,83,0.3)] glow-gold md:-mt-4 md:mb-[-16px] z-10 gold-border-animated"
-          : "bg-card border border-border"
-      } p-6 md:p-8 glass-gold card-hover-gold flex flex-col card-idle-pulse`}
-    >
-      {/* Popular badge */}
-      {pkg.popular && (
-        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <Badge className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] text-[#0A0A0B] font-semibold text-xs px-4 py-1 border-0 shadow-lg shadow-[rgba(212,168,83,0.25)]">
-            Most Popular
-          </Badge>
+    <TiltCard className="h-full" tiltStrength={3}>
+      {/* Subtle gradient glow behind card */}
+      <div className="absolute -inset-4 rounded-3xl blur-xl opacity-40 pointer-events-none" style={{ background: `radial-gradient(ellipse at center, ${accent.glow}, transparent 70%)` }} />
+
+      <div
+        className={`relative h-full rounded-2xl overflow-hidden ${
+          pkg.popular
+            ? `bg-card border-2 glow-gold md:-mt-4 md:mb-[-16px] z-10 gold-border-animated`
+            : `bg-card border border-border`
+        } p-6 md:p-8 glass-gold card-hover-gold flex flex-col card-idle-pulse card-shine-sweep`}
+        style={!pkg.popular ? { borderColor: accent.border } : undefined}
+      >
+        {/* Colored top accent line */}
+        {!pkg.popular && (
+          <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(to right, transparent, ${accent.text}, transparent)` }} />
+        )}
+
+        {/* Best Value ribbon on middle tier */}
+        {pkg.popular && (
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
+            <Badge className="bg-gradient-to-r from-[#10B981] to-[#059669] text-white font-semibold text-xs px-4 py-1 border-0 shadow-lg shadow-[rgba(16,185,129,0.3)]">
+              ★ Best Value
+            </Badge>
+          </div>
+        )}
+
+        {/* Package name + colored icon badge */}
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-1">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: accent.iconBg, border: `1px solid ${accent.iconBorder}` }}
+            >
+              <Shield className="w-4 h-4" style={{ color: accent.text }} />
+            </div>
+            <h3 className="text-xl font-bold font-['Space_Grotesk']" style={{ color: accent.text }}>
+              {pkg.name}
+            </h3>
+          </div>
+          <p className="text-sm text-muted-foreground/60 italic ml-11">
+            &ldquo;{pkg.tagline}&rdquo;
+          </p>
         </div>
-      )}
 
-      {/* Package name */}
-      <div className="mb-6">
-        <h3
-          className="text-xl font-bold text-gradient-gold mb-1 font-['Space_Grotesk']"
-        >
-          {pkg.name}
-        </h3>
-        <p className="text-sm text-muted-foreground/60 italic">
-          &ldquo;{pkg.tagline}&rdquo;
-        </p>
-      </div>
+        {/* Price */}
+        <div className="mb-6">
+          <span className="text-3xl md:text-4xl font-bold text-foreground font-display">
+            {pkg.price}
+          </span>
+          <span className="text-sm text-muted-foreground/60 ml-1">
+            once-off
+          </span>
+          <div className="mt-1">
+            <span className="text-xs text-muted-foreground/50">
+              + {pkg.retainer} optional retainer
+            </span>
+          </div>
+        </div>
 
-      {/* Price */}
-      <div className="mb-6">
-        <span
-          className="text-3xl md:text-4xl font-bold text-foreground font-display"
-        >
-          {pkg.price}
-        </span>
-        <span className="text-sm text-muted-foreground/60 ml-1">
-          once-off
-        </span>
-        <div className="mt-1">
-          <span className="text-xs text-muted-foreground/50">
-            + {pkg.retainer} optional retainer
+        <Separator className="bg-[rgba(255,255,255,0.06)] mb-6" />
+
+        {/* Feature count badge */}
+        <div className="mb-4">
+          <span
+            className="text-xs font-medium px-2.5 py-1 rounded-full"
+            style={{ backgroundColor: accent.iconBg, color: accent.text, border: `1px solid ${accent.iconBorder}` }}
+          >
+            {pkg.features.length} features
           </span>
         </div>
+
+        {/* Features */}
+        <ul className="space-y-3 mb-8 flex-1">
+          {pkg.features.map((feature) => (
+            <li
+              key={feature}
+              className="flex items-start gap-3 text-sm text-foreground/60"
+            >
+              <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" style={{ color: accent.text }} />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <Button
+          onClick={() => {
+            navigate("contact");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          variant={pkg.popular ? "default" : "outline"}
+          className={`w-full font-semibold py-5 rounded-xl transition-all duration-300 group ${
+            pkg.popular
+              ? "bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] shadow-lg shadow-[rgba(212,168,83,0.2)] hover:shadow-[rgba(212,168,83,0.3)]"
+              : "bg-transparent border-[rgba(255,255,255,0.12)] bg-gradient-to-r hover:from-[rgba(255,255,255,0.08)] hover:to-[rgba(255,255,255,0.04)] text-foreground"
+          }`}
+          style={!pkg.popular ? { border: `1px solid ${accent.border}` } as React.CSSProperties : undefined}
+        >
+          {pkg.popular ? (
+            <>
+              Get Started
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </>
+          ) : (
+            <>
+              Get Started
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </>
+          )}
+        </Button>
       </div>
-
-      <Separator className="bg-[rgba(255,255,255,0.06)] mb-6" />
-
-      {/* Features */}
-      <ul className="space-y-3 mb-8 flex-1">
-        {pkg.features.map((feature) => (
-          <li
-            key={feature}
-            className="flex items-start gap-3 text-sm text-foreground/60"
-          >
-            <CheckCircle className="w-4 h-4 text-[#D4A853] shrink-0 mt-0.5" />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* CTA */}
-      <Button
-        onClick={() => {
-          navigate("contact");
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-        variant={pkg.popular ? "default" : "outline"}
-        className={`w-full font-semibold py-5 rounded-xl transition-all duration-300 group ${
-          pkg.popular
-            ? "bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] shadow-lg shadow-[rgba(212,168,83,0.2)] hover:shadow-[rgba(212,168,83,0.3)]"
-            : "border-[rgba(255,255,255,0.12)] bg-transparent hover:bg-white/5 text-foreground"
-        }`}
-      >
-        Get Started
-        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-      </Button>
-    </div>
+    </TiltCard>
   );
 }
 
@@ -282,12 +354,23 @@ export default function PackagesPage() {
     <main className="relative overflow-hidden">
       {/* ───────────────────── 1. PAGE HERO ───────────────────── */}
       <section className="relative py-28 md:py-40 bg-background">
-        {/* Background */}
+        {/* Aurora mesh background */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.4]" />
+
+        {/* Background grid */}
         <div className="absolute inset-0 bg-grid pattern-grid-animated" />
 
-        {/* ── Parallax background layers ── */}
-        {/* Large gold glow orb — speed 0.15 */}
+        {/* Multi-color gradient orbs */}
         <ParallaxSection speed={0.15} direction="up" className="absolute inset-0 pointer-events-none">
+          {/* Sapphire orb */}
+          <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[120px]" />
+          {/* Coral orb */}
+          <div className="absolute top-[15%] right-[15%] w-[350px] h-[350px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[110px]" />
+          {/* Emerald orb */}
+          <div className="absolute bottom-[25%] left-[20%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px]" />
+          {/* Purple orb */}
+          <div className="absolute bottom-[20%] right-[10%] w-[380px] h-[380px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[120px]" />
+          {/* Large gold orb — existing */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px]" />
           <div className="absolute top-[55%] left-[15%] w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px]" />
         </ParallaxSection>
@@ -297,22 +380,27 @@ export default function PackagesPage() {
           <motion.div
             animate={{ rotate: 45 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-lg border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-lg border border-[rgba(30,58,95,0.12)] bg-[rgba(30,58,95,0.03)]"
           />
           <motion.div
             animate={{ rotate: -30 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[25%] right-[8%] w-6 h-6 rounded-full border border-[rgba(212,168,83,0.08)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute top-[25%] right-[8%] w-6 h-6 rounded-full border border-[rgba(196,30,58,0.1)] bg-[rgba(196,30,58,0.02)]"
           />
           <motion.div
             animate={{ rotate: 60 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[30%] left-[22%] w-10 h-10 rounded-sm border border-[rgba(212,168,83,0.06)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute bottom-[30%] left-[22%] w-10 h-10 rounded-sm border border-[rgba(16,185,129,0.08)] bg-[rgba(16,185,129,0.02)]"
           />
           <motion.div
             animate={{ rotate: -45 }}
             transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[20%] right-[12%] w-5 h-5 rounded border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute bottom-[20%] right-[12%] w-5 h-5 rounded border border-[rgba(139,92,246,0.1)] bg-[rgba(139,92,246,0.03)]"
+          />
+          <motion.div
+            animate={{ rotate: 30 }}
+            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[45%] left-[75%] w-7 h-7 rounded-lg border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
           />
         </ParallaxSection>
 
@@ -323,7 +411,7 @@ export default function PackagesPage() {
 
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(212,168,83,0.03)] via-transparent to-[rgba(212,168,83,0.02)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(30,58,95,0.02)] via-[rgba(212,168,83,0.02)] to-[rgba(139,92,246,0.02)]" />
 
         {/* Content with subtle parallax — speed 0.03 */}
         <ParallaxSection speed={0.03} direction="up">
@@ -338,17 +426,13 @@ export default function PackagesPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2} direction="up">
-              <h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display"
-              >
-                <span className="text-gradient-gold">Packages & Pricing</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display text-shadow-hero">
+                <span className="text-gradient-hero">Packages & Pricing</span>
               </h1>
             </AnimatedSection>
 
             <AnimatedSection delay={0.35} direction="up">
-              <p
-                className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.65)] font-medium font-display"
-              >
+              <p className="mt-4 text-xl md:text-2xl text-[rgba(245,245,245,0.65)] font-medium font-display">
                 Pick Your Package. Go Live in 5-7 Days.
               </p>
             </AnimatedSection>
@@ -367,13 +451,16 @@ export default function PackagesPage() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0A0A0B] via-[rgba(10,10,11,0.6)] to-transparent pointer-events-none" />
       </section>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
       {/* ────────────────── 2. SME PACKAGES TABS ─────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
         <CosmicDecorations variant="nebula" intensity="subtle" />
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[10%] left-[5%] w-[300px] h-[300px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[10%] right-[5%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -387,17 +474,20 @@ export default function PackagesPage() {
           <AnimatedSection delay={0.2} direction="up">
             <Tabs defaultValue="sme" className="w-full">
               <div className="flex justify-center mb-12">
-                <TabsList className="bg-[rgba(255,255,255,0.04)] border border-border rounded-xl p-1 h-auto">
+                <TabsList className="bg-[rgba(255,255,255,0.04)] border border-border rounded-xl p-1 h-auto relative">
+                  {/* Multi-color gradient underline indicator (visual accent) */}
                   <TabsTrigger
                     value="sme"
-                    className="data-[state=active]:bg-[rgba(212,168,83,0.15)] data-[state=active]:text-[#D4A853] text-muted-foreground px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                    className="data-[state=active]:bg-[rgba(30,58,95,0.15)] data-[state=active]:text-[#4A7AB5] text-muted-foreground hover:text-[#4A7AB5] px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative z-10"
                   >
+                    <Shield className="w-4 h-4 mr-1.5 opacity-70" />
                     Small Business
                   </TabsTrigger>
                   <TabsTrigger
                     value="school"
-                    className="data-[state=active]:bg-[rgba(212,168,83,0.15)] data-[state=active]:text-[#D4A853] text-muted-foreground px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                    className="data-[state=active]:bg-[rgba(16,185,129,0.15)] data-[state=active]:text-[#34D399] text-muted-foreground hover:text-[#34D399] px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 relative z-10"
                   >
+                    <Sparkles className="w-4 h-4 mr-1.5 opacity-70" />
                     School
                   </TabsTrigger>
                 </TabsList>
@@ -410,9 +500,9 @@ export default function PackagesPage() {
                   staggerDelay={0.12}
                   once={false}
                 >
-                  {smePackages.map((pkg) => (
+                  {smePackages.map((pkg, idx) => (
                     <StaggerItem key={pkg.name}>
-                      <PricingCard pkg={pkg} />
+                      <PricingCard pkg={pkg} tierIndex={idx} type="sme" />
                     </StaggerItem>
                   ))}
                 </StaggerContainer>
@@ -425,9 +515,9 @@ export default function PackagesPage() {
                   staggerDelay={0.12}
                   once={false}
                 >
-                  {schoolPackages.map((pkg) => (
+                  {schoolPackages.map((pkg, idx) => (
                     <StaggerItem key={pkg.name}>
-                      <PricingCard pkg={pkg} />
+                      <PricingCard pkg={pkg} tierIndex={idx} type="school" />
                     </StaggerItem>
                   ))}
                 </StaggerContainer>
@@ -437,12 +527,18 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
       {/* ────────────────── 3. ADD-ON SERVICES ──────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[10%] right-[10%] w-[350px] h-[350px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[20%] left-[5%] w-[250px] h-[250px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[15%] w-[200px] h-[200px] bg-[rgba(196,30,58,0.025)] rounded-full blur-[80px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Extras"
             title="Bolt-On"
@@ -452,51 +548,130 @@ export default function PackagesPage() {
           />
 
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" staggerDelay={0.1}>
-            {addons.map((addon) => (
-              <StaggerItem key={addon.title}>
-                <div className="group relative h-full rounded-2xl bg-[rgba(212,168,83,0.02)] border border-[rgba(212,168,83,0.08)] backdrop-blur-sm p-6 card-hover-gold">
-                  {/* Gold top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {addons.map((addon) => {
+              const colors = addonColors[addon.iconKey] || addonColors.server;
+              return (
+                <StaggerItem key={addon.title}>
+                  <div className="group relative h-full rounded-2xl bg-[rgba(212,168,83,0.02)] border border-[rgba(212,168,83,0.08)] backdrop-blur-sm p-6 card-hover-gold card-shine-sweep overflow-hidden">
+                    {/* Colored left border on hover */}
+                    <div className="absolute top-0 left-0 w-[3px] h-full rounded-l-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundColor: colors.text }} />
 
-                  <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 shrink-0 rounded-xl bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
-                      <addon.icon className="w-6 h-6 text-[#D4A853]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3
-                        className="text-base font-semibold text-foreground mb-1.5 font-display"
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(to right, transparent, ${colors.text}, transparent)` }} />
+
+                    <div className="flex items-start gap-5">
+                      <div
+                        className="w-12 h-12 shrink-0 rounded-xl flex items-center justify-center transition-colors duration-300"
+                        style={{ backgroundColor: colors.iconBg, border: `1px solid ${colors.iconBorder}` }}
                       >
-                        {addon.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                        {addon.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {addon.onceOff && (
-                          <Badge className="bg-[rgba(212,168,83,0.1)] text-[#D4A853] border-[rgba(212,168,83,0.15)] text-xs font-medium px-2.5 py-0.5">
-                            {addon.onceOff}
-                          </Badge>
-                        )}
-                        {addon.monthly && (
-                          <Badge className="bg-[rgba(255,255,255,0.05)] text-foreground/60 border-[rgba(255,255,255,0.08)] text-xs font-medium px-2.5 py-0.5">
-                            {addon.monthly}
-                          </Badge>
-                        )}
+                        <addon.icon className="w-6 h-6" style={{ color: colors.text }} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base font-semibold text-foreground mb-1.5 font-display">
+                          {addon.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                          {addon.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {addon.onceOff && (
+                            <Badge className="bg-[rgba(212,168,83,0.1)] text-[#D4A853] border-[rgba(212,168,83,0.15)] text-xs font-medium px-2.5 py-0.5">
+                              {addon.onceOff}
+                            </Badge>
+                          )}
+                          {addon.monthly && (
+                            <Badge className="bg-[rgba(255,255,255,0.05)] text-foreground/60 border-[rgba(255,255,255,0.08)] text-xs font-medium px-2.5 py-0.5">
+                              {addon.monthly}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
-      {/* ──────────────────── 4. FAQ SECTION ───────────────────── */}
+      {/* ──────────── 4. WHY OUR PRICING IS DIFFERENT ───────────── */}
+      <section className="relative py-20 md:py-28 bg-background section-gold-tint">
+        <CosmicDecorations variant="stardust" intensity="subtle" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[15%] left-[8%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[20%] right-[10%] w-[280px] h-[280px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-[15%] left-[30%] w-[320px] h-[320px] bg-[rgba(196,30,58,0.025)] rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="Our Promise"
+            title="Why Our Pricing is"
+            titleHighlight="Different"
+            description="We believe pricing should be clear, fair, and built around your success — not our profit margins."
+            align="center"
+          />
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.1}>
+            {/* No Lock-In Contracts — Emerald */}
+            <StaggerItem>
+              <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep overflow-hidden transition-all duration-300 hover:border-[rgba(16,185,129,0.3)]">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.2)" }}>
+                  <Shield className="w-6 h-6 text-[#34D399]" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2 font-display">
+                  No Lock-In Contracts
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  You own your website 100%. Full source code handover, hosting credentials, and domain ownership. Walk away anytime — no penalties, no strings attached.
+                </p>
+              </div>
+            </StaggerItem>
+
+            {/* Transparent Pricing — Sapphire */}
+            <StaggerItem>
+              <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep overflow-hidden transition-all duration-300 hover:border-[rgba(30,58,95,0.35)]">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(30,58,95,0.12)", border: "1px solid rgba(30,58,95,0.2)" }}>
+                  <Eye className="w-6 h-6 text-[#4A7AB5]" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2 font-display">
+                  Transparent Pricing
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  What you see is what you pay. No hidden setup fees, no surprise add-ons, no &ldquo;basic&rdquo; tier traps. Every feature is listed clearly before you commit.
+                </p>
+              </div>
+            </StaggerItem>
+
+            {/* Free Year 1 Hosting — Coral */}
+            <StaggerItem>
+              <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep overflow-hidden transition-all duration-300 hover:border-[rgba(196,30,58,0.3)]">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(196,30,58,0.12)", border: "1px solid rgba(196,30,58,0.2)" }}>
+                  <Gift className="w-6 h-6 text-[#EF4444]" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2 font-display">
+                  Free Year 1 Hosting
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Every package includes free Year 1 hosting, domain registration, SSL, and priority support on Vercel&apos;s enterprise-grade global CDN. Zero hosting costs in year one.
+                </p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      <div className="h-px section-divider-rainbow" />
+
+      {/* ──────────────────── 5. FAQ SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
         <CosmicDecorations variant="aurora" intensity="subtle" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[10%] left-[15%] w-[300px] h-[300px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[50%] right-[10%] w-[250px] h-[250px] bg-[rgba(139,92,246,0.025)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-[15%] left-[40%] w-[280px] h-[280px] bg-[rgba(16,185,129,0.025)] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -509,41 +684,48 @@ export default function PackagesPage() {
           />
 
           <AnimatedSection delay={0.15} direction="up">
-            <div className="gold-border-animated rounded-2xl">
+            <div className="gold-border-animated rounded-2xl card-shine-sweep">
+              {/* Colored accent lines */}
+              <div className="absolute top-0 left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-transparent via-[#1E3A5F] to-transparent rounded-full opacity-60" />
               <FaqSearch items={packagesFaqItems} />
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
-      {/* ──────────────────── 5. CTA SECTION ───────────────────── */}
+      {/* ──────────────────── 6. CTA SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Aurora mesh background at 30% */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.3] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="relative overflow-hidden rounded-3xl gold-border-animated">
               {/* Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(19,19,22,0.95)] to-[rgba(212,168,83,0.04)]" />
               <div className="absolute inset-0 bg-dots opacity-40" />
 
-              {/* Gold glow orbs */}
+              {/* Multi-color glow orbs */}
               <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-[rgba(212,168,83,0.08)] rounded-full blur-[140px] pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute top-[10%] right-[30%] w-[250px] h-[250px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[90px] pointer-events-none" />
+              <div className="absolute bottom-[10%] left-[20%] w-[200px] h-[200px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[80px] pointer-events-none" />
 
-              {/* Floating gold dots */}
+              {/* Multi-color floating dots */}
               <div className="absolute top-8 left-8 w-2 h-2 rounded-full bg-[rgba(212,168,83,0.3)] animate-gold-float" />
-              <div className="absolute top-1/2 left-[15%] w-1.5 h-1.5 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "1s" }} />
-              <div className="absolute bottom-12 right-12 w-2 h-2 rounded-full bg-[rgba(212,168,83,0.25)] animate-gold-float" style={{ animationDelay: "0.5s" }} />
-              <div className="absolute top-8 right-[20%] w-1.5 h-1.5 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "1.5s" }} />
-              <div className="absolute bottom-1/4 left-[25%] w-1 h-1 rounded-full bg-[rgba(212,168,83,0.15)] animate-gold-float" style={{ animationDelay: "2s" }} />
+              <div className="absolute top-1/2 left-[15%] w-1.5 h-1.5 rounded-full bg-[rgba(16,185,129,0.25)] animate-gold-float" style={{ animationDelay: "1s" }} />
+              <div className="absolute bottom-12 right-12 w-2 h-2 rounded-full bg-[rgba(139,92,246,0.25)] animate-gold-float" style={{ animationDelay: "0.5s" }} />
+              <div className="absolute top-8 right-[20%] w-1.5 h-1.5 rounded-full bg-[rgba(30,58,95,0.3)] animate-gold-float" style={{ animationDelay: "1.5s" }} />
+              <div className="absolute bottom-1/4 left-[25%] w-1 h-1 rounded-full bg-[rgba(196,30,58,0.2)] animate-gold-float" style={{ animationDelay: "2s" }} />
               <div className="absolute top-[30%] right-[10%] w-2 h-2 rounded-full bg-[rgba(212,168,83,0.2)] animate-gold-float" style={{ animationDelay: "0.8s" }} />
+              <div className="absolute top-[60%] right-[35%] w-1.5 h-1.5 rounded-full bg-[rgba(16,185,129,0.2)] animate-gold-float" style={{ animationDelay: "2.5s" }} />
+              <div className="absolute bottom-[40%] left-[8%] w-1 h-1 rounded-full bg-[rgba(139,92,246,0.2)] animate-gold-float" style={{ animationDelay: "1.8s" }} />
 
               <div className="relative z-10 px-6 py-14 md:px-16 md:py-20 lg:px-24 lg:py-24 text-center">
-                <h2
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight font-display"
-                >
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight font-display text-shadow-section">
                   Ready to Get Started?
                 </h2>
 

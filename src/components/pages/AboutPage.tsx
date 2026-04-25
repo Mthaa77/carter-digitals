@@ -50,6 +50,48 @@ import { TiltCard } from "@/components/shared/TiltCard";
 import { useNavigation } from "@/lib/navigation";
 import CosmicDecorations from "@/components/shared/CosmicDecorations";
 
+/* ──────────────── Multi-color accent palette ───────────────── */
+const colorAccents = {
+  gold: { bg: "rgba(212,168,83,0.X)", text: "#D4A853", border: "rgba(212,168,83,0.15)" },
+  sapphire: { bg: "rgba(30,58,95,0.X)", text: "#1E3A5F", border: "rgba(30,58,95,0.15)" },
+  coral: { bg: "rgba(196,30,58,0.X)", text: "#C41E3A", border: "rgba(196,30,58,0.15)" },
+  emerald: { bg: "rgba(16,185,129,0.X)", text: "#10B981", border: "rgba(16,185,129,0.15)" },
+  purple: { bg: "rgba(139,92,246,0.X)", text: "#8B5CF6", border: "rgba(139,92,246,0.15)" },
+};
+
+/* Value card color mapping */
+const valueCardColors = [
+  { iconBg: "rgba(16,185,129,0.1)", iconBorder: "rgba(16,185,129,0.15)", iconHoverBg: "rgba(16,185,129,0.15)", iconColor: "#10B981", badge: "emerald", hoverBorder: "rgba(16,185,129,0.25)" },
+  { iconBg: "rgba(30,58,95,0.1)", iconBorder: "rgba(30,58,95,0.15)", iconHoverBg: "rgba(30,58,95,0.15)", iconColor: "#1E3A5F", badge: "sapphire", hoverBorder: "rgba(30,58,95,0.25)" },
+  { iconBg: "rgba(196,30,58,0.1)", iconBorder: "rgba(196,30,58,0.15)", iconHoverBg: "rgba(196,30,58,0.15)", iconColor: "#C41E3A", badge: "coral", hoverBorder: "rgba(196,30,58,0.25)" },
+  { iconBg: "rgba(139,92,246,0.1)", iconBorder: "rgba(139,92,246,0.15)", iconHoverBg: "rgba(139,92,246,0.15)", iconColor: "#8B5CF6", badge: "purple", hoverBorder: "rgba(139,92,246,0.25)" },
+];
+
+/* Team stat card colors */
+const teamStatColors = [
+  { iconBg: "rgba(16,185,129,0.1)", iconColor: "#10B981" },
+  { iconBg: "rgba(30,58,95,0.1)", iconColor: "#1E3A5F" },
+  { iconBg: "rgba(139,92,246,0.1)", iconColor: "#8B5CF6" },
+];
+
+/* Milestone year badge colors (cycling) */
+const milestoneBadgeColors = [
+  { bg: "rgba(212,168,83,0.1)", text: "#D4A853", dotBorder: "#D4A853", dotGlow: "rgba(212,168,83,0.3)", iconBg: "rgba(212,168,83,0.1)", iconBorder: "rgba(212,168,83,0.15)", iconColor: "#D4A853", iconHoverBg: "rgba(212,168,83,0.15)", hoverBorder: "rgba(212,168,83,0.25)" },
+  { bg: "rgba(30,58,95,0.1)", text: "#1E3A5F", dotBorder: "#1E3A5F", dotGlow: "rgba(30,58,95,0.3)", iconBg: "rgba(30,58,95,0.1)", iconBorder: "rgba(30,58,95,0.15)", iconColor: "#1E3A5F", iconHoverBg: "rgba(30,58,95,0.15)", hoverBorder: "rgba(30,58,95,0.25)" },
+  { bg: "rgba(16,185,129,0.1)", text: "#10B981", dotBorder: "#10B981", dotGlow: "rgba(16,185,129,0.3)", iconBg: "rgba(16,185,129,0.1)", iconBorder: "rgba(16,185,129,0.15)", iconColor: "#10B981", iconHoverBg: "rgba(16,185,129,0.15)", hoverBorder: "rgba(16,185,129,0.25)" },
+  { bg: "rgba(196,30,58,0.1)", text: "#C41E3A", dotBorder: "#C41E3A", dotGlow: "rgba(196,30,58,0.3)", iconBg: "rgba(196,30,58,0.1)", iconBorder: "rgba(196,30,58,0.15)", iconColor: "#C41E3A", iconHoverBg: "rgba(196,30,58,0.15)", hoverBorder: "rgba(196,30,58,0.25)" },
+  { bg: "rgba(139,92,246,0.1)", text: "#8B5CF6", dotBorder: "#8B5CF6", dotGlow: "rgba(139,92,246,0.3)", iconBg: "rgba(139,92,246,0.1)", iconBorder: "rgba(139,92,246,0.15)", iconColor: "#8B5CF6", iconHoverBg: "rgba(139,92,246,0.15)", hoverBorder: "rgba(139,92,246,0.25)" },
+  { bg: "rgba(212,168,83,0.1)", text: "#D4A853", dotBorder: "#D4A853", dotGlow: "rgba(212,168,83,0.3)", iconBg: "rgba(212,168,83,0.1)", iconBorder: "rgba(212,168,83,0.15)", iconColor: "#D4A853", iconHoverBg: "rgba(212,168,83,0.15)", hoverBorder: "rgba(212,168,83,0.25)" },
+];
+
+/* Capability cards data */
+const capabilities = [
+  { icon: Code, title: "Full-Stack Development", description: "End-to-end web applications with modern frameworks and production-grade architecture.", color: { iconBg: "rgba(30,58,95,0.1)", iconBorder: "rgba(30,58,95,0.15)", iconColor: "#1E3A5F", hoverBorder: "rgba(30,58,95,0.25)" } },
+  { icon: Cloud, title: "Cloud Architecture", description: "Scalable infrastructure on GCP with enterprise-grade reliability and performance.", color: { iconBg: "rgba(16,185,129,0.1)", iconBorder: "rgba(16,185,129,0.15)", iconColor: "#10B981", hoverBorder: "rgba(16,185,129,0.25)" } },
+  { icon: Cpu, title: "AI Integration", description: "Intelligent automation, chatbots, and AI-powered analytics for modern businesses.", color: { iconBg: "rgba(139,92,246,0.1)", iconBorder: "rgba(139,92,246,0.15)", iconColor: "#8B5CF6", hoverBorder: "rgba(139,92,246,0.25)" } },
+  { icon: Rocket, title: "Rapid Delivery", description: "5-7 day turnaround without sacrificing quality. Built fast, built right.", color: { iconBg: "rgba(196,30,58,0.1)", iconBorder: "rgba(196,30,58,0.15)", iconColor: "#C41E3A", hoverBorder: "rgba(196,30,58,0.25)" } },
+];
+
 /* ──────────────────────── value cards data ─────────────────────── */
 const values = [
   {
@@ -165,14 +207,49 @@ export default function AboutPage() {
     <main className="relative overflow-hidden">
       {/* ───────────────────── 1. PAGE HERO ───────────────────── */}
       <section className="relative py-24 md:py-36 bg-background">
+        {/* Aurora mesh background layer */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.4]" />
+
         {/* Background grid */}
         <div className="absolute inset-0 bg-grid pattern-grid-animated" />
+
+        {/* ── Multi-color animated gradient orbs ── */}
+        <ParallaxSection speed={0.12} direction="up" className="absolute inset-0 pointer-events-none">
+          <motion.div
+            animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[15%] left-[8%] w-[400px] h-[400px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[100px]"
+          />
+          <motion.div
+            animate={{ y: [0, 15, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-[20%] right-[10%] w-[350px] h-[350px] bg-[rgba(196,30,58,0.04)] rounded-full blur-[90px]"
+          />
+          <motion.div
+            animate={{ y: [0, -12, 0], scale: [1, 1.06, 1] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-[25%] left-[20%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[80px]"
+          />
+          <motion.div
+            animate={{ y: [0, 18, 0], scale: [1, 1.04, 1] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+            className="absolute bottom-[15%] right-[15%] w-[320px] h-[320px] bg-[rgba(139,92,246,0.04)] rounded-full blur-[85px]"
+          />
+          <motion.div
+            animate={{ y: [0, -10, 0], scale: [1, 1.07, 1] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+            className="absolute top-[40%] left-[45%] w-[250px] h-[250px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[70px]"
+          />
+        </ParallaxSection>
 
         {/* ── Parallax background layers ── */}
         {/* Large gold glow orb — speed 0.15 */}
         <ParallaxSection speed={0.15} direction="up" className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px]" />
         </ParallaxSection>
+
+        {/* Multi-color radial glow behind content (gold + coral) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at center, rgba(212,168,83,0.06) 0%, rgba(196,30,58,0.03) 40%, transparent 70%)" }} />
 
         {/* Small floating geometric shapes — speed 0.08 */}
         <ParallaxSection speed={0.08} direction="up" className="absolute inset-0 pointer-events-none">
@@ -184,17 +261,17 @@ export default function AboutPage() {
           <motion.div
             animate={{ rotate: -30 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[30%] right-[15%] w-6 h-6 rounded-full border border-[rgba(212,168,83,0.08)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute top-[30%] right-[15%] w-6 h-6 rounded-full border border-[rgba(30,58,95,0.1)] bg-[rgba(30,58,95,0.03)]"
           />
           <motion.div
             animate={{ rotate: 60 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[25%] left-[20%] w-10 h-10 rounded-sm border border-[rgba(212,168,83,0.06)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute bottom-[25%] left-[20%] w-10 h-10 rounded-sm border border-[rgba(196,30,58,0.08)] bg-[rgba(196,30,58,0.02)]"
           />
           <motion.div
             animate={{ rotate: -45 }}
             transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[20%] right-[10%] w-5 h-5 rounded border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute bottom-[20%] right-[10%] w-5 h-5 rounded border border-[rgba(139,92,246,0.1)] bg-[rgba(139,92,246,0.03)]"
           />
         </ParallaxSection>
 
@@ -221,16 +298,16 @@ export default function AboutPage() {
 
             <AnimatedSection delay={0.2} direction="up">
               <h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display text-shadow-hero"
               >
                 <span className="text-foreground">About Carter </span>
-                <span className="text-gradient-gold">Digitals</span>
+                <span className="text-gradient-hero">Digitals</span>
               </h1>
             </AnimatedSection>
 
             <AnimatedSection delay={0.35} direction="up">
               <p
-                className="mt-4 text-xl md:text-2xl font-medium text-muted-foreground tracking-wide font-display"
+                className="mt-4 text-xl md:text-2xl font-medium text-muted-foreground tracking-wide font-display text-shadow-premium"
               >
                 Built Different. Built African. Built to Win.
               </p>
@@ -273,7 +350,7 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0A0A0B] via-[rgba(10,10,11,0.6)] to-transparent pointer-events-none" />
       </section>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
       {/* ────────────────── 2. OUR STORY SECTION ───────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
@@ -283,7 +360,13 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
         </div>
         <CosmicDecorations variant="stardust" intensity="subtle" />
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+        {/* Multi-color ambient orbs: emerald (top-left), coral (bottom-right), purple (right-center) */}
+        <div className="absolute top-[10%] left-[-3%] w-[350px] h-[350px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[10%] right-[-3%] w-[300px] h-[300px] bg-[rgba(196,30,58,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[40%] right-[5%] w-[250px] h-[250px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[90px] pointer-events-none" />
+
         {/* Ambient floating orbs */}
         <div className="ambient-orb ambient-orb-float w-[300px] h-[300px] bg-[rgba(212,168,83,0.03)] top-[10%] right-[-5%]" style={{animationDelay: '0s'}} />
         <div className="ambient-orb ambient-orb-float w-[200px] h-[200px] bg-[rgba(212,168,83,0.04)] bottom-[10%] left-[-3%]" style={{animationDelay: '7s'}} />
@@ -300,10 +383,10 @@ export default function AboutPage() {
                 Our Story
               </span>
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6 font-display"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-6 font-display text-shadow-section"
               >
                 A Studio Born from{" "}
-                <span className="text-gradient-gold">Purpose</span>
+                <span className="text-gradient-hero">Purpose</span>
               </h2>
 
               <div className="space-y-5 text-foreground/60 leading-[1.8]">
@@ -353,7 +436,7 @@ export default function AboutPage() {
 
                   {/* Floating accent element */}
                   <motion.div
-                    className="absolute -bottom-4 -left-4 w-24 h-24 rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)]"
+                    className="absolute -bottom-4 -left-4 w-24 h-24 rounded-2xl bg-gradient-to-br from-[rgba(16,185,129,0.15)] to-[rgba(16,185,129,0.03)] border border-[rgba(16,185,129,0.15)]"
                     animate={{ y: [0, -8, 0] }}
                     transition={{
                       duration: 4,
@@ -362,7 +445,7 @@ export default function AboutPage() {
                     }}
                   />
                   <motion.div
-                    className="absolute -top-4 -right-4 w-16 h-16 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.1)] to-[rgba(212,168,83,0.03)] border border-[rgba(212,168,83,0.1)]"
+                    className="absolute -top-4 -right-4 w-16 h-16 rounded-xl bg-gradient-to-br from-[rgba(139,92,246,0.12)] to-[rgba(139,92,246,0.03)] border border-[rgba(139,92,246,0.1)]"
                     animate={{ y: [0, 6, 0] }}
                     transition={{
                       duration: 3,
@@ -382,7 +465,12 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div className="gold-glow-line mx-auto max-w-xs rounded-full" /></div>
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
         <CosmicDecorations variant="aurora" intensity="subtle" />
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+        {/* Multi-color ambient orbs: sapphire (top-right), emerald (bottom-left) */}
+        <div className="absolute top-[5%] right-[-3%] w-[350px] h-[350px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[5%] left-[-3%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px] pointer-events-none" />
+
         {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[140px] pointer-events-none" />
 
@@ -399,28 +487,38 @@ export default function AboutPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             staggerDelay={0.1}
           >
-            {values.map((value) => (
-              <StaggerItem key={value.title}>
-                <TiltCard className="h-full" tiltStrength={4}>
-                  <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold overflow-hidden">
-                    {/* Gold top accent line */}
-                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-60" />
+            {values.map((value, idx) => {
+              const colors = valueCardColors[idx];
+              return (
+                <StaggerItem key={value.title}>
+                  <TiltCard className="h-full" tiltStrength={4}>
+                    <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep overflow-hidden hover:border-[rgba(212,168,83,0.2)] transition-colors duration-300">
+                      {/* Gold top accent line */}
+                      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-60" />
 
-                    <div className="w-12 h-12 rounded-xl bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mb-5 group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
-                      <value.icon className="w-6 h-6 text-[#D4A853]" />
+                      {/* Numbered badge */}
+                      <span className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] flex items-center justify-center text-xs font-bold text-[#D4A853] font-display select-none shadow-sm shadow-[rgba(212,168,83,0.1)]">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+
+                      <div className="w-12 h-12 rounded-xl border flex items-center justify-center mb-5 transition-colors duration-300" style={{ backgroundColor: colors.iconBg, borderColor: colors.iconBorder }}>
+                        <div className="group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: colors.iconHoverBg }}>
+                          <value.icon className="w-6 h-6" style={{ color: colors.iconColor }} />
+                        </div>
+                      </div>
+                      <h3
+                        className="text-lg font-semibold text-foreground mb-3 font-display"
+                      >
+                        {value.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {value.description}
+                      </p>
                     </div>
-                    <h3
-                      className="text-lg font-semibold text-foreground mb-3 font-display"
-                    >
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </TiltCard>
-              </StaggerItem>
-            ))}
+                  </TiltCard>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
@@ -429,7 +527,13 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div className="gold-glow-line mx-auto max-w-xs rounded-full" /></div>
       <AnimatedSection direction="up">
         <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+          {/* Multi-color ambient orbs: purple (center-top), coral (right), gold (left) */}
+          <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-[40%] right-[-3%] w-[280px] h-[280px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute bottom-[20%] left-[-3%] w-[260px] h-[260px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[80px] pointer-events-none" />
+
           {/* Gold glow orbs */}
           <div className="absolute top-1/3 left-[15%] w-[400px] h-[300px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-1/3 right-[15%] w-[350px] h-[250px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
@@ -454,27 +558,23 @@ export default function AboutPage() {
 
             {/* Stats below the image */}
             <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto" staggerDelay={0.1}>
-              <StaggerItem>
-                <div className="text-center p-6 rounded-2xl bg-card border border-border card-hover-gold">
-                  <Users className="w-8 h-8 text-[#D4A853] mx-auto mb-3" />
-                  <p className="text-3xl font-bold text-gradient-gold font-display mb-1">15+</p>
-                  <p className="text-sm text-muted-foreground font-medium">Team Members</p>
-                </div>
-              </StaggerItem>
-              <StaggerItem>
-                <div className="text-center p-6 rounded-2xl bg-card border border-border card-hover-gold">
-                  <Clock className="w-8 h-8 text-[#D4A853] mx-auto mb-3" />
-                  <p className="text-3xl font-bold text-gradient-gold font-display mb-1">5+</p>
-                  <p className="text-sm text-muted-foreground font-medium">Years Combined Experience</p>
-                </div>
-              </StaggerItem>
-              <StaggerItem>
-                <div className="text-center p-6 rounded-2xl bg-card border border-border card-hover-gold">
-                  <Sparkles className="w-8 h-8 text-[#D4A853] mx-auto mb-3" />
-                  <p className="text-3xl font-bold text-gradient-gold font-display mb-1">100%</p>
-                  <p className="text-sm text-muted-foreground font-medium">Passion</p>
-                </div>
-              </StaggerItem>
+              {teamStatColors.map((color, idx) => {
+                const items = [
+                  { icon: Users, value: "15+", label: "Team Members" },
+                  { icon: Clock, value: "5+", label: "Years Combined Experience" },
+                  { icon: Sparkles, value: "100%", label: "Passion" },
+                ];
+                const item = items[idx];
+                return (
+                  <StaggerItem key={item.label}>
+                    <div className="text-center p-6 rounded-2xl bg-card border border-border card-hover-gold card-shine-sweep">
+                      <item.icon className="w-8 h-8 mx-auto mb-3" style={{ color: color.iconColor }} />
+                      <p className="text-3xl font-bold text-gradient-gold font-display mb-1">{item.value}</p>
+                      <p className="text-sm text-muted-foreground font-medium">{item.label}</p>
+                    </div>
+                  </StaggerItem>
+                );
+              })}
             </StaggerContainer>
           </div>
         </section>
@@ -483,7 +583,13 @@ export default function AboutPage() {
       {/* ────────────────── 4. FOUNDER SECTION ──────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4"><div className="gold-glow-line mx-auto max-w-xs rounded-full" /></div>
       <section className="relative py-20 md:py-28 bg-background section-gold-tint grain-texture">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+        {/* Multi-color ambient orbs: emerald (left), purple (right), sapphire (center) */}
+        <div className="absolute top-[30%] left-[-3%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[-3%] w-[280px] h-[280px] bg-[rgba(139,92,246,0.04)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute top-[50%] left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[110px] pointer-events-none" />
+
         {/* Gold gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.03)] via-[rgba(212,168,83,0.01)] to-transparent pointer-events-none" />
         {/* Gold glow orbs */}
@@ -506,7 +612,7 @@ export default function AboutPage() {
                     <div className="relative mb-6">
                       <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border-2 border-[rgba(212,168,83,0.25)] flex items-center justify-center">
                         <span
-                          className="text-4xl font-bold text-gradient-gold font-display"
+                          className="text-4xl font-bold text-gradient-hero font-display"
                         >
                           KK
                         </span>
@@ -574,9 +680,9 @@ export default function AboutPage() {
                 </span>
 
                 <h2
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 font-display"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 font-display text-shadow-section"
                 >
-                  Meet <span className="text-gradient-gold">Kabelo Kadiaka</span>
+                  Meet <span className="text-gradient-hero">Kabelo Kadiaka</span>
                 </h2>
                 <p className="text-base text-[#D4A853] font-medium mb-6">
                   Founder & Director, Carter Digitals (Pty) Ltd
@@ -647,6 +753,32 @@ export default function AboutPage() {
                   </div>
                 </div>
 
+                {/* ── Capabilities Mini-Grid ── */}
+                <div className="mb-8">
+                  <p className="text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold mb-3">
+                    Core Capabilities
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {capabilities.map((cap) => (
+                      <div
+                        key={cap.title}
+                        className="group relative rounded-xl bg-card border border-border p-4 card-shine-sweep hover:border-l-2 transition-colors duration-300 cursor-default"
+                        style={{ '--hover-border-color': cap.color.hoverBorder } as React.CSSProperties}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="w-9 h-9 rounded-lg border flex items-center justify-center shrink-0" style={{ backgroundColor: cap.color.iconBg, borderColor: cap.color.iconBorder }}>
+                            <cap.icon className="w-4 h-4" style={{ color: cap.color.iconColor }} />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-foreground font-display mb-0.5">{cap.title}</h4>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{cap.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <Separator className="bg-muted/60 mb-6" />
 
                 {/* Quote */}
@@ -669,9 +801,14 @@ export default function AboutPage() {
       {/* ──────────── 5a. COMPANY STATS BAR ───────────────────── */}
       <AnimatedSection direction="up">
         <section className="relative py-16 md:py-20 bg-background section-gold-tint">
-          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
           <div className="absolute inset-0 bg-dots opacity-40" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
+
+          {/* Multi-color ambient orbs: sapphire, emerald, coral (3 across) */}
+          <div className="absolute top-[20%] left-[10%] w-[200px] h-[200px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-[30%] left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-[20%] right-[10%] w-[200px] h-[200px] bg-[rgba(196,30,58,0.04)] rounded-full blur-[80px] pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12" staggerDelay={0.1}>
@@ -701,8 +838,13 @@ export default function AboutPage() {
       {/* ──────────── 5b. COMPANY MILESTONES TIMELINE ─────────────── */}
       <AnimatedSection direction="up">
         <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
+
+          {/* Multi-color ambient orbs: gold, coral, purple */}
+          <div className="absolute top-[10%] left-[15%] w-[250px] h-[250px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute bottom-[15%] right-[10%] w-[280px] h-[280px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute top-[50%] right-[20%] w-[220px] h-[220px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[80px] pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
@@ -714,30 +856,31 @@ export default function AboutPage() {
             />
 
             <div className="relative mt-12">
-              {/* Vertical gold gradient line — centered on desktop, left on mobile */}
+              {/* Vertical multi-color gradient line — centered on desktop, left on mobile */}
               <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2">
-                <div className="w-full h-full bg-gradient-to-b from-[#D4A853] via-[#B8922F] to-[rgba(212,168,83,0.1)]" />
+                <div className="w-full h-full bg-gradient-to-b from-[#D4A853] via-[#1E3A5F] via-[#10B981] via-[#C41E3A] to-[#8B5CF6]" />
               </div>
               <div className="md:hidden absolute left-[15px] top-0 bottom-0 w-px">
-                <div className="w-full h-full bg-gradient-to-b from-[#D4A853] via-[#B8922F] to-[rgba(212,168,83,0.1)]" />
+                <div className="w-full h-full bg-gradient-to-b from-[#D4A853] via-[#1E3A5F] via-[#10B981] via-[#C41E3A] to-[#8B5CF6]" />
               </div>
 
               <div className="space-y-12 md:space-y-16">
                 {milestones.map((milestone, idx) => {
                   const isLeft = idx % 2 === 0;
+                  const colors = milestoneBadgeColors[idx % milestoneBadgeColors.length];
                   return (
                     <StaggerContainer key={milestone.title + milestone.year} className="relative" staggerDelay={0.08}>
                       <div className={`flex items-start gap-6 md:gap-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
                         {/* Content card */}
                         <div className={`flex-1 pl-10 md:pl-0 ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"}`}>
                           <StaggerItem>
-                            <div className="group rounded-2xl bg-card border border-border p-6 card-hover-gold hover:border-[rgba(212,168,83,0.15)] transition-colors duration-300 hover-lift">
+                            <div className="group rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep transition-colors duration-300 hover-lift" style={{ '--hover-border-color': colors.hoverBorder } as React.CSSProperties}>
                               <div className={`flex items-center gap-3 mb-3 ${isLeft ? "md:flex-row-reverse" : ""}`}>
-                                <div className="w-10 h-10 rounded-xl bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center shrink-0 group-hover:bg-[rgba(212,168,83,0.15)] transition-colors duration-300">
-                                  <milestone.icon className="w-5 h-5 text-[#D4A853]" />
+                                <div className="w-10 h-10 rounded-xl border flex items-center justify-center shrink-0 transition-colors duration-300" style={{ backgroundColor: colors.iconBg, borderColor: colors.iconBorder }}>
+                                  <milestone.icon className="w-5 h-5" style={{ color: colors.iconColor }} />
                                 </div>
                                 <div className={`flex items-center gap-3 ${isLeft ? "md:flex-row-reverse" : ""}`}>
-                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-[rgba(212,168,83,0.1)] text-[#D4A853] text-xs font-bold tracking-wider font-display">
+                                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold tracking-wider font-display" style={{ backgroundColor: colors.bg, color: colors.text }}>
                                     {milestone.year}
                                   </span>
                                   <h3
@@ -754,13 +897,13 @@ export default function AboutPage() {
                           </StaggerItem>
                         </div>
 
-                        {/* Center dot — desktop only */}
-                        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-6 w-10 h-10 rounded-full bg-background border-2 border-[#D4A853] items-center justify-center z-10 shadow-lg shadow-[rgba(212,168,83,0.3)]">
-                          <div className="w-4 h-4 rounded-full bg-[#D4A853]" />
+                        {/* Center dot — desktop only with colored glow */}
+                        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 top-6 w-10 h-10 rounded-full bg-background border-2 items-center justify-center z-10 shadow-lg transition-shadow duration-300" style={{ borderColor: colors.dotBorder, boxShadow: `0 10px 15px -3px ${colors.dotGlow}` }}>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: colors.dotBorder }} />
                         </div>
 
                         {/* Mobile dot */}
-                        <div className="md:hidden absolute left-[5px] top-6 w-5 h-5 rounded-full bg-[#D4A853] border-2 border-background z-10 shadow-md shadow-[rgba(212,168,83,0.25)]" />
+                        <div className="md:hidden absolute left-[5px] top-6 w-5 h-5 rounded-full border-2 border-background z-10 shadow-md" style={{ backgroundColor: colors.dotBorder, boxShadow: `0 4px 6px -1px ${colors.dotGlow}` }} />
 
                         {/* Spacer for alternating layout — desktop only */}
                         <div className="hidden md:block flex-1" />
@@ -776,7 +919,7 @@ export default function AboutPage() {
 
       {/* ────────────────── 5c. MEET THE TEAM ──────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
         {/* Gold glow orbs behind the section */}
         <div className="absolute top-1/4 left-[10%] w-[400px] h-[400px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-[10%] w-[350px] h-[350px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
@@ -826,7 +969,7 @@ export default function AboutPage() {
               },
             ].map((member) => (
               <StaggerItem key={member.name}>
-                <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold hover-lift card-idle-pulse overflow-hidden">
+                <div className="group relative h-full rounded-2xl bg-card border border-border p-6 card-hover-gold card-shine-sweep hover-lift card-idle-pulse overflow-hidden">
                   {/* Gold top accent line */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-60" />
 
@@ -874,8 +1017,12 @@ export default function AboutPage() {
 
       {/* ────────────────── 5. CREDENTIALS SECTION ──────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+
+        {/* Multi-color ambient orbs: emerald, sapphire */}
+        <div className="absolute top-[15%] left-[10%] w-[250px] h-[250px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-[15%] right-[10%] w-[280px] h-[280px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[90px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -889,7 +1036,7 @@ export default function AboutPage() {
           <AnimatedSection direction="up" delay={0.15}>
             <div className="relative max-w-3xl mx-auto">
               {/* Credentials card */}
-              <div className="rounded-3xl bg-card border border-[rgba(212,168,83,0.15)] overflow-hidden glow-gold">
+              <div className="rounded-3xl bg-card border border-[rgba(212,168,83,0.15)] overflow-hidden glow-gold card-shine-sweep">
                 {/* Glass effect overlay */}
                 <div className="absolute inset-0 rounded-3xl" style={{ background: "rgba(19,19,22,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }} />
                 <div className="absolute inset-0 bg-dots opacity-20 rounded-3xl" />
@@ -957,14 +1104,19 @@ export default function AboutPage() {
 
       {/* ──────────────── TRUSTED BY / CLIENT LOGOS ──────────────── */}
       <AnimatedSection direction="up">
-        <div className="py-16 md:py-20">
+        <div className="py-16 md:py-20 relative">
+          {/* Multi-color ambient orbs: coral, purple, gold */}
+          <div className="absolute top-[10%] left-[15%] w-[250px] h-[250px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute bottom-[10%] right-[15%] w-[280px] h-[280px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[70px] pointer-events-none" />
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-[rgba(212,168,83,0.1)] text-[#D4A853] border border-[rgba(212,168,83,0.2)]">
                 Trusted Across Sectors
               </span>
-              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-foreground font-display">
-                Institutions That <span className="text-gradient-gold">Believe In Us</span>
+              <h2 className="mt-6 text-2xl md:text-3xl font-bold text-foreground font-display text-shadow-section">
+                Institutions That <span className="text-gradient-hero">Believe In Us</span>
               </h2>
             </div>
 
@@ -972,7 +1124,7 @@ export default function AboutPage() {
             <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" staggerDelay={0.05}>
               {trustLogos.map((logo) => (
                 <StaggerItem key={logo.name}>
-                  <div className="group flex flex-col items-center justify-center p-6 rounded-2xl glass-gold hover:border-[rgba(212,168,83,0.2)] transition-all duration-300 hover-lift">
+                  <div className="group flex flex-col items-center justify-center p-6 rounded-2xl glass-gold hover:border-[rgba(212,168,83,0.2)] transition-all duration-300 hover-lift card-shine-sweep">
                     <logo.icon className="w-8 h-8 text-[rgba(245,245,245,0.2)] group-hover:text-[rgba(212,168,83,0.5)] transition-colors duration-300 mb-3" />
                     <span className="text-xs font-semibold text-[rgba(245,245,245,0.3)] group-hover:text-foreground/60 transition-colors text-center leading-tight">{logo.name}</span>
                     <span className="text-[10px] text-[rgba(245,245,245,0.15)] mt-1">{logo.sector}</span>
@@ -984,11 +1136,17 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
-      <div className="h-px section-divider-gold" />
+      <div className="h-px section-divider-rainbow" />
 
       {/* ────────────── 6. ENGAGEMENT MODELS SECTION ────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+        {/* Multi-color ambient orbs: sapphire, emerald, coral */}
+        <div className="absolute top-[10%] right-[15%] w-[280px] h-[280px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[10%] w-[300px] h-[300px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute top-[50%] left-1/2 -translate-x-1/2 w-[220px] h-[220px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[80px] pointer-events-none" />
+
         {/* Gold glow orb */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1006,7 +1164,7 @@ export default function AboutPage() {
           >
             {engagementModels.map((model, idx) => (
               <StaggerItem key={model.title}>
-                <div className="group relative h-full rounded-2xl bg-card border border-border p-6 md:p-8 card-hover-gold hover-lift overflow-hidden flex flex-col card-idle-pulse">
+                <div className="group relative h-full rounded-2xl bg-card border border-border p-6 md:p-8 card-hover-gold card-shine-sweep hover-lift overflow-hidden flex flex-col card-idle-pulse">
                   {/* Gold top accent */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

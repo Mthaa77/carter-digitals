@@ -59,6 +59,47 @@ import { useNavigation } from "@/lib/navigation";
 import CosmicDecorations from "@/components/shared/CosmicDecorations";
 import { toast } from "sonner";
 
+/* -------------------- service color categories -------------------- */
+const serviceCategoryColors = [
+  /* 01-03 Web dev: sapphire */ { bg: "rgba(30,58,95,0.15)", border: "rgba(30,58,95,0.25)", iconBg: "rgba(30,58,95,0.12)", text: "#4A90D9" },
+  /* 04-06 Design: coral */ { bg: "rgba(196,30,58,0.12)", border: "rgba(196,30,58,0.22)", iconBg: "rgba(196,30,58,0.10)", text: "#E85D75" },
+  /* 07-09 App/ops: emerald */ { bg: "rgba(16,185,129,0.12)", border: "rgba(16,185,129,0.22)", iconBg: "rgba(16,185,129,0.10)", text: "#34D399" },
+  /* 10-12 AI/security: purple */ { bg: "rgba(139,92,246,0.12)", border: "rgba(139,92,246,0.22)", iconBg: "rgba(139,92,246,0.10)", text: "#A78BFA" },
+];
+
+/* Phase colors for process accordion */
+const phaseColors = [
+  /* 01 */ { bg: "rgba(30,58,95,0.18)", border: "rgba(30,58,95,0.28)", text: "#4A90D9", badge: "rgba(30,58,95,0.12)", badgeBorder: "rgba(30,58,95,0.22)" },
+  /* 02 */ { bg: "rgba(16,185,129,0.18)", border: "rgba(16,185,129,0.28)", text: "#34D399", badge: "rgba(16,185,129,0.12)", badgeBorder: "rgba(16,185,129,0.22)" },
+  /* 03 */ { bg: "rgba(212,168,83,0.20)", border: "rgba(212,168,83,0.30)", text: "#D4A853", badge: "rgba(212,168,83,0.12)", badgeBorder: "rgba(212,168,83,0.22)" },
+  /* 04 */ { bg: "rgba(196,30,58,0.18)", border: "rgba(196,30,58,0.28)", text: "#E85D75", badge: "rgba(196,30,58,0.12)", badgeBorder: "rgba(196,30,58,0.22)" },
+  /* 05 */ { bg: "rgba(139,92,246,0.18)", border: "rgba(139,92,246,0.28)", text: "#A78BFA", badge: "rgba(139,92,246,0.12)", badgeBorder: "rgba(139,92,246,0.22)" },
+];
+
+/* Add-on icon colors */
+const addOnColors = [
+  /* AI Chatbot */ { bg: "rgba(139,92,246,0.12)", border: "rgba(139,92,246,0.18)", text: "#A78BFA" },
+  /* SEO */ { bg: "rgba(16,185,129,0.12)", border: "rgba(16,185,129,0.18)", text: "#34D399" },
+  /* Hosting */ { bg: "rgba(30,58,95,0.12)", border: "rgba(30,58,95,0.18)", text: "#4A90D9" },
+  /* Pitch Deck */ { bg: "rgba(196,30,58,0.12)", border: "rgba(196,30,58,0.18)", text: "#E85D75" },
+];
+
+/* Service card images */
+const serviceImages = [
+  "/images/website-mockup.png",
+  "/images/web-dev-workspace.png",
+  "/images/code-architecture.png",
+  "/images/digital-transformation.png",
+  "/images/ui-design-process.png",
+  "/images/gold-chrome-texture.png",
+  "/images/dev-workspace-showcase.png",
+  "/images/responsive-design.png",
+  "/images/web-dev-workspace.png",
+  "/images/code-architecture.png",
+  "/images/website-mockup.png",
+  "/images/digital-transformation.png",
+];
+
 /* -------------------- flagship features -------------------- */
 const flagshipFeatures = [
   {
@@ -85,6 +126,15 @@ const flagshipFeatures = [
     icon: Server,
     title: "Year 1 hosting and domain included",
   },
+];
+
+const flagshipFeatureColors = [
+  { bg: "rgba(30,58,95,0.10)", border: "rgba(30,58,95,0.15)", text: "#4A90D9", hoverBorder: "rgba(30,58,95,0.30)" },
+  { bg: "rgba(16,185,129,0.10)", border: "rgba(16,185,129,0.15)", text: "#34D399", hoverBorder: "rgba(16,185,129,0.30)" },
+  { bg: "rgba(196,30,58,0.10)", border: "rgba(196,30,58,0.15)", text: "#E85D75", hoverBorder: "rgba(196,30,58,0.30)" },
+  { bg: "rgba(139,92,246,0.10)", border: "rgba(139,92,246,0.15)", text: "#A78BFA", hoverBorder: "rgba(139,92,246,0.30)" },
+  { bg: "rgba(30,58,95,0.10)", border: "rgba(30,58,95,0.15)", text: "#4A90D9", hoverBorder: "rgba(30,58,95,0.30)" },
+  { bg: "rgba(16,185,129,0.10)", border: "rgba(16,185,129,0.15)", text: "#34D399", hoverBorder: "rgba(16,185,129,0.30)" },
 ];
 
 /* -------------------- core services ------------------------- */
@@ -244,37 +294,47 @@ export default function ServicesPage() {
     <main className="relative overflow-hidden">
       {/* ----------------- 1. PAGE HERO ----------------- */}
       <section className="relative py-24 md:py-36 bg-background">
+        {/* Aurora mesh background layer */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.4]" />
+
         {/* Background grid */}
         <div className="absolute inset-0 bg-grid pattern-grid-animated" />
 
-        {/* ── Parallax background layers ── */}
-        {/* Large gold glow orb — speed 0.15 */}
+        {/* ── Multi-color animated gradient orbs ── */}
         <ParallaxSection speed={0.15} direction="up" className="absolute inset-0 pointer-events-none">
+          {/* Gold orb */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px]" />
-          <div className="absolute top-[60%] left-[20%] w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px]" />
+          {/* Sapphire orb */}
+          <div className="absolute top-[15%] left-[10%] w-[350px] h-[350px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[110px]" />
+          {/* Coral orb */}
+          <div className="absolute top-[60%] left-[20%] w-[300px] h-[300px] bg-[rgba(196,30,58,0.04)] rounded-full blur-[100px]" />
+          {/* Emerald orb */}
+          <div className="absolute top-[20%] right-[15%] w-[280px] h-[280px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px]" />
+          {/* Purple orb */}
+          <div className="absolute bottom-[25%] right-[10%] w-[320px] h-[320px] bg-[rgba(139,92,246,0.04)] rounded-full blur-[110px]" />
         </ParallaxSection>
 
-        {/* Small floating geometric shapes — speed 0.08 */}
+        {/* Multi-color floating geometric shapes — speed 0.08 */}
         <ParallaxSection speed={0.08} direction="up" className="absolute inset-0 pointer-events-none">
           <motion.div
             animate={{ rotate: 45 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[25%] left-[8%] w-8 h-8 rounded-lg border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute top-[25%] left-[8%] w-8 h-8 rounded-lg border border-[rgba(30,58,95,0.12)] bg-[rgba(30,58,95,0.04)]"
           />
           <motion.div
             animate={{ rotate: -30 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[20%] right-[12%] w-6 h-6 rounded-full border border-[rgba(212,168,83,0.08)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute top-[20%] right-[12%] w-6 h-6 rounded-full border border-[rgba(196,30,58,0.10)] bg-[rgba(196,30,58,0.03)]"
           />
           <motion.div
             animate={{ rotate: 60 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[30%] left-[25%] w-10 h-10 rounded-sm border border-[rgba(212,168,83,0.06)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute bottom-[30%] left-[25%] w-10 h-10 rounded-sm border border-[rgba(16,185,129,0.08)] bg-[rgba(16,185,129,0.03)]"
           />
           <motion.div
             animate={{ rotate: -45 }}
             transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[25%] right-[8%] w-5 h-5 rounded border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute bottom-[25%] right-[8%] w-5 h-5 rounded border border-[rgba(139,92,246,0.12)] bg-[rgba(139,92,246,0.04)]"
           />
         </ParallaxSection>
 
@@ -291,7 +351,12 @@ export default function ServicesPage() {
 
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(212,168,83,0.03)] via-transparent to-[rgba(212,168,83,0.02)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(30,58,95,0.03)] via-[rgba(212,168,83,0.02)] to-[rgba(139,92,246,0.03)]" />
+
+        {/* Multi-color radial glow behind content */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] pointer-events-none z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(30,58,95,0.04)_0%,rgba(196,30,58,0.03)_25%,rgba(16,185,129,0.03)_50%,rgba(139,92,246,0.03)_75%,transparent_100%)] rounded-full" />
+        </div>
 
         {/* Content with subtle parallax — speed 0.03 */}
         <ParallaxSection speed={0.03} direction="up">
@@ -307,10 +372,10 @@ export default function ServicesPage() {
 
             <AnimatedSection delay={0.2} direction="up">
               <h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display text-shadow-hero"
               >
                 <span className="text-foreground">Our </span>
-                <span className="text-gradient-gold">Services</span>
+                <span className="text-gradient-hero">Services</span>
               </h1>
             </AnimatedSection>
 
@@ -354,15 +419,19 @@ export default function ServicesPage() {
           </div>
         </ParallaxSection>
 
-        {/* Gold gradient fade at bottom */}
+        {/* Rainbow divider at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-px section-divider-rainbow" />
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0A0A0B] via-[rgba(10,10,11,0.6)] to-transparent pointer-events-none" />
       </section>
 
       {/* ---------- 2. FLAGSHIP SERVICE -- WEBSITE DEV ---------- */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint grain-texture">
         <CosmicDecorations variant="nebula" intensity="subtle" />
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-        {/* Ambient orbs */}
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[15%] left-[-5%] w-[280px] h-[280px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[50%] right-[-5%] w-[250px] h-[250px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[30%] w-[220px] h-[220px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[90px] pointer-events-none" />
         <div className="ambient-orb ambient-orb-float w-[250px] h-[250px] bg-[rgba(212,168,83,0.03)] top-[20%] right-[-5%]" style={{animationDelay: '3s'}} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" delay={0.1}>
@@ -371,9 +440,10 @@ export default function ServicesPage() {
               <div className="absolute inset-0 rounded-3xl shadow-[0_0_60px_rgba(212,168,83,0.15)] pointer-events-none" />
               <div className="absolute inset-0 bg-dots opacity-20" />
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent" />
-              {/* Gold glow orbs */}
-              <div className="absolute -top-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[100px] pointer-events-none" />
-              <div className="absolute -bottom-20 -right-20 w-[250px] h-[250px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[80px] pointer-events-none" />
+              {/* Multi-color glow orbs */}
+              <div className="absolute -top-20 -left-20 w-[300px] h-[300px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-[250px] h-[250px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[80px] pointer-events-none" />
 
               <div className="relative z-10 p-8 md:p-12 lg:p-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -385,10 +455,10 @@ export default function ServicesPage() {
                     </span>
 
                     <h2
-                      className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 font-display"
+                      className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 font-display text-shadow-section"
                     >
                       Website{" "}
-                      <span className="text-gradient-gold">Development</span>
+                      <span className="text-gradient-hero">Development</span>
                     </h2>
                     <p
                       className="text-lg text-[#D4A853] font-medium mb-6 font-display"
@@ -425,25 +495,28 @@ export default function ServicesPage() {
                       <h3
                         className="text-xl font-bold text-foreground mb-6 font-display"
                       >
-                        Why Next.js & Vercel?
+                        Why Next.js &amp; Vercel?
                       </h3>
 
                       <StaggerContainer
                         className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                         staggerDelay={0.08}
                       >
-                        {flagshipFeatures.map((feature) => (
-                          <StaggerItem key={feature.title}>
-                            <div className="flex items-start gap-3 p-4 rounded-xl bg-[rgba(10,10,11,0.5)] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.15)] transition-colors duration-300 hover-lift card-idle-pulse">
-                              <div className="w-9 h-9 shrink-0 rounded-lg bg-[rgba(212,168,83,0.1)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center">
-                                <feature.icon className="w-4 h-4 text-[#D4A853]" />
+                        {flagshipFeatures.map((feature, fIdx) => {
+                          const c = flagshipFeatureColors[fIdx];
+                          return (
+                            <StaggerItem key={feature.title}>
+                              <div className={`flex items-start gap-3 p-4 rounded-xl bg-[rgba(10,10,11,0.5)] border border-[rgba(255,255,255,0.04)] hover:border-[${c.hoverBorder}] transition-colors duration-300 hover-lift card-idle-pulse card-shine-sweep overflow-hidden relative`}>
+                                <div className="w-9 h-9 shrink-0 rounded-lg flex items-center justify-center relative z-10" style={{background: c.bg, borderColor: c.border}} >
+                                  <feature.icon className="w-4 h-4" style={{color: c.text}} />
+                                </div>
+                                <span className="text-sm text-[rgba(245,245,245,0.7)] font-medium leading-snug pt-1.5 relative z-10">
+                                  {feature.title}
+                                </span>
                               </div>
-                              <span className="text-sm text-[rgba(245,245,245,0.7)] font-medium leading-snug pt-1.5">
-                                {feature.title}
-                              </span>
-                            </div>
-                          </StaggerItem>
-                        ))}
+                            </StaggerItem>
+                          );
+                        })}
                       </StaggerContainer>
                     </div>
                   </ParallaxSection>
@@ -458,9 +531,11 @@ export default function ServicesPage() {
       {/* ----------------- 3. CORE SERVICES GRID ----------------- */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
         <CosmicDecorations variant="constellation" intensity="subtle" />
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color background glows */}
+        <div className="absolute top-[20%] left-[10%] w-[400px] h-[300px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[60%] right-[5%] w-[350px] h-[250px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[40%] w-[300px] h-[200px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[90px] pointer-events-none" />
 
         {/* Decorative UI design process image */}
         <div className="absolute top-[10%] right-[-2%] w-[350px] h-[250px] pointer-events-none z-0 opacity-[0.12] hidden lg:block">
@@ -480,35 +555,51 @@ export default function ServicesPage() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
             staggerDelay={0.07}
           >
-            {coreServices.map((service) => (
-              <StaggerItem key={service.title}>
-                <TiltCard className="h-full" tiltStrength={4}>
-                  <div className="group relative h-full rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] p-6 card-hover-gold hover:border-[rgba(212,168,83,0.2)] hover-lift overflow-hidden card-shine-sweep">
-                    {/* Gold shimmer on hover */}
-                    <div className="absolute inset-0 animate-shimmer-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+            {coreServices.map((service, sIdx) => {
+              const catIdx = Math.floor(sIdx / 3);
+              const color = serviceCategoryColors[catIdx];
+              const num = String(sIdx + 1).padStart(2, '0');
+              return (
+                <StaggerItem key={service.title}>
+                  <TiltCard className="h-full" tiltStrength={4}>
+                    <div className="group relative h-full rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] p-6 hover-lift overflow-hidden service-card-premium">
+                      {/* Shine sweep effect */}
+                      <div className="absolute inset-0 card-shine-sweep rounded-2xl" />
 
-                    <div className="relative z-10">
-                      {/* Icon in gold circle */}
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.18)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] flex items-center justify-center mb-5 group-hover:shadow-lg group-hover:shadow-[rgba(212,168,83,0.12)] transition-shadow duration-300">
-                        <service.icon className="w-6 h-6 text-[#D4A853]" />
+                      {/* Service card image */}
+                      <div className="relative h-28 rounded-xl overflow-hidden mb-4 opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+                        <Image src={serviceImages[sIdx]} alt={service.title} fill className="object-cover object-center" unoptimized />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-[#131316]/40 to-transparent" />
                       </div>
 
-                      {/* Title */}
-                      <h3
-                        className="text-lg font-semibold text-foreground mb-2.5 font-display"
-                      >
-                        {service.title}
-                      </h3>
+                      <div className="relative z-10">
+                        {/* Number + Icon */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-[10px] font-bold tracking-widest opacity-40 font-display" style={{color: color.text}}>
+                            {num}
+                          </span>
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center border" style={{background: color.iconBg, borderColor: color.border}}>
+                            <service.icon className="w-5 h-5" style={{color: color.text}} />
+                          </div>
+                        </div>
 
-                      {/* Description */}
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
+                        {/* Title */}
+                        <h3
+                          className="text-lg font-semibold text-foreground mb-2.5 font-display"
+                        >
+                          {service.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {service.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </TiltCard>
-              </StaggerItem>
-            ))}
+                  </TiltCard>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
@@ -519,10 +610,10 @@ export default function ServicesPage() {
       {/* ----------------- 3.5 ANIMATED STATS SECTION ----------------- */}
       <AnimatedSection direction="up">
         <section className="relative py-20 md:py-28 bg-background">
-          <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-          {/* Gold radial glow orbs behind section */}
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[140px] pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+          {/* Multi-color radial glow orbs behind section */}
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -653,15 +744,17 @@ export default function ServicesPage() {
             </StaggerContainer>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 h-px section-divider-gold" />
+          <div className="absolute bottom-0 left-0 right-0 h-px section-divider-rainbow" />
         </section>
       </AnimatedSection>
 
       {/* ----------------- 4. PROCESS SECTION ----------------- */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-        {/* Gold glow orb */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color glow orbs */}
+        <div className="absolute top-[20%] left-[15%] w-[300px] h-[250px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[60%] right-[10%] w-[280px] h-[220px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-[15%] left-[50%] w-[250px] h-[200px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Our Process"
@@ -674,45 +767,53 @@ export default function ServicesPage() {
           <AnimatedSection direction="up" delay={0.15}>
             <div className="max-w-3xl mx-auto">
               <Accordion type="single" collapsible className="space-y-4">
-                {processPhases.map((phase, idx) => (
-                  <AccordionItem
-                    key={phase.num}
-                    value={`phase-${phase.num}`}
-                    className="rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] overflow-hidden px-6 data-[state=open]:border-[rgba(212,168,83,0.25)] data-[state=open]:bg-[rgba(19,19,22,0.8)] transition-colors duration-300"
-                  >
-                    <AccordionTrigger className="hover:no-underline py-5 [&>svg]:text-[#D4A853]">
-                      <div className="flex items-center gap-4 text-left">
-                        {/* Phase number in gold circle */}
-                        <div className="w-11 h-11 shrink-0 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.25)] flex items-center justify-center">
-                          <span
-                            className="text-sm font-bold text-[#D4A853] font-display"
-                          >
-                            {phase.num}
-                          </span>
+                {processPhases.map((phase, idx) => {
+                  const pc = phaseColors[idx];
+                  return (
+                    <AccordionItem
+                      key={phase.num}
+                      value={`phase-${phase.num}`}
+                      className="rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] overflow-hidden px-6 transition-colors duration-300"
+                      style={{
+                        ['--phase-open-border' as string]: pc.border,
+                        ['--phase-open-bg' as string]: 'rgba(19,19,22,0.8)',
+                      }}
+                    >
+                      <AccordionTrigger className="hover:no-underline py-5" style={{['--tw-accordion-trigger-color' as string]: pc.text}}>
+                        <div className="flex items-center gap-4 text-left">
+                          {/* Phase number with multi-color dot */}
+                          <div className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center border relative overflow-hidden" style={{background: `linear-gradient(135deg, ${pc.bg}, ${pc.bg.replace(/[\d.]+\)$/, '0.08)')})`, borderColor: pc.border}}>
+                            <span
+                              className="text-sm font-bold font-display relative z-10"
+                              style={{color: pc.text}}
+                            >
+                              {phase.num}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <phase.icon className="w-5 h-5 hidden sm:block" style={{color: pc.text, opacity: 0.6}} />
+                            <span
+                              className="text-base md:text-lg font-semibold text-foreground font-display"
+                            >
+                              {phase.title}
+                            </span>
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide border" style={{background: pc.badge, color: pc.text, borderColor: pc.badgeBorder}}>
+                              <Clock className="w-2.5 h-2.5" />
+                              {phase.timeline}
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <phase.icon className="w-5 h-5 text-[rgba(212,168,83,0.6)] hidden sm:block" />
-                          <span
-                            className="text-base md:text-lg font-semibold text-foreground font-display"
-                          >
-                            {phase.title}
-                          </span>
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide bg-[rgba(212,168,83,0.1)] text-[#D4A853] border border-[rgba(212,168,83,0.2)]">
-                            <Clock className="w-2.5 h-2.5" />
-                            {phase.timeline}
-                          </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-5">
+                        <div className="ml-[60px] sm:ml-[76px] card-shine-sweep rounded-xl p-4 bg-[rgba(10,10,11,0.3)] border border-[rgba(255,255,255,0.03)] relative overflow-hidden">
+                          <p className="text-sm md:text-base text-muted-foreground leading-relaxed relative z-10">
+                            {phase.description}
+                          </p>
                         </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-5">
-                      <div className="ml-[60px] sm:ml-[76px]">
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                          {phase.description}
-                        </p>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
               </Accordion>
             </div>
           </AnimatedSection>
@@ -721,9 +822,11 @@ export default function ServicesPage() {
 
       {/* ----------------- 5. ADD-ON SERVICES ----------------- */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color background glows */}
+        <div className="absolute top-[15%] left-[20%] w-[350px] h-[280px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute top-[50%] right-[15%] w-[300px] h-[250px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[20%] left-[40%] w-[250px] h-[200px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[90px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -738,54 +841,60 @@ export default function ServicesPage() {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
             staggerDelay={0.1}
           >
-            {addOns.map((addon) => (
-              <StaggerItem key={addon.title}>
-                <div className="group relative h-full rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] p-6 md:p-8 card-hover-gold overflow-hidden flex flex-col">
-                  {/* Gold top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4A853] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {addOns.map((addon, aIdx) => {
+              const ac = addOnColors[aIdx];
+              return (
+                <StaggerItem key={addon.title}>
+                  <div className="group relative h-full rounded-2xl bg-card border border-[rgba(255,255,255,0.06)] p-6 md:p-8 overflow-hidden flex flex-col card-shine-sweep">
+                    {/* Colored top accent */}
+                    <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: `linear-gradient(to right, transparent, ${ac.text}, transparent)`}} />
 
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-14 h-14 shrink-0 rounded-2xl bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.12)] flex items-center justify-center">
-                      <addon.icon className="w-7 h-7 text-[#D4A853]" />
-                    </div>
-                    <div className="flex-1">
-                      <h3
-                        className="text-lg font-bold text-foreground mb-1 font-display"
-                      >
-                        {addon.title}
-                      </h3>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span
-                          className="text-xl font-bold text-gradient-gold font-display"
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center border" style={{background: ac.bg, borderColor: ac.border}}>
+                        <addon.icon className="w-7 h-7" style={{color: ac.text}} />
+                      </div>
+                      <div className="flex-1">
+                        <h3
+                          className="text-lg font-bold text-foreground mb-1 font-display"
                         >
-                          {addon.price}
-                        </span>
-                        {addon.altPrice && (
-                          <span className="text-sm text-muted-foreground/60">
-                            or{" "}
-                            <span className="text-foreground/60 font-medium">
-                              {addon.altPrice}
-                            </span>
+                          {addon.title}
+                        </h3>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span
+                            className="text-xl font-bold text-gradient-gold font-display"
+                          >
+                            {addon.price}
                           </span>
-                        )}
+                          {addon.altPrice && (
+                            <span className="text-sm text-muted-foreground/60">
+                              or{" "}
+                              <span className="text-foreground/60 font-medium">
+                                {addon.altPrice}
+                              </span>
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                    {addon.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1 relative z-10">
+                      {addon.description}
+                    </p>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
 
       {/* ---------- 6. SERVICES COMPARISON TABLE ---------- */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color ambient orbs behind table */}
+        <div className="absolute top-[20%] left-[5%] w-[400px] h-[300px] bg-[rgba(30,58,95,0.03)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[50%] right-[5%] w-[350px] h-[280px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[110px] pointer-events-none" />
+        <div className="absolute bottom-[15%] left-[40%] w-[300px] h-[220px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -815,8 +924,8 @@ export default function ServicesPage() {
                         Professional online presence
                       </p>
                     </div>
-                    {/* Recommended Column */}
-                    <div className="p-4 md:p-5 bg-[rgba(212,168,83,0.06)] border-b border-[rgba(212,168,83,0.15)] border-l border-[rgba(212,168,83,0.12)] text-center relative">
+                    {/* Recommended Column - gradient approach */}
+                    <div className="p-4 md:p-5 text-center relative overflow-hidden" style={{background: 'linear-gradient(135deg, rgba(212,168,83,0.06), rgba(139,92,246,0.03), rgba(16,185,129,0.03))'}}>
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-gradient-to-r from-[#D4A853] to-[#B8922F] text-[#0A0A0B] shadow-lg shadow-[rgba(212,168,83,0.25)]">
                           <Star className="w-3 h-3" />
@@ -838,7 +947,7 @@ export default function ServicesPage() {
                       <h4
                         className="text-sm md:text-base font-bold text-foreground font-display"
                       >
-                        AI & Automation
+                        AI &amp; Automation
                       </h4>
                       <p className="text-[11px] text-muted-foreground/60 mt-1">
                         Intelligent technology
@@ -898,7 +1007,7 @@ export default function ServicesPage() {
                         rowIdx % 2 === 0 ? "bg-card" : "bg-[#151519]"
                       }`}
                     >
-                      {/* Label cell */}
+                      {/* Label cell with subtle accent */}
                       <div className="p-4 md:p-5 border-b border-[rgba(255,255,255,0.03)]">
                         <span className="text-xs md:text-sm font-semibold text-foreground/60 uppercase tracking-wider">
                           {row.label}
@@ -913,9 +1022,10 @@ export default function ServicesPage() {
                             key={`${row.label}-${colIdx}`}
                             className={`p-4 md:p-5 border-b border-[rgba(255,255,255,0.03)] border-l border-[rgba(255,255,255,0.04)] text-center ${
                               isRecommended
-                                ? "bg-[rgba(212,168,83,0.04)] border-l-[rgba(212,168,83,0.08)]"
+                                ? ""
                                 : ""
                             }`}
+                            style={isRecommended ? {background: 'linear-gradient(180deg, rgba(212,168,83,0.04), rgba(139,92,246,0.02))'} : undefined}
                           >
                             {row.isBoolean ? (
                               <span className="inline-flex items-center gap-1.5">
@@ -974,7 +1084,7 @@ export default function ServicesPage() {
                         <ChevronRight className="w-3 h-3 ml-1" />
                       </Button>
                     </div>
-                    <div className="p-4 md:p-5 bg-[rgba(212,168,83,0.04)] border-l border-[rgba(212,168,83,0.08)] flex justify-center">
+                    <div className="p-4 md:p-5 flex justify-center" style={{background: 'linear-gradient(180deg, rgba(212,168,83,0.06), rgba(139,92,246,0.02))'}}>
                       <Button
                         onClick={() => handleNavClick("contact")}
                         size="sm"
@@ -1005,18 +1115,24 @@ export default function ServicesPage() {
 
       {/* ---------- 7. STAY CONNECTED / NEWSLETTER ---------- */}
       <section className="relative py-16 md:py-20 bg-background section-gold-tint">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+        {/* Multi-color glow orbs */}
+        <div className="absolute top-[10%] left-[15%] w-[300px] h-[250px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-[50%] right-[10%] w-[280px] h-[230px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute bottom-[10%] left-[50%] w-[250px] h-[200px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[80px] pointer-events-none" />
+
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[rgba(212,168,83,0.1)] via-[#131316] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.15)] p-8 md:p-10 glow-gold">
-              {/* Decorative glows */}
-              <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[100px] pointer-events-none" />
-              <div className="absolute -bottom-20 -left-20 w-[200px] h-[200px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[80px] pointer-events-none" />
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[rgba(212,168,83,0.1)] via-[#131316] to-[rgba(139,92,246,0.05)] border border-[rgba(212,168,83,0.15)] p-8 md:p-10 glow-gold gold-border-animated">
+              {/* Multi-color decorative glows */}
+              <div className="absolute -top-20 -right-20 w-[300px] h-[300px] bg-[rgba(196,30,58,0.05)] rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-[200px] h-[200px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[80px] pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[150px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[60px] pointer-events-none" />
 
               <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
                 <div className="flex-1">
                   <h3
-                    className="text-xl md:text-2xl font-bold text-foreground mb-2 font-display"
+                    className="text-xl md:text-2xl font-bold text-foreground mb-2 font-display text-shadow-section"
                   >
                     Stay Ahead of the Curve
                   </h3>
@@ -1055,17 +1171,59 @@ export default function ServicesPage() {
 
       {/* ----------------- 8. CTA SECTION ----------------- */}
       <section className="relative py-20 md:py-28 bg-background">
-        <div className="absolute top-0 left-0 right-0 h-px section-divider-gold" />
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.3]" />
+        <div className="absolute top-0 left-0 right-0 h-px section-divider-rainbow" />
+
+        {/* Multi-color floating dots */}
+        <ParallaxSection speed={0.1} direction="up" className="absolute inset-0 pointer-events-none">
+          <motion.div
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[15%] left-[10%] w-2 h-2 rounded-full bg-[rgba(30,58,95,0.3)] animate-gold-float"
+          />
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="absolute top-[30%] right-[15%] w-2.5 h-2.5 rounded-full bg-[rgba(196,30,58,0.3)] animate-gold-float"
+            style={{animationDelay: '1s'}}
+          />
+          <motion.div
+            animate={{ y: [0, -18, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-[50%] left-[25%] w-1.5 h-1.5 rounded-full bg-[rgba(16,185,129,0.3)] animate-gold-float"
+            style={{animationDelay: '2s'}}
+          />
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            className="absolute top-[70%] right-[20%] w-2 h-2 rounded-full bg-[rgba(139,92,246,0.3)] animate-gold-float"
+            style={{animationDelay: '0.5s'}}
+          />
+          <motion.div
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[20%] left-[40%] w-3 h-3 rounded-full bg-[rgba(212,168,83,0.3)] animate-gold-float"
+            style={{animationDelay: '3s'}}
+          />
+          <motion.div
+            animate={{ y: [0, -16, 0] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="absolute bottom-[35%] right-[35%] w-1.5 h-1.5 rounded-full bg-[rgba(30,58,95,0.25)] animate-gold-float"
+            style={{animationDelay: '1.5s'}}
+          />
+        </ParallaxSection>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="relative overflow-hidden rounded-3xl border border-gradient-gold">
               {/* Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(19,19,22,0.95)] to-[rgba(212,168,83,0.04)]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,168,83,0.08)] via-[rgba(19,19,22,0.95)] to-[rgba(139,92,246,0.05)]" />
               <div className="absolute inset-0 bg-dots opacity-40" />
 
-              {/* Decorative glows */}
-              <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[rgba(212,168,83,0.06)] rounded-full blur-[120px] pointer-events-none" />
-              <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
+              {/* Multi-color decorative glows */}
+              <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[rgba(196,30,58,0.05)] rounded-full blur-[120px] pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[100px] pointer-events-none" />
 
               <div className="relative z-10 px-6 py-14 md:px-16 md:py-20 lg:px-24 lg:py-24 text-center">
                 {/* Quote icon */}
@@ -1075,7 +1233,7 @@ export default function ServicesPage() {
 
                 {/* Quote */}
                 <blockquote
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight max-w-3xl mx-auto font-display"
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight max-w-3xl mx-auto font-display text-shadow-section"
                 >
                   &#8220;In the time it takes most agencies to finish their
                   proposal, we&#39;ve already launched your site.&#8221;
@@ -1102,7 +1260,7 @@ export default function ServicesPage() {
                     variant="outline"
                     className="border-[rgba(255,255,255,0.15)] bg-transparent hover:bg-white/5 text-foreground font-semibold px-8 py-6 text-base rounded-xl transition-all duration-300 group"
                   >
-                    View Packages & Pricing
+                    View Packages &amp; Pricing
                     <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
@@ -1120,4 +1278,3 @@ export default function ServicesPage() {
     </main>
   );
 }
-

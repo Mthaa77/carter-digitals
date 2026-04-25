@@ -343,6 +343,17 @@ const categoryTabs = [
   { key: "medical", label: "Medical" },
 ];
 
+/* ──────────────────────── category color map ──────────────────────── */
+const categoryColors: Record<string, { bg: string; text: string; border: string; iconBg: string; glow: string }> = {
+  education: { bg: "rgba(16,185,129,0.12)", text: "#10B981", border: "rgba(16,185,129,0.25)", iconBg: "rgba(16,185,129,0.08)", glow: "rgba(16,185,129,0.04)" },
+  business: { bg: "rgba(30,58,95,0.12)", text: "#5B8EC9", border: "rgba(30,58,95,0.25)", iconBg: "rgba(30,58,95,0.08)", glow: "rgba(30,58,95,0.04)" },
+  legal: { bg: "rgba(196,30,58,0.12)", text: "#E8506A", border: "rgba(196,30,58,0.25)", iconBg: "rgba(196,30,58,0.08)", glow: "rgba(196,30,58,0.04)" },
+  medical: { bg: "rgba(139,92,246,0.12)", text: "#A78BFA", border: "rgba(139,92,246,0.25)", iconBg: "rgba(139,92,246,0.08)", glow: "rgba(139,92,246,0.04)" },
+};
+
+/* Multi-color stat accents */
+const statAccents = ["#D4A853", "#5B8EC9", "#10B981", "#E8506A"];
+
 /* ═══════════════════════════════════════════════════════════════════════
    PROJECT DETAIL DIALOG
    ═══════════════════════════════════════════════════════════════════════ */
@@ -381,12 +392,14 @@ function ProjectDetailDialog({
       >
         {/* Top section with gradient background */}
         <div className={`relative h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
+          {/* Multi-color gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(139,92,246,0.2)] via-transparent to-[rgba(16,185,129,0.15)] pointer-events-none" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F12] via-transparent to-transparent" />
           <project.icon className="w-16 h-16 text-[rgba(212,168,83,0.2)] relative z-10" />
 
           {/* Category badge */}
           <div className="absolute top-4 left-4 z-10">
-            <Badge className="bg-[rgba(10,10,11,0.7)] backdrop-blur-sm text-foreground/80 border-[rgba(255,255,255,0.1)] text-xs font-medium px-3 py-1">
+            <Badge className={`backdrop-blur-sm text-foreground/80 border-[rgba(255,255,255,0.1)] text-xs font-medium px-3 py-1 ${categoryColors[project.categoryKey] ? `${categoryColors[project.categoryKey].bg} ${categoryColors[project.categoryKey].text}` : "bg-[rgba(10,10,11,0.7)]"}`}>
               {project.category}
             </Badge>
           </div>
@@ -454,7 +467,7 @@ function ProjectDetailDialog({
             </h3>
             <div className="space-y-2.5">
               {project.results.map((result) => (
-                <div key={result} className="flex items-start gap-3">
+                <div key={result} className="flex items-start gap-3 card-shine-sweep rounded-lg p-2 -m-2">
                   <CheckCircle className="w-4 h-4 text-[#D4A853] shrink-0 mt-0.5" />
                   <span className="text-sm text-foreground/65 leading-relaxed">
                     {result}
@@ -472,14 +485,25 @@ function ProjectDetailDialog({
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium bg-[rgba(212,168,83,0.08)] text-[#E8C97A] border border-[rgba(212,168,83,0.12)]"
-                >
-                  {t}
-                </span>
-              ))}
+              {project.tech.map((t, idx) => {
+                const techColors = [
+                  { bg: "rgba(212,168,83,0.08)", text: "#E8C97A", border: "rgba(212,168,83,0.12)" },
+                  { bg: "rgba(30,58,95,0.08)", text: "#5B8EC9", border: "rgba(30,58,95,0.12)" },
+                  { bg: "rgba(16,185,129,0.08)", text: "#10B981", border: "rgba(16,185,129,0.12)" },
+                  { bg: "rgba(139,92,246,0.08)", text: "#A78BFA", border: "rgba(139,92,246,0.12)" },
+                  { bg: "rgba(196,30,58,0.08)", text: "#E8506A", border: "rgba(196,30,58,0.12)" },
+                ];
+                const tc = techColors[idx % techColors.length];
+                return (
+                  <span
+                    key={t}
+                    className={`inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium border`}
+                    style={{ backgroundColor: tc.bg, color: tc.text, borderColor: tc.border }}
+                  >
+                    {t}
+                  </span>
+                );
+              })}
             </div>
           </div>
 
@@ -557,8 +581,16 @@ export default function PortfolioPage() {
       {/* ───────────────────── 1. PAGE HERO ───────────────────── */}
       <section className="relative py-28 md:py-40 bg-background">
         <CosmicDecorations variant="cosmic-ring" intensity="subtle" />
+        {/* Aurora mesh background */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.4] pointer-events-none" />
         {/* Background */}
         <div className="absolute inset-0 bg-grid pattern-grid-animated" />
+
+        {/* ── Multi-color gradient orbs ── */}
+        <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-[30%] right-[8%] w-[280px] h-[280px] bg-[rgba(196,30,58,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[25%] left-[20%] w-[250px] h-[250px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[25%] w-[200px] h-[200px] bg-[rgba(139,92,246,0.05)] rounded-full blur-[90px] pointer-events-none" />
 
         {/* ── Parallax background layers ── */}
         {/* Large gold glow orb — speed 0.15 */}
@@ -572,22 +604,27 @@ export default function PortfolioPage() {
           <motion.div
             animate={{ rotate: 45 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[22%] left-[12%] w-8 h-8 rounded-lg border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute top-[22%] left-[12%] w-8 h-8 rounded-lg border border-[rgba(30,58,95,0.1)] bg-[rgba(30,58,95,0.03)]"
           />
           <motion.div
             animate={{ rotate: -30 }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[18%] right-[10%] w-6 h-6 rounded-full border border-[rgba(212,168,83,0.08)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute top-[18%] right-[10%] w-6 h-6 rounded-full border border-[rgba(196,30,58,0.08)] bg-[rgba(196,30,58,0.02)]"
           />
           <motion.div
             animate={{ rotate: 60 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[28%] left-[18%] w-10 h-10 rounded-sm border border-[rgba(212,168,83,0.06)] bg-[rgba(212,168,83,0.02)]"
+            className="absolute bottom-[28%] left-[18%] w-10 h-10 rounded-sm border border-[rgba(16,185,129,0.06)] bg-[rgba(16,185,129,0.02)]"
           />
           <motion.div
             animate={{ rotate: -45 }}
             transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[22%] right-[14%] w-5 h-5 rounded border border-[rgba(212,168,83,0.1)] bg-[rgba(212,168,83,0.03)]"
+            className="absolute bottom-[22%] right-[14%] w-5 h-5 rounded border border-[rgba(139,92,246,0.1)] bg-[rgba(139,92,246,0.03)]"
+          />
+          <motion.div
+            animate={{ rotate: 30 }}
+            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[45%] left-[5%] w-4 h-4 rounded-full border border-[rgba(212,168,83,0.08)] bg-[rgba(212,168,83,0.02)]"
           />
         </ParallaxSection>
 
@@ -624,9 +661,9 @@ export default function PortfolioPage() {
 
             <AnimatedSection delay={0.2} direction="up">
               <h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight font-display text-shadow-hero"
               >
-                <span className="text-gradient-gold">Our Work</span>
+                <span className="text-gradient-hero">Our Work</span>
               </h1>
             </AnimatedSection>
 
@@ -652,20 +689,23 @@ export default function PortfolioPage() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0A0A0B] via-[rgba(10,10,11,0.6)] to-transparent pointer-events-none" />
       </section>
 
-      <div className="section-divider-gold" />
+      <div className="section-divider-rainbow" />
 
       {/* ────────────────── 2. FEATURED PROJECT ─────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint grain-texture">
         {/* Gold radial glow orb behind featured card */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gold-gradient-radial pointer-events-none z-0" />
         <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-[rgba(212,168,83,0.05)] rounded-full blur-[100px] pointer-events-none z-0" />
-        {/* Ambient orbs */}
+        {/* Multi-color ambient orbs */}
         <div className="ambient-orb ambient-orb-float w-[300px] h-[300px] bg-[rgba(212,168,83,0.03)] top-[15%] left-[-5%]" style={{animationDelay: '2s'}} />
+        <div className="absolute top-[20%] right-[-3%] w-[250px] h-[250px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[100px] pointer-events-none z-0" />
+        <div className="absolute bottom-[15%] left-[5%] w-[200px] h-[200px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[80px] pointer-events-none z-0" />
+        <div className="absolute bottom-[10%] right-[10%] w-[180px] h-[180px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[70px] pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div
-              className="relative overflow-hidden rounded-3xl border-gradient-gold glass-gold-premium cursor-pointer group"
+              className="relative overflow-hidden rounded-3xl border-gradient-gold glass-gold-premium cursor-pointer group card-shine-sweep"
               onClick={() => setSelectedProject(featuredProject)}
             >
               {/* Gold gradient accent line at top */}
@@ -687,8 +727,8 @@ export default function PortfolioPage() {
                   {/* Left: Info */}
                   <div>
                     <div className="flex flex-wrap gap-2 mb-5">
-                      <Badge className="bg-[rgba(212,168,83,0.15)] text-[#D4A853] border-[rgba(212,168,83,0.25)] text-xs font-medium px-3 py-1">
-                        <Building2 className="w-3 h-3 mr-1.5" />
+                      <Badge className="bg-[rgba(16,185,129,0.15)] text-[#10B981] border-[rgba(16,185,129,0.25)] text-xs font-medium px-3 py-1">
+                        <GraduationCap className="w-3 h-3 mr-1.5" />
                         {featuredProject.category}
                       </Badge>
                       <Badge className="bg-muted/60 text-foreground/70 border-[rgba(255,255,255,0.08)] text-xs font-medium px-3 py-1">
@@ -697,7 +737,7 @@ export default function PortfolioPage() {
                     </div>
 
                     <h2
-                      className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight font-display"
+                      className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight font-display text-shadow-section"
                     >
                       {featuredProject.name}
                     </h2>
@@ -735,9 +775,8 @@ export default function PortfolioPage() {
                     </div>
                   </div>
 
-                  {/* Right: Preview placeholder */}
                   <div className="relative">
-                    <div className="rounded-2xl bg-gradient-to-br from-[#1A1A1F] to-[#131316] border border-border p-4">
+                    <div className="rounded-2xl bg-gradient-to-br from-[#1A1A1F] to-[#131316] border border-border p-4 chrome-image-frame">
                       <div className="rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.1)] via-[#131316] to-[rgba(212,168,83,0.05)] aspect-video flex flex-col items-center justify-center gap-4 overflow-hidden">
                         {/* Mock browser bar */}
                         <div className="w-full px-4 pt-3">
@@ -790,7 +829,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="section-divider-gold" />
+      <div className="section-divider-rainbow" />
 
       {/* ──────────────────── 3. PROJECT GRID ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
@@ -799,6 +838,11 @@ export default function PortfolioPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-[rgba(212,168,83,0.02)] rounded-full blur-[80px] pointer-events-none" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[10%] left-[5%] w-[200px] h-[200px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute top-[60%] right-[3%] w-[220px] h-[220px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-[20%] right-[15%] w-[180px] h-[180px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[70px] pointer-events-none" />
+        <div className="absolute top-[40%] left-[15%] w-[160px] h-[160px] bg-[rgba(139,92,246,0.03)] rounded-full blur-[70px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -822,7 +866,7 @@ export default function PortfolioPage() {
                       <TabsTrigger
                         key={tab.key}
                         value={tab.key}
-                        className="data-[state=active]:bg-[rgba(212,168,83,0.1)] data-[state=active]:border-[rgba(212,168,83,0.3)] data-[state=active]:text-[#D4A853] text-muted-foreground px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative"
+                        className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[rgba(212,168,83,0.15)] data-[state=active]:via-[rgba(139,92,246,0.1)] data-[state=active]:to-[rgba(16,185,129,0.12)] data-[state=active]:border-[rgba(212,168,83,0.3)] data-[state=active]:text-[#E8C97A] text-muted-foreground px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative"
                       >
                         <span>{tab.label}</span>
                         <span className="ml-1.5 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] font-bold bg-[rgba(212,168,83,0.08)] text-[rgba(212,168,83,0.7)] data-[state=active]:bg-[rgba(212,168,83,0.2)] data-[state=active]:text-[#D4A853] transition-colors duration-200">
@@ -864,7 +908,7 @@ export default function PortfolioPage() {
                             transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
                           >
                             <div
-                              className="group relative h-full rounded-2xl bg-card border border-border overflow-hidden card-hover-gold hover-lift cursor-pointer hover:shadow-[0_0_30px_rgba(212,168,83,0.08)] transition-shadow duration-300 card-shine-sweep"
+                              className="group relative h-full rounded-2xl bg-card border border-border overflow-hidden card-hover-gold hover-lift cursor-pointer hover:shadow-[0_0_30px_rgba(212,168,83,0.08)] transition-shadow duration-300 card-shine-sweep service-card-premium"
                               onClick={() => setSelectedProject(project)}
                             >
                               {/* Gold shimmer overlay on hover */}
@@ -883,11 +927,17 @@ export default function PortfolioPage() {
                                 />
                                 {/* Gradient overlay for depth */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-[rgba(0,0,0,0.3)] to-[rgba(0,0,0,0.15)]" />
-                                {/* Category badge with gold-tinted background */}
+                                {/* Category badge with color-coded background */}
                                 <div className="absolute top-3 right-3 z-10">
-                                  <Badge className="bg-[rgba(212,168,83,0.12)] backdrop-blur-sm text-[#E8C97A] border-[rgba(212,168,83,0.2)] text-[10px] font-medium px-2.5 py-0.5">
+                                  <Badge
+                                    className={`backdrop-blur-sm text-[10px] font-medium px-2.5 py-0.5 ${categoryColors[project.categoryKey] ? `${categoryColors[project.categoryKey].bg.replace("0.12", "0.15")} ${categoryColors[project.categoryKey].text} ${categoryColors[project.categoryKey].border.replace("0.25", "0.2")}` : "bg-[rgba(212,168,83,0.12)] text-[#E8C97A] border-[rgba(212,168,83,0.2)]"}`}
+                                  >
                                     {project.category}
                                   </Badge>
+                                </div>
+                                {/* Colored icon background */}
+                                <div className={`absolute bottom-3 left-3 z-10 w-8 h-8 rounded-lg flex items-center justify-center ${categoryColors[project.categoryKey]?.iconBg || "bg-[rgba(212,168,83,0.08)]"}`}>
+                                  <project.icon className={`w-4 h-4 ${categoryColors[project.categoryKey]?.text || "#D4A853"}`} />
                                 </div>
                               </div>
 
@@ -928,7 +978,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="section-divider-gold" />
+      <div className="section-divider-rainbow" />
 
       {/* ───────────────────── 4. RESULTS SECTION ───────────────── */}
       <section className="relative py-20 md:py-28 bg-background bg-dots section-gold-tint">
@@ -939,6 +989,11 @@ export default function PortfolioPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-1/3 left-0 w-[350px] h-[250px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[90px] pointer-events-none" />
         <div className="absolute bottom-1/3 right-0 w-[300px] h-[250px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[80px] pointer-events-none" />
+        {/* Multi-color ambient orbs */}
+        <div className="absolute top-[15%] right-[10%] w-[200px] h-[200px] bg-[rgba(30,58,95,0.05)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-[20%] left-[8%] w-[180px] h-[180px] bg-[rgba(16,185,129,0.04)] rounded-full blur-[70px] pointer-events-none" />
+        <div className="absolute top-[50%] left-[20%] w-[160px] h-[160px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[70px] pointer-events-none" />
+        <div className="absolute bottom-[15%] right-[25%] w-[140px] h-[140px] bg-[rgba(139,92,246,0.04)] rounded-full blur-[60px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -950,11 +1005,12 @@ export default function PortfolioPage() {
           />
 
           <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" staggerDelay={0.15}>
-            {stats.map((stat) => (
+            {stats.map((stat, idx) => (
               <StaggerItem key={stat.label}>
                 <div className="text-center p-6 rounded-2xl bg-card border border-border card-hover">
                   <div
-                    className="text-4xl md:text-5xl font-bold text-gradient-gold counter-glow mb-2 font-display"
+                    className="text-4xl md:text-5xl font-bold counter-glow mb-2 font-display"
+                    style={{ color: statAccents[idx] }}
                   >
                     {stat.prefix}
                     <AnimatedCounter
@@ -973,10 +1029,12 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <div className="section-divider-gold" />
+      <div className="section-divider-rainbow" />
 
       {/* ──────────────────── 5. CTA SECTION ───────────────────── */}
       <section className="relative py-20 md:py-28 bg-background section-gold-tint">
+        {/* Aurora mesh background */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-[0.3] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
             <div className="relative overflow-hidden rounded-3xl gold-border-animated">
@@ -993,14 +1051,15 @@ export default function PortfolioPage() {
 
               {/* Decorative floating gold dots */}
               <div className="absolute top-12 left-[15%] w-1.5 h-1.5 rounded-full bg-[#D4A853] animate-gold-float pointer-events-none" style={{ animationDelay: "0s" }} />
-              <div className="absolute top-24 right-[20%] w-1 h-1 rounded-full bg-[#E8C97A] animate-gold-float pointer-events-none" style={{ animationDelay: "1s" }} />
-              <div className="absolute bottom-20 left-[25%] w-2 h-2 rounded-full bg-[#D4A853] animate-gold-float pointer-events-none" style={{ animationDelay: "2s" }} />
+              <div className="absolute top-24 right-[20%] w-1 h-1 rounded-full bg-[#E8506A] animate-gold-float pointer-events-none" style={{ animationDelay: "1s" }} />
+              <div className="absolute bottom-20 left-[25%] w-2 h-2 rounded-full bg-[#10B981] animate-gold-float pointer-events-none" style={{ animationDelay: "2s" }} />
               <div className="absolute bottom-32 right-[30%] w-1 h-1 rounded-full bg-[#B8922F] animate-gold-float pointer-events-none" style={{ animationDelay: "0.5s" }} />
-              <div className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-[#E8C97A] animate-gold-float pointer-events-none" style={{ animationDelay: "1.5s" }} />
+              <div className="absolute top-1/2 left-[10%] w-1.5 h-1.5 rounded-full bg-[#5B8EC9] animate-gold-float pointer-events-none" style={{ animationDelay: "1.5s" }} />
+              <div className="absolute top-[30%] right-[12%] w-1 h-1 rounded-full bg-[#A78BFA] animate-gold-float pointer-events-none" style={{ animationDelay: "3s" }} />
 
               <div className="relative z-10 px-6 py-14 md:px-16 md:py-20 lg:px-24 lg:py-24 text-center">
                 <h2
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight font-display text-glow-gold"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight font-display text-glow-gold text-shadow-section"
                 >
                   Have a Project in Mind?
                 </h2>
