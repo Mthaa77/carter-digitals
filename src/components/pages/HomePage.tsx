@@ -481,17 +481,39 @@ export default function HomePage() {
     <main className="relative overflow-hidden">
       {/* ════════════════════ 1. HERO SECTION ════════════════════ */}
       <section className="relative min-h-screen flex flex-col justify-center bg-background overflow-hidden">
-        {/* Animated gradient mesh background */}
+        {/* Aurora mesh background — multi-color gradient system */}
+        <div className="absolute inset-0 bg-aurora-mesh pointer-events-none" />
+
+        {/* Multi-color floating gradient orbs — sapphire, coral, emerald, gold, purple */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-[40%] -left-[20%] w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,rgba(30,58,95,0.08)_0%,transparent_70%)] animate-[float_20s_ease-in-out_infinite]" />
-          <div className="absolute -bottom-[30%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,rgba(196,30,58,0.06)_0%,transparent_70%)] animate-[float_25s_ease-in-out_infinite_reverse]" />
-          <div className="absolute top-[20%] right-[10%] w-[40%] h-[40%] rounded-full bg-[radial-gradient(circle,rgba(212,168,83,0.04)_0%,transparent_70%)] animate-[float_18s_ease-in-out_infinite_2s]" />
+          <motion.div className="absolute -top-[30%] -left-[15%] w-[60%] h-[60%] rounded-full opacity-[0.08]"
+            style={{ background: "radial-gradient(circle, #1E3A5F 0%, transparent 70%)" }}
+            animate={{ y: [0, -30, 0, 20, 0], x: [0, 15, 0, -10, 0], scale: [1, 1.05, 1] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute -bottom-[25%] -right-[10%] w-[55%] h-[55%] rounded-full opacity-[0.06]"
+            style={{ background: "radial-gradient(circle, #C41E3A 0%, transparent 70%)" }}
+            animate={{ y: [0, 25, 0, -15, 0], x: [0, -20, 0, 10, 0], scale: [1, 1.08, 1] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} />
+          <motion.div className="absolute top-[40%] -left-[10%] w-[40%] h-[40%] rounded-full opacity-[0.05]"
+            style={{ background: "radial-gradient(circle, #10B981 0%, transparent 70%)" }}
+            animate={{ y: [0, -20, 0, 15, 0], scale: [1, 1.1, 1] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
+          <motion.div className="absolute top-[10%] right-[5%] w-[35%] h-[35%] rounded-full opacity-[0.06]"
+            style={{ background: "radial-gradient(circle, #D4A853 0%, transparent 70%)" }}
+            animate={{ y: [0, 15, 0, -20, 0], scale: [1, 1.06, 1] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
+          <motion.div className="absolute bottom-[20%] left-[30%] w-[30%] h-[30%] rounded-full opacity-[0.04]"
+            style={{ background: "radial-gradient(circle, #8B5CF6 0%, transparent 70%)" }}
+            animate={{ y: [0, -10, 0, 25, 0], scale: [1, 1.12, 1] }}
+            transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
         </div>
+
         {/* Cosmic ring decoration behind hero */}
         <CosmicDecorations variant="cosmic-ring" intensity="subtle" />
+
         {/* Subtle hero background image layer */}
         <ParallaxSection speed={0.05} direction="up" className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.18]">
+          <div className="absolute inset-0 opacity-[0.15]">
             <Image src="/images/hero-tech-bg.png" alt="" fill className="object-cover object-center" unoptimized />
           </div>
         </ParallaxSection>
@@ -512,11 +534,12 @@ export default function HomePage() {
           ))}
         </ParallaxSection>
 
-        {/* Ambient gold glow orbs */}
+        {/* Multi-color ambient glow orbs */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[rgba(212,168,83,0.04)] rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[rgba(196,30,58,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 w-[350px] h-[350px] bg-[rgba(16,185,129,0.025)] rounded-full blur-[100px] pointer-events-none" />
         <ParallaxSection speed={0.1} direction="up" className="absolute pointer-events-none">
-          <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px]" />
+          <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-[rgba(139,92,246,0.025)] rounded-full blur-[150px]" />
         </ParallaxSection>
 
         {/* Gold particle field */}
@@ -530,7 +553,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Kabelo character watermark (bottom-right, partially overlapping) */}
+        {/* Kabelo character watermark */}
         <div className="absolute bottom-0 right-0 z-0 pointer-events-none hidden lg:block">
           <div className="relative w-[320px] h-[400px] opacity-[0.15] rounded-2xl overflow-hidden"
             style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)" }}>
@@ -538,31 +561,34 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Main hero content — two-column layout */}
+        {/* Main hero content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-36 md:pb-20 w-full flex-1 flex items-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
             {/* Left column — text content */}
             <div className="max-w-2xl">
               <AnimatedSection delay={0.1} direction="up">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.15)] mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(212,168,83,0.08)] border border-[rgba(212,168,83,0.2)] mb-8 shadow-lg shadow-[rgba(212,168,83,0.08)]">
                   <Rocket className="w-4 h-4 text-[#D4A853]" />
                   <span className="text-xs font-medium text-[#D4A853] tracking-[0.15em] uppercase">High-Agility Digital Infrastructure</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
                 </div>
               </AnimatedSection>
 
               <AnimatedSection delay={0.2} direction="up">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.0] tracking-[-0.04em] text-display-hero">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.0] tracking-[-0.04em] text-shadow-hero">
                   <span className="text-gradient-hero">Built Different.</span>
                   <br />
                   <span className="text-gradient-hero">Built African.</span>
                   <br />
-                  <span className="text-gradient-gold">Built to Win.</span>
+                  <span className="text-gradient-gold text-shadow-premium">Built to Win.</span>
                 </h1>
               </AnimatedSection>
 
               <AnimatedSection delay={0.4} direction="up">
-                <p className="mt-6 md:mt-8 text-lg md:text-xl text-[rgba(245,245,245,0.65)] max-w-xl text-body-refined">
-                  South Africa&apos;s forward-thinking institutions don&apos;t need another digital vendor. They need a builder — someone who delivers on time and leaves institutions stronger.
+                <p className="mt-6 md:mt-8 text-lg md:text-xl text-[rgba(245,245,245,0.65)] max-w-xl leading-[1.8]">
+                  South Africa&apos;s forward-thinking institutions don&apos;t need another digital vendor. They need a builder — someone who delivers{" "}
+                  <TypingText words={["websites", "applications", "digital experiences", "digital infrastructure"]} className="text-[#D4A853] font-semibold" />
+                  {" "}on time and leaves institutions stronger.
                 </p>
               </AnimatedSection>
 
@@ -570,13 +596,13 @@ export default function HomePage() {
                 <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4">
                   <MagneticButton strength={0.2}>
                     <Button onClick={() => handleNavClick("contact")} size="lg"
-                      className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-8 py-6 text-base rounded-xl shadow-lg shadow-[rgba(212,168,83,0.25)] hover:shadow-[rgba(212,168,83,0.35)] transition-all duration-300 group">
+                      className="bg-gradient-to-r from-[#D4A853] to-[#B8922F] hover:from-[#E8C97A] hover:to-[#D4A853] text-[#0A0A0B] font-semibold px-8 py-6 text-base rounded-xl shadow-lg shadow-[rgba(212,168,83,0.3)] hover:shadow-[rgba(212,168,83,0.45)] hover:shadow-[0_0_30px_rgba(212,168,83,0.2)] transition-all duration-300 group border border-[rgba(255,255,255,0.1)]">
                       Start Your Project <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </MagneticButton>
                   <MagneticButton strength={0.2}>
                     <Button onClick={() => handleNavClick("services")} size="lg" variant="outline"
-                      className="border-foreground/20 bg-transparent hover:bg-foreground/5 text-foreground font-semibold px-8 py-6 text-base rounded-xl transition-all duration-300 group">
+                      className="border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.03)] backdrop-blur-sm hover:bg-[rgba(255,255,255,0.06)] text-foreground font-semibold px-8 py-6 text-base rounded-xl transition-all duration-300 group hover:border-[rgba(212,168,83,0.3)]">
                       View Our Work <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </MagneticButton>
@@ -588,18 +614,23 @@ export default function HomePage() {
             <div className="flex justify-center lg:justify-end order-first lg:order-last">
               <AnimatedSection delay={0.3} direction="up">
                 <div className="relative">
-                  {/* Ambient glow behind banner */}
-                  <div className="absolute -inset-8 bg-[rgba(212,168,83,0.06)] rounded-full blur-[80px] pointer-events-none" />
-                  <div className="relative rounded-2xl overflow-hidden chrome-image-frame shadow-2xl shadow-[rgba(0,0,0,0.5)]">
+                  {/* Multi-color ambient glow behind banner */}
+                  <div className="absolute -inset-8 rounded-full blur-[80px] pointer-events-none"
+                    style={{ background: "radial-gradient(circle, rgba(212,168,83,0.08) 0%, rgba(196,30,58,0.04) 40%, transparent 70%)" }} />
+                  <div className="relative rounded-2xl overflow-hidden chrome-image-frame shadow-2xl shadow-[rgba(0,0,0,0.5)] border border-[rgba(255,255,255,0.06)]">
                     <div className="relative w-full max-w-[520px] aspect-[1376/740]">
                       <Image src="/images/hero-blockbuster-banner.png" alt="Carter Digitals — Built Different. Built African. Built to Win." fill className="object-cover object-center" unoptimized priority />
                     </div>
                   </div>
-                  {/* Decorative floating elements */}
+                  {/* Multi-color decorative floating elements */}
                   <motion.div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-gradient-to-br from-[#D4A853] to-[#B8922F] opacity-60 blur-[1px]"
                     animate={{ y: [0, -8, 0], rotate: [0, 90, 180] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
                   <motion.div className="absolute -bottom-3 -left-3 w-5 h-5 rounded-sm bg-gradient-to-br from-[#E8C97A] to-[#D4A853] opacity-40"
                     animate={{ y: [0, 6, 0], rotate: [0, -45, -90] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+                  <motion.div className="absolute top-1/2 -left-6 w-3 h-3 rounded-full bg-[#10B981] opacity-30"
+                    animate={{ y: [0, -12, 0], scale: [1, 1.3, 1] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
+                  <motion.div className="absolute -top-6 left-1/3 w-4 h-4 rounded-full bg-[#8B5CF6] opacity-25"
+                    animate={{ y: [0, -6, 0], rotate: [0, 180, 360] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }} />
                 </div>
               </AnimatedSection>
             </div>
@@ -628,8 +659,8 @@ export default function HomePage() {
           <ChevronDown className="w-5 h-5 text-[rgba(212,168,83,0.5)]" />
         </div>
 
-        {/* Subtle decorative gradient line at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E3A5F]/20 via-[#C41E3A]/15 to-transparent" />
+        {/* Multi-color section divider */}
+        <div className="section-divider-rainbow" />
       </section>
 
       {/* ════════════════ 1.5 LIVE TICKER ════════════════ */}
@@ -647,6 +678,10 @@ export default function HomePage() {
         <CosmicDecorations variant="nebula" intensity="subtle" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[150px] pointer-events-none" />
+        {/* Colorful gradient orbs — emerald, coral, purple */}
+        <div className="absolute top-1/4 left-[10%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(16,185,129,0.04)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-[15%] w-[250px] h-[250px] bg-[radial-gradient(circle,rgba(196,30,58,0.03)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/2 right-[5%] w-[200px] h-[200px] bg-[radial-gradient(circle,rgba(139,92,246,0.03)_0%,transparent_70%)] rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -717,6 +752,10 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.03)] rounded-full blur-[100px] pointer-events-none" />
+        {/* Multi-color gradient mesh */}
+        <div className="absolute top-0 left-[20%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(30,58,95,0.06)_0%,transparent_70%)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-0 right-[20%] w-[250px] h-[250px] bg-[radial-gradient(circle,rgba(139,92,246,0.04)_0%,transparent_70%)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-1/3 right-[10%] w-[200px] h-[200px] bg-[radial-gradient(circle,rgba(16,185,129,0.03)_0%,transparent_70%)] rounded-full blur-[60px] pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12" staggerDelay={0.15}>
             {[
@@ -739,6 +778,10 @@ export default function HomePage() {
       {/* ══════════════════ 4. TECH MARQUEE ══════════════════ */}
       <section className="relative py-12 md:py-16 bg-[#0A0A0B] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
+        {/* Multi-color ambient gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,168,83,0.04)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-1/2 left-[5%] w-[200px] h-[200px] bg-[radial-gradient(circle,rgba(196,30,58,0.03)_0%,transparent_70%)] rounded-full blur-[60px] pointer-events-none" />
+        <div className="absolute top-1/2 right-[8%] w-[180px] h-[180px] bg-[radial-gradient(circle,rgba(30,58,95,0.04)_0%,transparent_70%)] rounded-full blur-[60px] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <p className="text-center text-xs font-medium tracking-[0.2em] uppercase text-[rgba(245,245,245,0.3)] mb-8">Technologies We Work With</p>
@@ -836,15 +879,24 @@ export default function HomePage() {
         </section>
       </AnimatedSection>
 
-      {/* ════════════════ 5. SERVICES — EXPAND-ON-HOVER ════════════════ */}
-      <section className="relative py-24 md:py-32 bg-[#0A0A0B]">
+      {/* ════════════════ 5. SERVICES — ULTRA PREMIUM ════════════════ */}
+      <section className="relative py-24 md:py-32 bg-[#0A0A0B] overflow-hidden">
+        {/* Multi-color aurora background */}
+        <div className="absolute inset-0 bg-aurora-mesh opacity-40 pointer-events-none" />
         {/* Subtle workspace background image */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.12]">
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.08]">
           <Image src="/images/abstract-tech-bg.png" alt="" fill className="object-cover object-center" unoptimized />
         </div>
         {/* Constellation decoration for services */}
         <CosmicDecorations variant="constellation" intensity="subtle" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top section divider */}
+        <div className="section-divider-rainbow absolute top-0 left-0 right-0" />
+        {/* Multi-color ambient glows */}
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[rgba(30,58,95,0.04)] rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-1/4 left-0 w-[350px] h-[350px] bg-[rgba(16,185,129,0.03)] rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(139,92,246,0.02)] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="Our Services"
             title="Command Your Digital"
@@ -852,50 +904,66 @@ export default function HomePage() {
             description="Every service meticulously architected to give South African institutions an unassailable competitive advantage — from first pixel to global deployment."
             align="center"
           />
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
-            {services.map((service, idx) => (
-              <StaggerItem key={service.title}>
-                <div className="group relative rounded-2xl bg-[#111114] border border-[rgba(255,255,255,0.04)] hover:border-[rgba(212,168,83,0.2)] transition-all duration-500 overflow-hidden cursor-pointer hover-lift card-shine-sweep">
-                  {/* Numbered gold circle + title row */}
-                  <div className="flex items-center gap-4 p-6 pb-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[rgba(212,168,83,0.15)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.2)] flex items-center justify-center shrink-0">
-                      <span className="text-sm font-extrabold text-[#D4A853]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold text-white tracking-tight group-hover:text-[#E8C97A] transition-colors duration-300" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                      {service.title}
-                    </h3>
-                    <service.icon className="w-5 h-5 text-[rgba(212,168,83,0.3)] ml-auto shrink-0 group-hover:text-[#D4A853] transition-colors duration-300" />
-                  </div>
-                  {/* Gold line separator */}
-                  <div className="mx-6 h-px bg-gradient-to-r from-[rgba(212,168,83,0.2)] via-[rgba(212,168,83,0.05)] to-transparent" />
-                  {/* Expandable content */}
-                  <div className="px-6 overflow-hidden transition-all duration-500 ease-out" style={{ maxHeight: "0px", opacity: 0 }}>
-                    <div className="pt-4 pb-6">
-                      <p className="text-sm text-[rgba(245,245,245,0.5)] leading-[1.8] mb-4">{service.description}</p>
-                      <div className="flex items-center gap-2 text-sm font-medium text-[#D4A853] group-hover:text-[#E8C97A] transition-colors">
-                        <span>Learn More</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          {/* Animated gold separator line */}
+          <div className="mt-2 mb-12 flex justify-center">
+            <div className="h-px animate-gold-line bg-gradient-to-r from-[#D4A853] to-[#E8C97A]" />
+          </div>
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" staggerDelay={0.08}>
+            {services.map((service, idx) => {
+              const serviceImages = [
+                "/images/website-mockup.png",
+                "/images/dev-workspace-showcase.png",
+                "/images/digital-transformation.png",
+                "/images/ui-design-process.png",
+                "/images/gold-chrome-texture.png",
+                "/images/responsive-design.png",
+              ];
+              return (
+                <StaggerItem key={service.title}>
+                  <div className="group relative service-card-premium cursor-pointer">
+                    {/* Inner shine sweep layer */}
+                    <div className="relative card-shine-sweep rounded-[1.25rem] overflow-hidden">
+                      {/* Service image — top portion */}
+                      <div className="relative h-44 overflow-hidden">
+                        <Image src={serviceImages[idx]} alt={service.title} fill className="object-cover object-center group-hover:scale-110 transition-transform duration-700" unoptimized />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#131316] via-[#131316]/40 to-transparent" />
+                        {/* Number badge — top-right */}
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[rgba(0,0,0,0.5)] backdrop-blur-sm border border-[rgba(212,168,83,0.3)] flex items-center justify-center z-10">
+                          <span className="text-sm font-extrabold text-[#D4A853]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Large gradient icon — overlaps image/content boundary */}
+                      <div className="absolute top-36 left-6 w-14 h-14 rounded-xl bg-gradient-to-br from-[rgba(212,168,83,0.2)] to-[rgba(212,168,83,0.05)] border border-[rgba(212,168,83,0.3)] flex items-center justify-center z-10 group-hover:shadow-lg group-hover:shadow-[rgba(212,168,83,0.2)] group-hover:border-[rgba(212,168,83,0.5)] transition-all duration-500">
+                        <service.icon className="w-7 h-7 text-[#D4A853]" />
+                      </div>
+                      {/* Text content */}
+                      <div className="relative pt-10 px-6 pb-6">
+                        <h3 className="text-lg font-semibold text-white tracking-tight group-hover:text-[#E8C97A] transition-colors duration-300" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                          {service.title}
+                        </h3>
+                        {/* Animated gold line — expands on hover */}
+                        <div className="mt-3 h-px bg-gradient-to-r from-[rgba(212,168,83,0.4)] via-[rgba(212,168,83,0.1)] to-transparent transition-all duration-500 group-hover:w-full" style={{ width: "40px" }} />
+                        {/* Teaser line */}
+                        <p className="mt-3 text-sm text-[rgba(245,245,245,0.4)] leading-[1.7] line-clamp-2">{service.description}</p>
+                      </div>
+                      {/* Expand-on-hover overlay — full description */}
+                      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.25rem]" style={{ background: "linear-gradient(to top, rgba(19,19,22,0.97) 35%, rgba(19,19,22,0.6) 60%, transparent 80%)" }}>
+                        <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
+                          <p className="text-sm text-[rgba(245,245,245,0.6)] leading-[1.8] mb-4">{service.description}</p>
+                          <div className="flex items-center gap-2 text-sm font-medium text-[#D4A853] group-hover:text-[#E8C97A] transition-colors">
+                            <span>Learn More</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  {/* Hover state forces open */}
-                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="px-6 pt-4">
-                      <div className="h-px bg-gradient-to-r from-[rgba(212,168,83,0.2)] via-[rgba(212,168,83,0.05)] to-transparent" />
-                    </div>
-                    <div className="px-6 pb-6 pt-4">
-                      <p className="text-sm text-[rgba(245,245,245,0.5)] leading-[1.8] mb-4">{service.description}</p>
-                      <div className="flex items-center gap-2 text-sm font-medium text-[#D4A853] group-hover:text-[#E8C97A] transition-colors">
-                        <span>Learn More</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
 
           {/* Social Media Ad Showcase */}
@@ -909,7 +977,7 @@ export default function HomePage() {
                   <Sparkles className="w-3.5 h-3.5 text-[#D4A853]" />
                   <span className="text-[10px] font-semibold tracking-[0.15em] uppercase text-[#D4A853]">Social Media Design</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight text-shadow-section" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                   Scroll-Stopping <span className="text-gradient-gold">Visual Content</span>
                 </h3>
                 <p className="text-sm text-[rgba(245,245,245,0.55)] leading-[1.8]">Premium social media advertisements, email headers, and digital collateral that elevate your brand across every touchpoint.</p>
@@ -920,6 +988,8 @@ export default function HomePage() {
             </div>
           </AnimatedSection>
         </div>
+        {/* Bottom section divider */}
+        <div className="section-divider-rainbow absolute bottom-0 left-0 right-0" />
       </section>
 
       {/* ════════════════ 6. INDUSTRY SECTORS — HONEYCOMB ════════════════ */}
@@ -976,6 +1046,9 @@ export default function HomePage() {
         </div>
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[rgba(212,168,83,0.025)] rounded-full blur-[120px] pointer-events-none" />
+        {/* Multi-color ambient gradients */}
+        <div className="absolute top-0 right-[20%] w-[350px] h-[350px] bg-[radial-gradient(circle,rgba(30,58,95,0.05)_0%,transparent_70%)] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-[15%] w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(16,185,129,0.03)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
           <SectionHeading
             label="Our Edge"
@@ -1016,6 +1089,10 @@ export default function HomePage() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(212,168,83,0.02)] to-transparent pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(212,168,83,0.2)] to-transparent" />
+        {/* Gradient orbs at step positions */}
+        <div className="absolute top-[15%] left-[10%] w-[200px] h-[200px] bg-[radial-gradient(circle,rgba(212,168,83,0.05)_0%,transparent_70%)] rounded-full blur-[80px] pointer-events-none" />
+        <div className="absolute top-[30%] right-[15%] w-[250px] h-[250px] bg-[radial-gradient(circle,rgba(196,30,58,0.03)_0%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-[20%] left-[40%] w-[200px] h-[200px] bg-[radial-gradient(circle,rgba(139,92,246,0.03)_0%,transparent_70%)] rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="How We Work"

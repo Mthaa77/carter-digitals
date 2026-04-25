@@ -1990,3 +1990,321 @@ a {
 
 /* Override dark backgrounds used throughout the site */
 
+/* ============================================
+   Ultra Premium — Multi-Color Gradient System
+   ============================================ */
+
+/* Hero gradient text — multi-color aurora */
+.text-gradient-hero {
+  background: linear-gradient(
+    135deg,
+    #D4A853 0%,
+    #E8C97A 18%,
+    #FFD700 30%,
+    #F5E6B8 45%,
+    #D4A853 55%,
+    #C9956B 70%,
+    #E8C97A 85%,
+    #FFD700 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: heroGradientShift 6s ease infinite;
+}
+
+@keyframes heroGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Premium heading text shadow */
+.text-shadow-premium {
+  text-shadow:
+    0 0 20px rgba(212, 168, 83, 0.3),
+    0 0 40px rgba(212, 168, 83, 0.15),
+    0 0 80px rgba(212, 168, 83, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-hero {
+  text-shadow:
+    0 0 40px rgba(212, 168, 83, 0.4),
+    0 0 80px rgba(232, 201, 122, 0.2),
+    0 0 120px rgba(184, 146, 47, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Elegant section heading shadow */
+.text-shadow-section {
+  text-shadow:
+    0 0 15px rgba(212, 168, 83, 0.15),
+    0 0 30px rgba(212, 168, 83, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   Ultra Premium — Service Card Styles
+   ============================================ */
+
+/* Interactive service card with gradient border reveal */
+.service-card-premium {
+  position: relative;
+  background: linear-gradient(135deg, rgba(19, 19, 22, 0.9) 0%, rgba(26, 26, 31, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card-premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(212, 168, 83, 0.3) 25%,
+    rgba(232, 201, 122, 0.5) 50%,
+    rgba(212, 168, 83, 0.3) 75%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.service-card-premium:hover::before {
+  opacity: 1;
+}
+
+.service-card-premium::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.service-card-premium:hover::after {
+  opacity: 1;
+}
+
+.service-card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(212, 168, 83, 0.1),
+    0 0 80px rgba(212, 168, 83, 0.05);
+  border-color: rgba(212, 168, 83, 0.15);
+}
+
+/* Card shine sweep on hover */
+.card-shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine-sweep::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 168, 83, 0.04),
+    rgba(255, 215, 0, 0.08),
+    rgba(212, 168, 83, 0.04),
+    transparent
+  );
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-shine-sweep:hover::before {
+  left: 120%;
+}
+
+/* ============================================
+   Ultra Premium — Multi-Color Gradient Mesh
+   ============================================ */
+
+/* Aurora gradient background for hero */
+.bg-aurora-mesh {
+  background:
+    radial-gradient(ellipse at 15% 30%, rgba(30, 58, 95, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(196, 30, 58, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 40%);
+  animation: auroraShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes auroraShift {
+  0% {
+    background:
+      radial-gradient(ellipse at 15% 30%, rgba(30, 58, 95, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 20%, rgba(196, 30, 58, 0.08) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.04) 0%, transparent 40%);
+  }
+  100% {
+    background:
+      radial-gradient(ellipse at 25% 25%, rgba(212, 168, 83, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 40%, rgba(30, 58, 95, 0.1) 0%, transparent 45%),
+      radial-gradient(ellipse at 40% 70%, rgba(196, 30, 58, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 85%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
+      radial-gradient(ellipse at 90% 60%, rgba(16, 185, 129, 0.04) 0%, transparent 40%);
+  }
+}
+
+/* Section gradient dividers with multi-color */
+.section-divider-rainbow {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(30, 58, 95, 0.2) 15%,
+    rgba(196, 30, 58, 0.15) 30%,
+    rgba(212, 168, 83, 0.3) 50%,
+    rgba(196, 30, 58, 0.15) 70%,
+    rgba(30, 58, 95, 0.2) 85%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   Ultra Premium — Interactive States
+   ============================================ */
+
+/* Idle pulse for cards */
+.card-idle-pulse {
+  animation: idlePulse 4s ease-in-out infinite;
+}
+
+@keyframes idlePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 83, 0); }
+  50% { box-shadow: 0 0 20px 0 rgba(212, 168, 83, 0.05); }
+}
+
+/* Gold line animated width */
+.animate-gold-line {
+  width: 0;
+  animation: goldLineExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes goldLineExpand {
+  0% { width: 0; opacity: 0; }
+  100% { width: 60px; opacity: 1; }
+}
+
+/* ============================================
+   Ultra Premium — Light Mode Overrides
+   ============================================ */
+
+.light .text-gradient-hero {
+  background: linear-gradient(
+    135deg,
+    #1E3A5F 0%,
+    #C41E3A 35%,
+    #1E3A5F 65%,
+    #0F2844 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: heroGradientShift 6s ease infinite !important;
+}
+
+.light .text-shadow-premium {
+  text-shadow:
+    0 0 15px rgba(30, 58, 95, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light .text-shadow-hero {
+  text-shadow:
+    0 0 20px rgba(30, 58, 95, 0.1),
+    0 0 40px rgba(196, 30, 58, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+.light .text-shadow-section {
+  text-shadow:
+    0 0 10px rgba(30, 58, 95, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+.light .service-card-premium {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(30, 58, 95, 0.08) !important;
+}
+
+.light .service-card-premium::before {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(30, 58, 95, 0.2) 25%,
+    rgba(196, 30, 58, 0.3) 50%,
+    rgba(30, 58, 95, 0.2) 75%,
+    transparent 100%
+  ) !important;
+}
+
+.light .service-card-premium:hover {
+  box-shadow:
+    0 25px 50px rgba(30, 58, 95, 0.1),
+    0 0 30px rgba(196, 30, 58, 0.05) !important;
+}
+
+.light .card-idle-pulse {
+  animation: none !important;
+}
+
+.light .section-divider-rainbow {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(30, 58, 95, 0.15) 15%,
+    rgba(196, 30, 58, 0.1) 30%,
+    rgba(30, 58, 95, 0.2) 50%,
+    rgba(196, 30, 58, 0.1) 70%,
+    rgba(30, 58, 95, 0.15) 85%,
+    transparent 100%
+  ) !important;
+}
+
+/* Chrome image frame enhancement */
+.chrome-image-frame {
+  position: relative;
+  border: 1px solid rgba(212, 168, 83, 0.2);
+  box-shadow:
+    0 0 20px rgba(212, 168, 83, 0.08),
+    inset 0 0 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chrome-image-frame:hover {
+  border-color: rgba(212, 168, 83, 0.35);
+  box-shadow:
+    0 0 40px rgba(212, 168, 83, 0.12),
+    inset 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
